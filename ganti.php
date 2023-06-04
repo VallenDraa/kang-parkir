@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
 <body>
     <?php
     session_start();
@@ -6,7 +16,6 @@
     <h2>Edit Data</h2>
     <form action="lib/handle-ganti-data-user.php" method="post">
         <table width="487" border="0">
-            <input type="hidden" name="id" value="<?php echo $id; ?>" />
             <tr>
                 <td width="150">Username</td>
                 <td width="327"><input type="text" name="username" value="<?php echo $_SESSION["username"] ?>"></td>
@@ -22,3 +31,5 @@
         </table>
     </form>
 </body>
+
+</html>
