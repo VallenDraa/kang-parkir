@@ -4,7 +4,7 @@
     $id = $_SESSION["id"];
     ?>
     <h2>Edit Data</h2>
-    <form action="ganti2.php" method="post">
+    <form action="handle-ganti-data-user.php" method="post">
         <table width="487" border="0">
             <input type="hidden" name="id" value="<?php echo $id; ?>" />
             <tr>

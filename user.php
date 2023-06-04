@@ -1,5 +1,6 @@
 <?php
 include "db/koneksi.php";
+include "components/head-tags.php";
 $hasil = mysqli_query($conn, "SELECT * FROM user");
 $buff = mysqli_fetch_assoc($hasil);
 
@@ -11,7 +12,6 @@ $_SESSION["password"] = $buff["password"];
 $id = $_SESSION["id"];
 
 ?>
-<script src="https://cdn.tailwindcss.com"></script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +39,7 @@ $id = $_SESSION["id"];
     </div>
     </br>
     <div class="pl-3">
-        <button class="rounded-none h-5 w-20 bg-slate-500 "><a href="ganti.php?id=<?php echo $_SESSION["id"] ?>">Ganti</a></button>
+        <button class="rounded-none h-5 w-20 bg-slate-500 "><a href="lib/ganti.php?id=<?php echo $_SESSION["id"] ?>">Ganti</a></button>
     </div>
 </body>
 
