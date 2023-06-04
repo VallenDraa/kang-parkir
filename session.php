@@ -1,7 +1,11 @@
 <?php
 session_start();
-if (isset($_SESSION['username']))
+
+echo $_SESSION['username']; 
+echo $_SESSION['isAdmin'];
+echo $_SESSION['id'];
+
 ?>
 
 Selamat Datang
-<?php echo '<strong>' . $_SESSION['username'] . '</strong>'; ?> <a href="?module-logout#pos">Keluar</a>
+

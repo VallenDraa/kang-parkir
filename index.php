@@ -1,9 +1,8 @@
-<P><a href="login.php" class="selected"></a></P>
+<p><a href="login.php" class="selected"></a></p>
 
 <?php 
-	if (isset($_GET["module"])) {
- 		$Nama_file = $_GET["module"];
- 		include "$Nama_file.php";
+	if (isset($_GET)) {
+ 		include "login.php";
 	}else
-        include "login.php";
+        include "session.php";
 ?>
