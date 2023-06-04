@@ -1,6 +1,6 @@
 <?php
 
-function Button(string $content, string $color, string $html_id): string
+function Button(string $content, string $color, ?string $html_id = null): string
 {
   $id = $html_id ? "id='$html_id'" : "";
 

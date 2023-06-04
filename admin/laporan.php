@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <?php include "../components/navbar-admin.php" ?>
+  <?php include "../components/admin/navbar-admin.php" ?>
 
 </body>
 
