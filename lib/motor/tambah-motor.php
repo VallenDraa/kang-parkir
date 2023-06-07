@@ -4,10 +4,12 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include "../../db/koneksi.php";
-include "../motor/cek-motor.php";
-include "../parkiran/cek-parkiran.php";
-include "../parkiran/isi-parkiran.php";
+include "../motor/cari-motor.php";
+include "../parkiran/cari-parkiran.php";
+include "../parkiran/tambah-parkiran.php";
 include "../user/tambah-user.php";
+include "../user/cari-user.php";
+include "../histori-parkiran/tambah-histori-parkiran.php";
 
 include "../info.php";
 
@@ -24,33 +26,40 @@ if ($_SESSION['isAdmin'] !== '1') {
 
 if (
   !isset($_POST['plat-motor']) &&
-  !isset($_POST['token-parkiran']) &&
-  !isset($_POST['plat-user-baru'])
+  !isset($_POST['token-parkiran'])
 ) {
   die("Tidak semua data post diberikan !");
 }
 
 $plat_motor = $_POST['plat-motor'];
 $token_parkiran = $_POST['token-parkiran'];
-$motor_untuk_user_baru = $_POST['plat-user-baru'] ? $_POST['plat-user-baru'] : 0;
 
-if (cekMotorSudahAda($conn, $plat_motor)) {
-  echo infoJs("Motor dengan plat $plat_motor sudah ada. Silahkan gunakan plat lain !", '../../admin/index.php');
+$motor_untuk_user_baru = isset($_POST['plat-user-baru']) ? $_POST['plat-user-baru'] : 0;
+$motor_untuk_user_lama = isset($_POST['plat-user-lama']) ? $_POST['plat-user-lama'] : null;
+
+if (
+  cekMotorSudahAda($conn, $plat_motor) ||
+  // harus di cek pada user, karena nama default user adalah platnya
+  cekUsernameSudahAda($conn, $plat_motor)
+) {
+  echo infoJs(
+    "Motor dengan plat $plat_motor sudah ada atau user dengan username yang sama telah ada. Silahkan gunakan plat lain !",
+    '../../admin/index.php'
+  );
 }
 
 if (cekParkiranTerisi($conn, $token_parkiran)) {
-  echo infoJs("Lokasi parkir $token_parkiran sudah terisi, Silahkan pilih lokasi lain !", '../../admin/index.php');
+  echo infoJs(
+    "Lokasi parkir $token_parkiran sudah terisi, Silahkan pilih lokasi lain !",
+    '../../admin/index.php'
+  );
 }
-
-$id_target_user = "";
 
 // cek masukan untuk user baru atau lama
-if ($motor_untuk_user_baru) {
-  $id_target_user = tambahUser($conn, $plat_motor);
-} else {
-  // $id_target_user = tambahUser($conn, $plat_motor);
-}
-
+$id_target_user =
+  $motor_untuk_user_baru || !$motor_untuk_user_lama
+  ? tambahUser($conn, $plat_motor)
+  : idDariUsername($conn, $motor_untuk_user_lama);
 
 // Jika lolos cek diatas maka motor bisa ditambahkan
 $stmt_tambah_motor = mysqli_prepare(
@@ -65,16 +74,26 @@ mysqli_stmt_bind_param(
   $token_parkiran,
   $id_target_user
 );
+
 mysqli_stmt_execute($stmt_tambah_motor);
 
 if (
   mysqli_stmt_affected_rows($stmt_tambah_motor) > 0 &&
-  isiParkiran($conn, $token_parkiran, $plat_motor)
+  isiParkiran($conn, $token_parkiran, $plat_motor) &&
+  tambahHistoriParkiran($conn, $token_parkiran, $plat_motor, true)
 ) {
 
-  echo infoJs("Motor dengan plat $plat_motor ditambahkan dan diparkir di $token_parkiran !", '../../admin/index.php');
+  echo infoJs(
+    "Motor dengan plat $plat_motor ditambahkan dan diparkir di $token_parkiran !",
+    '../../admin/index.php'
+  );
 } else {
-  echo infoJs("Motor dengan plat $plat_motor gagal ditambahkan. Coba lagi nanti !", '../../admin/index.php');
+  hapusUser($conn, $id_target_user);
+
+  echo infoJs(
+    "Motor dengan plat $plat_motor gagal ditambahkan. Coba lagi nanti !",
+    '../../admin/index.php'
+  );
 }
 
 mysqli_stmt_close($stmt_tambah_motor);

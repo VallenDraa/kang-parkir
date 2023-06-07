@@ -2,19 +2,23 @@
 // Enable error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_start();
+
+include "../lib/admin/akses-admin.php";
+
+if (!aksesAdmin()) {
+  header("Location: ../index.php");
+}
 
 include "../db/koneksi.php";
 include "../components/button.php";
 include "../components/dialog.php";
 
-include "../lib/parkiran/cari-parkiran-kosong.php";
-include "../lib/motor/ambil-motor.php";
 include "../lib/user/tambah-user.php";
-include "../lib/user/ambil-user.php";
+include "../lib/parkiran/cari-parkiran.php";
+include "../lib/motor/cari-motor.php";
+include "../lib/user/cari-user.php";
 
-session_start();
-
-$_SESSION['isAdmin'] = "1";
 
 $TAB_USER = 'user';
 $TAB_MOTOR = 'motor';
@@ -50,13 +54,13 @@ if ($tab_aktif === $TAB_MOTOR) {
 <body>
   <?php include "../components/admin/navbar-admin.php" ?>
 
-  <div class="container mx-auto mt-12">
+  <div class="container px-4 mx-auto mt-12">
     <header>
       <a href="?tab=user" class="<?= $tab_aktif === $TAB_USER ? "text-blue-500" : "" ?>">User</a>
       <a href="?tab=motor" class="<?= $tab_aktif === $TAB_MOTOR ? "text-blue-500" : "" ?>">Motor</a>
     </header>
     <main class="mt-10">
-      <div class="flex justify-between">
+      <div class="flex flex-wrap justify-between gap-4">
         <h1 class="text-4xl font-bold capitalize">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
 
         <!-- admin actions -->
@@ -98,8 +102,8 @@ if ($tab_aktif === $TAB_MOTOR) {
     <footer></footer>
   </div>
 
-  <dialog id="action-dialog" class='m-0 max-w-[100vw] max-h-[100vh] md:m-auto w-screen h-screen rounded-lg shadow-sm md:w-[650px] md:h-max md:backdrop:backdrop-blur-sm'>
-    <div class="bg-gray-100">
+  <dialog id="action-dialog" class='m-0 max-w-[100vw] max-h-screen md:m-auto w-screen h-screen md:rounded-lg shadow-sm md:w-[650px] md:h-max md:backdrop:backdrop-blur-sm'>
+    <div>
       <span>Tambah Motor</span>
       <button id="close-action-dialog-btn">
         <i class="fa fa-window-close" aria-hidden='true'></i>
@@ -119,13 +123,13 @@ if ($tab_aktif === $TAB_MOTOR) {
         <input type="checkbox" id="plat-user-baru" name="plat-user-baru">
       </label>
 
-      <select name="plat-user-lama" class="disabled:cursor-not-allowed">
+      <select name="plat-user-lama" class="disabled:cursor-not-allowed" <?= count($semua_username) === 0 ? "disabled" : "" ?>>
         <?php foreach ($semua_username as $username) : ?>
-          <option value="<?= $username ?>"><?= $username ?></option>
+          <option id="opsi-user" value="<?= $username ?>"><?= $username ?></option>
         <?php endforeach ?>
       </select>
 
-      <?= Button("Tambah", "green", "submit-motor-btn") ?>
+      <?= Button("Tambah", "sky", "submit-motor-btn") ?>
     </form>
   </dialog>
 </body>

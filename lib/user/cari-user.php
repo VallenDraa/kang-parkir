@@ -67,3 +67,31 @@ function ambilSemuaDataUser(mysqli $conn)
 
   return [];
 }
+
+function idDariUsername(mysqli $conn, string $username): string | null
+{
+  $stmt = mysqli_prepare(
+    $conn,
+    "SELECT id FROM user WHERE username = ?"
+  );
+
+  mysqli_stmt_bind_param($stmt, "s", $username);
+  mysqli_stmt_execute($stmt);
+
+  mysqli_stmt_bind_result($stmt, $id);
+
+  mysqli_stmt_fetch($stmt);
+  mysqli_stmt_close($stmt);
+
+  return $id;
+}
+
+
+function cekUsernameSudahAda(mysqli $conn, string $username): bool
+{
+  $sudah_ada = !!idDariUsername($conn, $username);
+
+
+
+  return $sudah_ada;
+}

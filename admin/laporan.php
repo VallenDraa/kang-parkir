@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+include "../lib/admin/akses-admin.php";
+
+if (!aksesAdmin()) {
+  header("Location: ../index.php");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

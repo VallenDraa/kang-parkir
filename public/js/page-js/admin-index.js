@@ -5,6 +5,8 @@ const submitMotorBtn = qs("#submit-motor-btn");
 const hapusMotorforms = qsa("#hapus-motor-form");
 const inputPlat = qs("[name='plat-motor']");
 
+const opsiUser = qsa("#opsi-user");
+
 /** @type {HTMLInputElement} */
 const platUserBaruCheckbox = qs("[name='plat-user-baru']");
 
@@ -50,6 +52,6 @@ platUserBaruCheckbox?.addEventListener("change", e => {
   if (e.target.checked) {
     platUserLamaSelection.setAttribute("disabled", e.target.checked);
   } else {
-    platUserLamaSelection.removeAttribute("disabled");
+    if (opsiUser.length > 0) platUserLamaSelection.removeAttribute("disabled");
   }
 });
