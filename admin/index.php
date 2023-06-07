@@ -9,6 +9,8 @@ include "../components/dialog.php";
 
 include "../lib/parkiran/cari-parkiran-kosong.php";
 include "../lib/motor/ambil-motor.php";
+include "../lib/user/tambah-user.php";
+include "../lib/user/ambil-user.php";
 
 session_start();
 
@@ -25,12 +27,15 @@ if (isset($_GET['tab'])) {
   }
 }
 
+$semua_username = ambilSemuaUsername($conn);
+$parkiran_kosong = cariParkiranKosong($conn);
 
 if ($tab_aktif === $TAB_MOTOR) {
-  $parkiran_kosong = cariParkiranKosong($conn);
   $semua_motor = ambilSemuaMotor($conn);
 } else {
+  $semua_user = ambilSemuaDataUser($conn);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +60,7 @@ if ($tab_aktif === $TAB_MOTOR) {
         <h1 class="text-4xl font-bold capitalize">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
 
         <!-- admin actions -->
-        <?= $tab_aktif === $TAB_MOTOR ?  Button("Tambah Motor", "green", "tambah-motor-btn") : "" ?>
+        <?= Button("Tambah Motor", "green", "tambah-motor-btn")  ?>
       </div>
 
       <ul class="mt-8 space-y-4">
@@ -83,7 +88,9 @@ if ($tab_aktif === $TAB_MOTOR) {
           <?php endif ?>
 
         <?php else : ?>
-          <!-- isi list user -->
+          <?php
+          var_dump($semua_user)
+          ?>
         <?php endif ?>
       </ul>
 
@@ -91,7 +98,7 @@ if ($tab_aktif === $TAB_MOTOR) {
     <footer></footer>
   </div>
 
-  <dialog id="action-dialog" class='m-0 max-w-[100vw] max-h-[100vh] md:m-auto w-screen h-screen rounded-md shadow-sm md:w-[650px] md:h-max md:backdrop:backdrop-blur-sm'>
+  <dialog id="action-dialog" class='m-0 max-w-[100vw] max-h-[100vh] md:m-auto w-screen h-screen rounded-lg shadow-sm md:w-[650px] md:h-max md:backdrop:backdrop-blur-sm'>
     <div class="bg-gray-100">
       <span>Tambah Motor</span>
       <button id="close-action-dialog-btn">
@@ -107,9 +114,20 @@ if ($tab_aktif === $TAB_MOTOR) {
         <?php endforeach ?>
       </select>
 
+      <label for="plat-user-baru" class="select-none">
+        Plat untuk user baru
+        <input type="checkbox" id="plat-user-baru" name="plat-user-baru">
+      </label>
+
+      <select name="plat-user-lama" class="disabled:cursor-not-allowed">
+        <?php foreach ($semua_username as $username) : ?>
+          <option value="<?= $username ?>"><?= $username ?></option>
+        <?php endforeach ?>
+      </select>
+
       <?= Button("Tambah", "green", "submit-motor-btn") ?>
     </form>
   </dialog>
 </body>
 
-</html>
+</html>:

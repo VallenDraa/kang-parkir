@@ -3,7 +3,7 @@ function ambilSemuaMotor(mysqli $conn)
 {
   $stmt = mysqli_prepare(
     $conn,
-    "SELECT * FROM motor"
+    "SELECT plat, lokasi_parkir, tanggal_masuk FROM motor"
   );
 
   mysqli_stmt_execute($stmt);
@@ -11,13 +11,13 @@ function ambilSemuaMotor(mysqli $conn)
   $semua_motor = [];
 
   while (mysqli_stmt_fetch($stmt)) {
-    $user = [
+    $motor = [
       'plat' => $plat,
       'lokasi_parkir' => $lokasi_parkir,
       'tanggal_masuk' => $tanggal_masuk
     ];
 
-    array_push($semua_motor, $user);
+    array_push($semua_motor, $motor);
   }
 
   mysqli_stmt_close($stmt);
