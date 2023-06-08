@@ -15,12 +15,40 @@ include "../info.php";
 
 session_start();
 
+function tambahMotor(
+  mysqli $conn,
+  string $plat_motor,
+  string $token_parkiran,
+  string $id_target_user
+): bool {
+  $berhasil = false;
+
+  $stmt_tambah_motor = mysqli_prepare(
+    $conn,
+    "INSERT INTO motor (plat, lokasi_parkir, id_user_pemilik) VALUES (?, ?, ?)"
+  );
+
+  mysqli_stmt_bind_param(
+    $stmt_tambah_motor,
+    "sss",
+    $plat_motor,
+    $token_parkiran,
+    $id_target_user
+  );
+
+  mysqli_stmt_execute($stmt_tambah_motor);
+
+  $berhasil = mysqli_stmt_affected_rows($stmt_tambah_motor) > 0;
+
+  return $berhasil;
+}
+
 // Error checking
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   die("File ini hanya menghandle method POST !");
 }
 
-if ($_SESSION['isAdmin'] !== '1') {
+if ($_SESSION['is_admin'] !== '1') {
   die("Anda bukan admin !");
 }
 
@@ -61,33 +89,20 @@ $id_target_user =
   ? tambahUser($conn, $plat_motor)
   : idDariUsername($conn, $motor_untuk_user_lama);
 
-// Jika lolos cek diatas maka motor bisa ditambahkan
-$stmt_tambah_motor = mysqli_prepare(
-  $conn,
-  "INSERT INTO motor (plat, lokasi_parkir, id_user_pemilik) VALUES (?, ?, ?)"
-);
-
-mysqli_stmt_bind_param(
-  $stmt_tambah_motor,
-  "sss",
-  $plat_motor,
-  $token_parkiran,
-  $id_target_user
-);
-
-mysqli_stmt_execute($stmt_tambah_motor);
-
+// Jika lolos pengecekan lakukan tiga hal dibawah
 if (
-  mysqli_stmt_affected_rows($stmt_tambah_motor) > 0 &&
+  tambahMotor($conn, $plat_motor, $token_parkiran, $id_target_user) &&
   isiParkiran($conn, $token_parkiran, $plat_motor) &&
   tambahHistoriParkiran($conn, $token_parkiran, $plat_motor, true)
 ) {
-
   echo infoJs(
     "Motor dengan plat $plat_motor ditambahkan dan diparkir di $token_parkiran !",
     '../../admin/index.php'
   );
 } else {
+  // jika tidak berhasil menambah motor untuk user baru
+  // maka langsung hapus user baru, karena user baru
+  // dibuat sebelum plat baru itu sendiri dibuat.
   hapusUser($conn, $id_target_user);
 
   echo infoJs(

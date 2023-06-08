@@ -3,7 +3,7 @@ function aksesAdmin(): bool
 {
   $is_permitted = false;
 
-  if (!isset($_SESSION['isAdmin']) || $_SESSION['isAdmin'] !== '1') {
+  if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== '1') {
     return $is_permitted;
   }
 

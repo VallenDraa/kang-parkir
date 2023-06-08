@@ -25,7 +25,6 @@ function ambilSemuaMotor(mysqli $conn)
   return $semua_motor;
 }
 
-
 function cekMotorSudahAda(mysqli $conn, string $plat)
 {
   $stmt = mysqli_prepare(
@@ -42,4 +41,35 @@ function cekMotorSudahAda(mysqli $conn, string $plat)
   mysqli_stmt_close($stmt);
 
   return $motor_sudah_ada;
+}
+
+function cariMotor(mysqli $conn, array $plat_motor)
+{
+  $plat_motor_str = implode(",", $plat_motor);
+
+
+  $stmt = mysqli_prepare(
+    $conn,
+    "SELECT * FROM motor where plat IN ?"
+  );
+  mysqli_stmt_bind_param($stmt, "s", $plat_motor_str);
+  mysqli_stmt_execute($stmt);
+
+  mysqli_stmt_bind_result($stmt, $plat, $lokasi_parkir, $tanggal_masuk, $id_user_pemilik);
+  $hasil_cari_motor = [];
+
+  while (mysqli_stmt_fetch($stmt)) {
+    $motor = [
+      'plat' => $plat,
+      'lokasi_parkir' => $lokasi_parkir,
+      'tanggal_masuk' => $tanggal_masuk,
+      'id_user_pemilik' => $id_user_pemilik,
+    ];
+
+    array_push($hasil_cari_motor, $motor);
+  }
+
+  mysqli_stmt_close($stmt);
+
+  return $hasil_cari_motor;
 }

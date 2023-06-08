@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   die("File ini hanya menghandle method POST !");
 }
 
-if ($_SESSION['isAdmin'] !== '1') {
+if ($_SESSION['is_admin'] !== '1') {
   die("Anda bukan admin !");
 }
 

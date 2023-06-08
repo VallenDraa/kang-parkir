@@ -47,7 +47,7 @@ if ($tab_aktif === $TAB_MOTOR) {
 
 <head>
   <?php include "../components/head-tags.php"; ?>
-  <script src="../public/js/page-js/admin-index.js" defer type="module"></script>
+  <script src="../public/js/page-js/admin/admin-index.js" defer type="module"></script>
   <title>Halaman Utama Admin</title>
 </head>
 
@@ -64,7 +64,7 @@ if ($tab_aktif === $TAB_MOTOR) {
         <h1 class="text-4xl font-bold capitalize">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
 
         <!-- admin actions -->
-        <?= Button("Tambah Motor", "green", "tambah-motor-btn")  ?>
+        <?= Button("Tambah Motor", "blue", "primary", "tambah-motor-btn")  ?>
       </div>
 
       <ul class="mt-8 space-y-4">
@@ -83,7 +83,7 @@ if ($tab_aktif === $TAB_MOTOR) {
                 <form action="../lib/motor/hapus-motor.php" id="hapus-motor-form" method="POST">
                   <input type="hidden" name="plat-motor" value="<?= $motor['plat']; ?>" />
                   <input type="hidden" name="token-parkiran" value="<?= $motor['lokasi_parkir']; ?>" />
-                  <?= Button("Hapus", "red", null) ?>
+                  <?= Button("Hapus", "red", "secondary") ?>
                 </form>
               </li>
             <?php endforeach ?>
@@ -92,9 +92,19 @@ if ($tab_aktif === $TAB_MOTOR) {
           <?php endif ?>
 
         <?php else : ?>
-          <?php
-          var_dump($semua_user)
-          ?>
+          <?php foreach ($semua_user as $user) : ?>
+            <li class="flex justify-between">
+              <div>
+                <span><?= $user['username']; ?></span>
+                <span><?= $user['created_at']; ?></span>
+              </div>
+
+              <form id="user-edit-form" method="POST">
+                <input type="hidden" name="plat-motor" value="<?= $user['id']; ?>" />
+                <?= Button("Edit", "blue", "secondary") ?>
+              </form>
+            </li>
+          <?php endforeach ?>
         <?php endif ?>
       </ul>
 
@@ -129,7 +139,7 @@ if ($tab_aktif === $TAB_MOTOR) {
         <?php endforeach ?>
       </select>
 
-      <?= Button("Tambah", "sky", "submit-motor-btn") ?>
+      <?= Button("Tambah", "blue", "primary", "submit-motor-btn") ?>
     </form>
   </dialog>
 </body>

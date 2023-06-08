@@ -23,49 +23,30 @@ function ambilSemuaDataUser(mysqli $conn)
 {
   $result = mysqli_query(
     $conn,
-    "SELECT u.id, u.username, u.isAdmin, m.plat, m.lokasi_parkir, m.tanggal_masuk FROM user u
-    LEFT JOIN motor m ON u.id = m.id_user_pemilik"
+    "SELECT * FROM user"
   );
 
-  if ($result) {
-    $semua_user = [];
-    $current_user = null;
+  $semua_user = [];
 
-    while ($baris = mysqli_fetch_assoc($result)) {
-      $id = $baris['id'];
-      $username = $baris['username'];
-      $isAdmin = $baris['isAdmin'];
-      $plat = $baris['plat'];
-      $lokasi = $baris['lokasi_parkir'];
-      $tanggal_masuk = $baris['tanggal_masuk'];
+  while ($baris = mysqli_fetch_assoc($result)) {
+    $id = $baris['id'];
+    $username = $baris['username'];
+    $is_admin = $baris['is_admin'];
+    $created_at = $baris['created_at'];
 
-      if (!$current_user || $current_user['id'] !== $id) {
-        $current_user = [
-          'id' => $id,
-          'username' => $username,
-          'isAdmin' => $isAdmin,
-          'motor' => [],
-        ];
+    $user = [
+      'id' => $id,
+      'username' => $username,
+      'is_admin' => $is_admin,
+      'created_at' => $created_at,
+    ];
 
-        $semua_user[] = $current_user;
-      }
-
-      if ($plat) {
-        $current_user['motor'][] = [
-          'plat' => $plat,
-          'lokasi' => $lokasi,
-          'tanggal_masuk' => $tanggal_masuk
-        ];
-      }
-    }
-
-    mysqli_free_result($result);
-    return $semua_user;
-  } else {
-    echo "Error executing the query: " . mysqli_error($conn);
+    array_push($semua_user, $user);
   }
 
-  return [];
+  mysqli_free_result($result);
+
+  return $semua_user;
 }
 
 function idDariUsername(mysqli $conn, string $username): string | null
@@ -90,8 +71,6 @@ function idDariUsername(mysqli $conn, string $username): string | null
 function cekUsernameSudahAda(mysqli $conn, string $username): bool
 {
   $sudah_ada = !!idDariUsername($conn, $username);
-
-
 
   return $sudah_ada;
 }

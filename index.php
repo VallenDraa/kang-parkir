@@ -1,4 +1,4 @@
 <?php
 session_start();
 
-$_SESSION['isAdmin'] = "1";
+$_SESSION['is_admin'] = "1";
