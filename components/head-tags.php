@@ -1,3 +1,6 @@
+<!-- barba js page transition -->
+<script src="https://unpkg.com/@barba/core"></script>
+
 <!-- tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
 
