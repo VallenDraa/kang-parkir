@@ -3,9 +3,9 @@
 /**
  * @param "type adalah primary, secondary, link"
  */
-function Button(string $content, string $color, string $type, ?string $html_id = null): string
+function Button(string $content, string $color, string $type, string $btnType = "submit", ?string $html_id = null): string
 {
-  $id = $html_id ? "id='$html_id'" : "";
+  $id = $html_id ? "$html_id" : "";
 
   $class = "px-5 py-1 rounded-lg ";
 
@@ -27,7 +27,7 @@ function Button(string $content, string $color, string $type, ?string $html_id =
   }
 
 
-  $button = "<button $id class='$class'>$content</button>";
+  $button = "<button type='$btnType' id='$id' class='$class'>$content</button>";
 
   return $button;
 }
