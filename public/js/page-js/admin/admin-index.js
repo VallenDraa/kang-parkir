@@ -1,105 +1,37 @@
 import { qs, qsa } from "../../utils/dom-selector.js";
+import { adminMotorHandler } from "./admin-motor-handler.js";
+import { editUserHandler } from "./admin-user-handler.js";
 import { initAdminTooltip } from "./admin-tooltip.js";
+import { CustomDialog } from "../../components/dialog.js";
 
-const tambahMotorBtn = qs("#tambah-motor-btn");
-const submitMotorBtn = qs("#submit-motor-btn");
-const hapusMotorforms = qsa("#hapus-motor-form");
-const inputPlat = qs("[name='plat-motor']");
+export const tambahMotorBtn = qs("#tambah-motor-btn");
+export const submitMotorBtn = qs("#submit-motor-btn");
+export const hapusMotorforms = qsa("#hapus-motor-form");
+export const inputPlat = qs("[name='plat-motor']");
 
-const opsiUser = qsa("#opsi-user");
-const editUserBtn = qsa("#edit-user-btn");
+export const opsiUser = qsa("#opsi-user");
+export const editUserBtns = qsa("#edit-user-btn");
 
 /** @type {HTMLInputElement} */
-const platUserBaruCheckbox = qs("[name='plat-user-baru']");
+export const platUserBaruCheckbox = qs("[name='plat-user-baru']");
 
 /** @type {HTMLSelectElement} */
-const platUserLamaSelection = qs("[name='plat-user-lama']");
+export const platUserLamaSelection = qs("[name='plat-user-lama']");
 
-/** @type {HTMLDialogElement} */
-const actionDialog = qs("#action-dialog");
-const closeActionDialogBtn = qs("#close-action-dialog-btn");
+export const actionDialog = new CustomDialog(
+  "#action-dialog",
+  "#close-action-dialog-btn",
+  () => {
+    formEditUser?.classList.add("hidden");
+    formTambahMotor?.classList.add("hidden");
+  },
+);
 
 // konten dialog
-const formTambahMotor = qs("#form-tambah-motor");
-const formEditUser = qs("#form-edit-user");
+export const formTambahMotor = qs("#form-tambah-motor");
+export const formEditUser = qs("#form-edit-user");
 
 // inisialisasi
 initAdminTooltip();
-
-// tampilkan modal ketika tombol tambah motor ditekan
-tambahMotorBtn?.addEventListener("click", () => {
-  actionDialog?.showModal();
-
-  formEditUser?.classList.add("hidden");
-  formTambahMotor?.classList.remove("hidden");
-});
-
-// konfirmasi ketika menghapus motor
-hapusMotorforms?.forEach(form => {
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-
-    const konfirmasiHapus = confirm(
-      "Apakah anda yakin ingin menghapus motor ini ?",
-    );
-
-    if (konfirmasiHapus) form.submit();
-  });
-});
-
-// tutup modal ketika mengsubmit motor baru
-submitMotorBtn?.addEventListener("click", () => {
-  if (inputPlat.value !== "") {
-    actionDialog?.close();
-  }
-});
-
-// tutup modal ketika user meneka tombol x pada modal
-closeActionDialogBtn?.addEventListener("click", () => {
-  actionDialog?.close();
-
-  formEditUser?.classList.add("hidden");
-  formTambahMotor?.classList.add("hidden");
-});
-
-// matikan opsi untuk memasukkan plat ke user lama
-platUserBaruCheckbox?.addEventListener("change", e => {
-  if (e.target.checked) {
-    platUserLamaSelection.setAttribute("disabled", e.target.checked);
-  } else {
-    if (opsiUser.length > 0) platUserLamaSelection.removeAttribute("disabled");
-  }
-});
-
-editUserBtn?.forEach(btn => {
-  btn.addEventListener("click", async () => {
-    actionDialog?.showModal();
-
-    const idUser = btn.getAttribute("data-id-user");
-    const { username, is_admin: isAdmin } = users.find(u => u.id === idUser);
-
-    // ambil data motor milik user
-    try {
-      const HTMLListMotor = await fetch(
-        "../../../../parkiran-dua/api/cari-motor.php",
-        {
-          method: "POST",
-          body: JSON.stringify({ "id-user": parseInt(idUser) }),
-        },
-      ).then(res => res.text());
-
-      // isi list motor di dalam dialog
-      qs("#list-motor-user").innerHTML = HTMLListMotor;
-
-      // isi data di dalam form
-      qs("#id-user-edit").value = idUser;
-      qs("[name='username']").value = username;
-      qs("[name='is-admin']").checked = isAdmin === "1";
-
-      formEditUser?.classList.remove("hidden");
-      formTambahMotor?.classList.add("hidden");
-    } catch (error) {
-      console.error(error);
-    }
-  });
-});
+editUserHandler();
+adminMotorHandler();
