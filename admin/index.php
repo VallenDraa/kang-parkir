@@ -57,17 +57,20 @@ if ($tab_aktif === $TAB_MOTOR) {
   <div id="content" class="transition-transform duration-200">
     <header class="sticky top-0 z-10 py-2 bg-gray-50/50 backdrop-blur-lg">
       <div class="flex flex-wrap items-center justify-between max-w-screen-xl gap-2 px-6 mx-auto md:gap-0">
+        <!-- hamburger menu -->
         <div class="basis-1/3">
           <button id="hamburger-menu-btn" type="button" class="px-3 py-2 text-2xl transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
             <i class="fa-solid fa-bars"></i>
           </button>
         </div>
 
+        <!-- tab halaman admin -->
         <nav class="flex justify-end gap-4 text-lg md:justify-center basis-1/3">
           <a href="?tab=user" class="<?= $tab_aktif === $TAB_USER ? "text-blue-500" : "" ?>">User</a>
           <a href="?tab=motor" class="<?= $tab_aktif === $TAB_MOTOR ? "text-blue-500" : "" ?>">Motor</a>
         </nav>
 
+        <!-- tambah motor -->
         <div class="flex justify-end md:basis-1/3 basis-full [&>button]:w-full md:[&>button]:w-fit">
           <?= Button("Tambah Motor", "blue", "primary", "button", "tambah-motor-btn")  ?>
         </div>
@@ -177,7 +180,7 @@ if ($tab_aktif === $TAB_MOTOR) {
     <footer></footer>
   </div>
 
-  <dialog id="action-dialog" class='m-0 max-w-[100vw] max-h-screen md:m-auto w-screen h-screen md:rounded-lg shadow-md md:w-[650px] md:h-max md:backdrop:backdrop-blur-sm'>
+  <dialog id="action-dialog">
     <div>
       <span id="dialog-title">Tambah Motor</span>
       <button id="close-action-dialog-btn">
