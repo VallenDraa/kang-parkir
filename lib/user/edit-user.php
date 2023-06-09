@@ -49,21 +49,18 @@ function editUser(
 }
 
 
-function editUserOlehAdmin(mysqli $conn, array $user)
-{
-  $id = $user['id'];
-  $username = $user['username'];
-  $pw = $user['password'];
-  $is_admin = $user['is_admin'];
-
-  $encrypted_pw = password_hash($pw, PASSWORD_BCRYPT, ["cost" => 12]);
-
+function editUserOlehAdmin(
+  mysqli $conn,
+  string $id,
+  string $username,
+  bool $is_admin
+) {
   $stmt = mysqli_prepare(
     $conn,
-    "UPDATE user SET username = ?, password = ?, is_admin = ? WHERE id = ?"
+    "UPDATE user SET username = ?, is_admin = ? WHERE id = ?"
   );
 
-  mysqli_stmt_bind_param($stmt, "ssss", $username, $encrypted_pw, $is_admin, $id);
+  mysqli_stmt_bind_param($stmt, "sds", $username, $is_admin, $id);
   mysqli_stmt_execute($stmt);
 
   $berhasil = mysqli_stmt_affected_rows($stmt) > 0;

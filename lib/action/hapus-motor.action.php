@@ -21,7 +21,7 @@ if ($_SESSION['is_admin'] !== '1') {
   die("Anda bukan admin !");
 }
 
-if (!isset($_POST['plat-motor']) && !isset($_POST['token-parkiran'])) {
+if (!isset($_POST['plat-motor']) || !isset($_POST['token-parkiran'])) {
   die("Plat motor dan token parkiran tidak diberikan !");
 }
 

@@ -7,7 +7,7 @@ function Button(string $content, string $color, string $type, string $btnType = 
 {
   $id = $html_id ? "$html_id" : "";
 
-  $class = "px-5 py-1 rounded-lg ";
+  $class = "px-5 py-1 rounded-md ";
 
   switch (strtolower($type)) {
     case 'primary':

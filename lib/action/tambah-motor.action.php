@@ -27,7 +27,7 @@ if ($_SESSION['is_admin'] !== '1') {
 }
 
 if (
-  !isset($_POST['plat-motor']) &&
+  !isset($_POST['plat-motor']) ||
   !isset($_POST['token-parkiran'])
 ) {
   die("Tidak semua data post diberikan !");

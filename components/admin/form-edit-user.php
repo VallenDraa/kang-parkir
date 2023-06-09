@@ -1,11 +1,22 @@
- <form action="../lib/motor/edit-user.action.php" id="form-edit-user" method="POST" class="hidden">
-   <input type="hidden" name="id-user" value="">
+ <form action="../lib/action/edit-user-admin.action.php" id="form-edit-user" method="POST" class="hidden space-y-3">
+   <input type="hidden" id="id-user-edit" name="id-user" value="123123" />
 
-   <input required="true" type="text" name="username" placeholder="Plat Motor" />
+   <div class="flex flex-col gap-1 ">
+     <label for="username">Username</label>
+     <input required="true" type="text" id="username" name="username" />
+   </div>
 
-   <ul id="list-motor-user" class="flex flex-col gap-4">
+   <div class="flex flex-col items-start gap-1">
+     <label for="is-admin">Admin status</label>
+     <input type="checkbox" id="is-admin" name="is-admin" />
+   </div>
 
-   </ul>
 
-   <?= Button("Tambah", "blue", "primary", "submit", "submit-motor-btn") ?>
+   <div class="flex flex-col gap-1">
+     <span>Motor milik user</span>
+     <ul id="list-motor-user" class="flex flex-col gap-1">
+     </ul>
+   </div>
+
+   <?= Button("Edit", "blue", "primary", "submit", "submit-motor-btn") ?>
  </form>

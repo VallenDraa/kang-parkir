@@ -1,6 +1,5 @@
 import { qs, qsa } from "../../utils/dom-selector.js";
 import { initAdminTooltip } from "./admin-tooltip.js";
-import * as T from "../../utils/types.js";
 
 const tambahMotorBtn = qs("#tambah-motor-btn");
 const submitMotorBtn = qs("#submit-motor-btn");
@@ -9,7 +8,6 @@ const inputPlat = qs("[name='plat-motor']");
 
 const opsiUser = qsa("#opsi-user");
 const editUserBtn = qsa("#edit-user-btn");
-const listMotorUser = qs("#list-motor-user");
 
 /** @type {HTMLInputElement} */
 const platUserBaruCheckbox = qs("[name='plat-user-baru']");
@@ -78,6 +76,7 @@ editUserBtn?.forEach(btn => {
     actionDialog?.showModal();
 
     const idUser = btn.getAttribute("data-id-user");
+    const { username, is_admin: isAdmin } = users.find(u => u.id === idUser);
 
     // ambil data motor milik user
     try {
@@ -89,8 +88,12 @@ editUserBtn?.forEach(btn => {
         },
       ).then(res => res.text());
 
-      // reset list motor user
-      listMotorUser.innerHTML = HTMLListMotor;
+      qs("#list-motor-user").innerHTML = HTMLListMotor;
+
+      // isi data di dalam form
+      qs("#id-user-edit").value = idUser;
+      qs("[name='username']").value = username;
+      qs("[name='is-admin']").checked = isAdmin === "1";
 
       formEditUser?.classList.remove("hidden");
       formTambahMotor?.classList.add("hidden");

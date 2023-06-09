@@ -48,7 +48,7 @@ if (
   kosongkanBanyakParkiran($conn, $token_parkir_arr) &&
   tambahBanyakHistoriParkiran($conn, $motor_tanpa_tgl_masuk, false)
 ) {
-  echo infoJs("User berhasil dihapus !", '../../admin/index.php');
+  echo infoJs("User berhasil dihapus !", '../../admin/index.php?tab=user');
 } else {
-  echo infoJs("User gagal dihapus. Coba lagi nanti !", '../../admin/index.php');
+  echo infoJs("User gagal dihapus. Coba lagi nanti !", '../../admin/index.php?tab=user');
 }

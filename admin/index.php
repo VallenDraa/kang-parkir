@@ -46,12 +46,16 @@ if ($tab_aktif === $TAB_MOTOR) {
 
 <head>
   <?php include "../components/head-tags.php"; ?>
+  <script defer>
+    const users = JSON.parse('<?= json_encode(isset($semua_user) ? $semua_user : []) ?>');
+    const motor = JSON.parse('<?= json_encode(isset($semua_motor) ? $semua_motor : []) ?>');
+  </script>
   <script src="../public/js/page-js/admin/admin-index.js" defer type="module"></script>
   <title>Halaman Utama Admin</title>
 </head>
 
 <body>
-  <div class="container px-4 mx-auto mt-12">
+  <div class="max-w-screen-xl px-6 mx-auto mt-12">
     <header>
       <a href="?tab=user" class="<?= $tab_aktif === $TAB_USER ? "text-blue-500" : "" ?>">User</a>
       <a href="?tab=motor" class="<?= $tab_aktif === $TAB_MOTOR ? "text-blue-500" : "" ?>">Motor</a>
@@ -128,7 +132,7 @@ if ($tab_aktif === $TAB_MOTOR) {
     <footer></footer>
   </div>
 
-  <dialog id="action-dialog" class='m-0 max-w-[100vw] max-h-screen md:m-auto w-screen h-screen md:rounded-lg shadow-sm md:w-[650px] md:h-max md:backdrop:backdrop-blur-sm'>
+  <dialog id="action-dialog" class='m-0 max-w-[100vw] max-h-screen md:m-auto w-screen h-screen md:rounded-lg shadow-md md:w-[650px] md:h-max md:backdrop:backdrop-blur-sm'>
     <div>
       <span id="dialog-title">Tambah Motor</span>
       <button id="close-action-dialog-btn">
