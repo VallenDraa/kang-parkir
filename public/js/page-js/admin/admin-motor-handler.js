@@ -5,7 +5,6 @@ import {
   hapusMotorforms,
   platUserBaruCheckbox,
   platUserLamaSelection,
-  submitMotorBtn,
   tambahMotorBtn,
 } from "./admin-index.js";
 
@@ -29,13 +28,6 @@ export function adminMotorHandler() {
 
       if (konfirmasiHapus) form.submit();
     });
-  });
-
-  // tutup modal ketika mengsubmit motor baru
-  submitMotorBtn?.addEventListener("click", () => {
-    if (inputPlat.value !== "") {
-      actionDialog?.hideDialog();
-    }
   });
 
   // matikan opsi untuk memasukkan plat ke user lama

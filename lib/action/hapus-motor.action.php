@@ -7,6 +7,7 @@ include "../../db/koneksi.php";
 include "../motor/hapus-motor.php";
 include "../parkiran/hapus-parkiran.php";
 include "../histori-parkiran/tambah-histori-parkiran.php";
+include "../admin/akses-admin.php";
 
 include "../info.php";
 
@@ -17,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   die("File ini hanya menghandle method POST !");
 }
 
-if ($_SESSION['is_admin'] !== '1') {
+if (!aksesAdmin()) {
   die("Anda bukan admin !");
 }
 

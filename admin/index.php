@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 session_start();
 
 include "../lib/admin/akses-admin.php";
+include "../config.php";
 
 if (!aksesAdmin()) {
   header("Location: ../index.php");
@@ -22,6 +23,9 @@ $TAB_USER = 'user';
 $TAB_MOTOR = 'motor';
 
 $tab_aktif = $TAB_MOTOR;
+$halaman_aktif = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
+$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
+
 
 if (isset($_GET['tab'])) {
   if ($_GET['tab'] === $TAB_USER || $_GET['tab'] === $TAB_MOTOR) {
@@ -33,9 +37,14 @@ $semua_username = ambilSemuaUsername($conn);
 $parkiran_kosong = cariParkiranKosong($conn);
 
 if ($tab_aktif === $TAB_MOTOR) {
-  $semua_motor = ambilSemuaMotor($conn);
+  $motor_arr = ambilSemuaMotor($conn);
 } else {
-  $semua_user = ambilSemuaDataUser($conn);
+  [
+    "users" => $user_arr,
+    "total_halaman" => $total_halaman,
+    "halaman_sebelumnya" => $halaman_sebelumnya,
+    "halaman_berikutnya" => $halaman_berikutnya
+  ] = cariUser($conn, $keyword, $halaman_aktif, JUMLAH_PER_HALAMAN);
 }
 
 ?>
@@ -46,8 +55,11 @@ if ($tab_aktif === $TAB_MOTOR) {
 <head>
   <?php include "../components/head-tags.php"; ?>
   <script defer>
-    const users = JSON.parse('<?= json_encode(isset($semua_user) ? $semua_user : []) ?>');
-    const motor = JSON.parse('<?= json_encode(isset($semua_motor) ? $semua_motor : []) ?>');
+    window.users = JSON.parse('<?= json_encode(isset($user_arr) ? $user_arr : []) ?>');
+    window.motor = JSON.parse('<?= json_encode(isset($motor_arr) ? $motor_arr : []) ?>');
+    window.tabAktif = '<?= $tab_aktif ?>';
+    window.halamanAktif = '<?= $halaman_aktif ?>';
+    window.keyword = '<?= $keyword ?>';
   </script>
   <script src="../public/js/page-js/admin/admin-index.js" defer type="module"></script>
   <title>Halaman Utama Admin</title>
@@ -55,7 +67,7 @@ if ($tab_aktif === $TAB_MOTOR) {
 
 <body class="bg-gray-50 h-[200vh]">
   <div id="content" class="transition-transform duration-200">
-    <header class="sticky top-0 z-10 py-2 bg-gray-50/50 backdrop-blur-lg">
+    <header class="sticky top-0 z-[10000] py-2 bg-gray-50/50 backdrop-blur-lg">
       <div class="flex flex-wrap items-center justify-between max-w-screen-xl gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
         <div class="basis-1/3">
@@ -78,15 +90,23 @@ if ($tab_aktif === $TAB_MOTOR) {
     </header>
 
     <main class="max-w-screen-xl px-6 mx-auto mt-4">
-      <h1 class="mb-6 text-4xl font-bold capitalize">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
+      <h1 class="mb-6 text-3xl font-bold capitalize">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
+
+      <div class="relative flex items-center pl-3 mb-3 border border-gray-400 rounded-lg shadow shadow-gray-300">
+        <i class="text-gray-700 fa-solid fa-search"></i>
+
+        <input type="search" id="search-data-tabel" placeholder="Cari" class="w-full px-4 py-2 transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none placeholder:text-transparent peer disabled:cursor-not-allowed disabled:opacity-20">
+
+        <label class="px-1 -translate-x-8 scale-90 transition-all absolute left-9 top-1/2 -translate-y-[30px] text-sm text-blue-500 peer-placeholder-shown:text-gray-500 bg-gray-50 peer-focus:-translate-x-8 peer-focus:-translate-y-[30px] peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
+          Cari <?= $tab_aktif ?>
+        </label>
+      </div>
 
       <!-- table list user atau motor -->
-      <input type="search" class="w-full px-4 py-1 transition-colors duration-200 bg-gray-200 rounded-lg shadow shadow-gray-200 focus:bg-gray-100">
-
       <div class="mt-2 rounded-lg shadow shadow-gray-300 overflow-clip">
         <!-- tabel semi-responsive -->
         <div class="w-full overflow-auto">
-          <table class="w-full table-auto overflow-clip">
+          <table id="tabel-user-motor" class="w-full table-auto overflow-clip">
             <thead>
               <tr class="[&>th]:p-2 bg-gray-200 text-gray-700">
                 <th>No</th>
@@ -106,49 +126,48 @@ if ($tab_aktif === $TAB_MOTOR) {
             <?php if ($tab_aktif === $TAB_MOTOR) : ?>
               <tbody>
                 <!-- isi list motor -->
-                <?php for ($i = 0; $i < count($semua_motor); $i++) : ?>
+                <?php for ($i = 0; $i < count($motor_arr); $i++) : ?>
                   <tr class="[&>td]:p-2 text-center even:bg-gray-100">
-                    <td><?= $i + 1 ?></td>
-                    <td><?= $semua_motor[$i]['plat']; ?></td>
-                    <td><?= $semua_motor[$i]['lokasi_parkir']; ?></td>
-                    <td><?= $semua_motor[$i]['tanggal_masuk']; ?></td>
+                    <td><?= $i + $halaman_aktif ?></td>
+                    <td><?= $motor_arr[$i]['plat']; ?></td>
+                    <td><?= $motor_arr[$i]['lokasi_parkir']; ?></td>
+                    <td><?= $motor_arr[$i]['tanggal_masuk']; ?></td>
 
                     <td>
                       <form action="../lib/action/hapus-motor.action.php" id="hapus-motor-form" method="POST">
-                        <input type="hidden" name="plat-motor" value="<?= $semua_motor[$i]['plat']; ?>" />
-                        <input type="hidden" name="token-parkiran" value="<?= $semua_motor[$i]['lokasi_parkir']; ?>" />
+                        <input type="hidden" name="plat-motor" value="<?= $motor_arr[$i]['plat']; ?>" />
+                        <input type="hidden" name="token-parkiran" value="<?= $motor_arr[$i]['lokasi_parkir']; ?>" />
 
                         <div class="flex items-center justify-center gap-2">
                           <button id="info-motor-btn" type="button" class="px-3 py-2 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
                             <i class="drop-shadow fa-solid fa-circle-info"></i>
                           </button>
-                          <button id="hapus-motor-btn" class="px-3 py-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
+                          <button id="hapus-motor-btn" class="px-3 py-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red -200 active:bg-red -300">
                             <i class="drop-shadow fa-regular fa-trash-can"></i>
                           </button>
                         </div>
                       </form>
                     </td>
-
                   </tr>
                 <?php endfor ?>
               <?php else : ?>
                 <!-- isi list user-->
-                <?php for ($i = 0; $i < count($semua_user); $i++) : ?>
+                <?php for ($i = 0; $i < count($user_arr); $i++) : ?>
                   <tr class="[&>td]:p-2 text-center even:bg-gray-100">
-                    <td><?= $i + 1 ?></td>
-                    <td><?= $semua_user[$i]['username']; ?></td>
-                    <td><?= $semua_user[$i]['jumlah_motor']; ?></td>
+                    <td><?= $i + $halaman_aktif ?></td>
+                    <td><?= $user_arr[$i]['username']; ?></td>
+                    <td><?= $user_arr[$i]['jumlah_motor']; ?></td>
                     <td>
                       <form action="../lib/action/hapus-user.action.php" id="hapus-user-form" method="POST">
-                        <input type="hidden" name="id-user" value="<?= $semua_user[$i]['id']; ?>" />
+                        <input type="hidden" name="id-user" value="<?= $user_arr[$i]['id']; ?>" />
 
                         <!-- tombol user -->
                         <div class="flex items-center justify-center gap-2">
-                          <button id="edit-user-btn" type="button" data-id-user="<?= $semua_user[$i]['id']; ?>" class="px-3 py-2 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
+                          <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="px-3 py-2 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
                             <i class="drop-shadow fa-regular fa-pen-to-square"></i>
                           </button>
 
-                          <button id="hapus-user-btn" class="px-3 py-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
+                          <button id="hapus-user-btn" class="px-3 py-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
                             <i class="drop-shadow fa-regular fa-trash-can"></i>
                           </button>
                         </div>
@@ -164,15 +183,22 @@ if ($tab_aktif === $TAB_MOTOR) {
 
         <!-- kontrol dari tabel -->
         <div class="flex items-center justify-center w-full gap-2 px-4 py-0.5 bg-gray-200">
-          <button id="halaman-sebelumnya-btn" type="button" class="px-3 py-2 text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
+          <?php
+          $link_hal_sebelum = $halaman_sebelumnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_sebelumnya" : "#";
+          ?>
+          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="px-3 py-2 text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
             <i class="fa-solid fa-left-long"></i>
-          </button>
+          </a>
 
-          <span>1/2</span>
+          <span id="indikator-halaman"><?= $halaman_aktif ?> / <?= $total_halaman ?></span>
 
-          <button id="halaman-berikutnya-btn" type="button" class="px-3 py-2 text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
+          <?php
+          $link_hal_berikut = $halaman_berikutnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_berikutnya" : "#";
+          ?>
+
+          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="px-3 py-2 text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
             <i class="fa-solid fa-right-long"></i>
-          </button>
+          </a>
         </div>
       </div>
 

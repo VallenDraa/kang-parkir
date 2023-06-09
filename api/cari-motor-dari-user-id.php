@@ -2,11 +2,12 @@
 include "../db/koneksi.php";
 include "../lib/motor/cari-motor.php";
 
+header('Content-Type: application/json');
+
 // Error checking
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   http_response_code(405);
   $response = ['error' => 'Metode request tidak diperbolehkan !'];
-  header('Content-Type: application/json');
   echo json_encode($response);
   exit;
 }
@@ -20,18 +21,10 @@ if (
 ) {
   http_response_code(400);
   $response = ['error' => 'Parameter tidak sesuai !'];
-  header('Content-Type: application/json');
   echo json_encode($response);
   exit;
 }
 
 $motor_arr = cariMotorDariUserId($conn, $data['id-user']);
-?>
-
-<?php foreach ($motor_arr as $motor) : ?>
-  <li class="flex gap-5">
-    <span><?= $motor['plat'] ?></span>
-    <span><?= $motor['lokasi_parkir'] ?></span>
-    <!-- <span>${new Date() - new Date(m.tanggal_masuk)}</span> -->
-  </li>
-<?php endforeach  ?>
+http_response_code(200);
+echo json_encode($motor_arr);

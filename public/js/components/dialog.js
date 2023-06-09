@@ -7,6 +7,8 @@ export class CustomDialog {
   /** @type {HTMLButtonElement | null} */
   #closeButtonEl;
 
+  static #escapeIntercepted = false;
+
   static #closeAnimationClasses = [
     "backdrop:opacity-0",
     "scale-95",
@@ -34,6 +36,20 @@ export class CustomDialog {
     this.#closeButtonEl = qs(closeBtnSelector);
 
     this.#dialogEl?.classList.add(...CustomDialog.#classes);
+
+    // sembunyikan dialog ketika backdrop di click
+    this.#dialogEl?.addEventListener("click", e => {
+      const rect = this.#dialogEl.getBoundingClientRect();
+      const isInDialog =
+        rect.top <= e.clientY &&
+        e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.left + rect.width;
+
+      if (!isInDialog) {
+        this.hideDialog(onClose);
+      }
+    });
 
     this.#closeButtonEl?.addEventListener("click", () => {
       this.hideDialog(onClose);

@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 include "../../db/koneksi.php";
 include "../../lib/user/edit-user.php";
+include "../admin/akses-admin.php";
 
 include "../info.php";
 
@@ -15,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   die("File ini hanya menghandle method POST !");
 }
 
-if ($_SESSION['is_admin'] !== '1') {
+if (!aksesAdmin()) {
   die("Anda bukan admin !");
 }
 
@@ -29,7 +30,6 @@ if (
 $id = $_POST['id-user'];
 $username = $_POST['username'];
 $is_admin = isset($_POST['is-admin']) ?  true : false;
-
 
 if (editUserOlehAdmin($conn, $id, $username, $is_admin)) {
   echo infoJs(
