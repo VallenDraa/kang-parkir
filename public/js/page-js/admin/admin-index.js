@@ -88,6 +88,7 @@ editUserBtn?.forEach(btn => {
         },
       ).then(res => res.text());
 
+      // isi list motor di dalam dialog
       qs("#list-motor-user").innerHTML = HTMLListMotor;
 
       // isi data di dalam form

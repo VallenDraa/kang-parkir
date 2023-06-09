@@ -70,3 +70,20 @@ function cariMotorDariUserId(mysqli $conn, int $id_user_pemilik)
 
   return $hasil_cari_motor;
 }
+
+function jumlahMotorUser(mysqli $conn, string $id_user_pemilik): int
+{
+  $stmt = mysqli_prepare(
+    $conn,
+    "SELECT COUNT(*) as motor_count FROM motor WHERE id_user_pemilik = ?"
+  );
+
+  mysqli_stmt_bind_param($stmt, "s", $id_user_pemilik);
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_bind_result($stmt, $motor_count);
+
+  mysqli_stmt_fetch($stmt);
+  mysqli_stmt_close($stmt);
+
+  return $motor_count;
+}

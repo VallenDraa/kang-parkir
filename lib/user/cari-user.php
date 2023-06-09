@@ -21,10 +21,12 @@ function ambilSemuaUsername(mysqli $conn)
 
 function ambilSemuaDataUser(mysqli $conn)
 {
-  $result = mysqli_query(
-    $conn,
-    "SELECT * FROM user"
-  );
+  $result = mysqli_query($conn, "
+    SELECT user.id, user.username, user.is_admin, user.created_at, COUNT(motor.plat) AS jumlah_motor
+    FROM user
+    LEFT JOIN motor ON user.id = motor.id_user_pemilik
+    GROUP BY user.id
+  ");
 
   $semua_user = [];
 
@@ -33,12 +35,14 @@ function ambilSemuaDataUser(mysqli $conn)
     $username = $baris['username'];
     $is_admin = $baris['is_admin'];
     $created_at = $baris['created_at'];
+    $jumlah_motor = $baris['jumlah_motor'];
 
     $user = [
       'id' => $id,
       'username' => $username,
       'is_admin' => $is_admin,
       'created_at' => $created_at,
+      'jumlah_motor' => $jumlah_motor,
     ];
 
     array_push($semua_user, $user);
@@ -70,7 +74,7 @@ function idDariUsername(mysqli $conn, string $username): string | null
 
 function cekUsernameSudahAda(mysqli $conn, string $username): bool
 {
-  $sudah_ada = !!idDariUsername($conn, $username);
+  $sudah_ada = idDariUsername($conn, $username) !== null;
 
   return $sudah_ada;
 }
