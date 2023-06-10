@@ -2,12 +2,12 @@ import { qs } from "../utils/dom-selector.js";
 
 export class Sidebar {
   static #backdropClasses =
-    "opacity-0 transition-opacity duration-300 ease-out bg-gray-600/50 backdrop-blur-sm absolute z-[12000]".split(
+    "opacity-0 transition-opacity duration-300 ease-out bg-gray-600/50 md:backdrop-blur-sm absolute z-[12000]".split(
       " ",
     );
 
   static #sidebarClasses =
-    "-translate-x-full transition-transform duration-300 shadow shadow-gray-300 absolute w-80 h-screen bg-gray-50 z-[15000] left-0".split(
+    "-translate-x-full transition-transform duration-300 shadow shadow-gray-300 absolute w-full md:w-96 h-screen bg-gray-50 z-[15000] left-0".split(
       " ",
     );
 
@@ -25,21 +25,26 @@ export class Sidebar {
   /**@type {HTMLElement} */
   #mainContent;
 
+  /**@type {HTMLElement} */
+  #closeBtn;
+
   terbuka = false;
 
   /**
    * @param {string} sidebar
    * @param {string} backdrop
    * @param {string} menuBtn
+   * @param {string} `closeBtn`
    * @param {string} mainContent
    *
    * pastikan sidebar ada diluar HTML mainContent
    */
-  constructor(sidebar, backdrop, menuBtn, mainContent) {
+  constructor(sidebar, backdrop, menuBtn, closeBtn, mainContent) {
     this.#sidebar = qs(sidebar);
     this.#backdrop = qs(backdrop);
     this.#mainContent = qs(mainContent);
     this.#menuBtn = qs(menuBtn);
+    this.#closeBtn = qs(closeBtn);
 
     // menambahkan kelas ke elemen
     this.#backdrop?.classList.add(...Sidebar.#backdropClasses);
@@ -47,6 +52,10 @@ export class Sidebar {
 
     this.#menuBtn?.addEventListener("click", () => {
       this.openSidebar();
+    });
+
+    this.#closeBtn?.addEventListener("click", () => {
+      this.closeSidebar();
     });
 
     // tertutup ketika backdrop ditekan
@@ -84,7 +93,7 @@ export class Sidebar {
 
     this.#sidebar?.classList.remove("-translate-x-full");
 
-    this.#mainContent?.classList.add("translate-x-80");
+    this.#mainContent?.classList.add("translate-x-96", "2xl:translate-x-64");
   }
 
   #closeSidebarAnimation() {
@@ -97,6 +106,6 @@ export class Sidebar {
 
     this.#sidebar?.classList.add("-translate-x-full");
 
-    this.#mainContent?.classList.remove("translate-x-80");
+    this.#mainContent?.classList.remove("translate-x-96", "2xl:translate-x-64");
   }
 }

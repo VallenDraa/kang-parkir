@@ -11,4 +11,6 @@ export function initAdminTooltip(theme = "light") {
 
   tippy("#info-motor-btn", { content: "Info Motor" });
   tippy("#hapus-motor-btn", { content: "Hapus Motor" });
+
+  const themeTooltip = tippy("#theme-btn", { content: "Matikan Lampu" });
 }

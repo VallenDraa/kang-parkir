@@ -75,7 +75,7 @@ if ($tab_aktif === $TAB_MOTOR) {
       <div class="flex flex-wrap items-center justify-between max-w-screen-xl gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
         <div class="basis-1/3">
-          <button id="hamburger-menu-btn" type="button" class="px-3 py-2 text-2xl transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
+          <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
             <i class="fa-solid fa-bars"></i>
           </button>
         </div>
@@ -107,10 +107,9 @@ if ($tab_aktif === $TAB_MOTOR) {
           Cari <?= $tab_aktif ?>
         </label>
 
-        <button id="hamburger-menu-btn" class="px-3 py-2 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-gray-200 active:bg-gray-300">
+        <button id="hamburger-menu-btn" class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-gray-200 active:bg-gray-300">
           <i class="fa-solid fa-search"></i>
         </button>
-
       </form>
 
       <!-- table list user atau motor -->
@@ -164,7 +163,7 @@ if ($tab_aktif === $TAB_MOTOR) {
                         <input type="hidden" name="plat-motor" value="<?= $motor_arr[$i]['plat']; ?>" />
                         <input type="hidden" name="token-parkiran" value="<?= $motor_arr[$i]['lokasi_parkir']; ?>" />
 
-                        <button id="hapus-motor-btn" class="px-3 py-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
+                        <button id="hapus-motor-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
                           <i class="drop-shadow fa-regular fa-trash-can"></i>
                         </button>
                       </form>
@@ -184,11 +183,11 @@ if ($tab_aktif === $TAB_MOTOR) {
 
                         <!-- tombol user -->
                         <div class="flex items-center justify-center gap-2">
-                          <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="px-3 py-2 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
+                          <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
                             <i class="drop-shadow fa-regular fa-pen-to-square"></i>
                           </button>
 
-                          <button id="hapus-user-btn" class="px-3 py-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
+                          <button id="hapus-user-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
                             <i class="drop-shadow fa-regular fa-trash-can"></i>
                           </button>
                         </div>
@@ -207,7 +206,7 @@ if ($tab_aktif === $TAB_MOTOR) {
           <?php
           $link_hal_sebelum = $halaman_sebelumnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_sebelumnya" : "#";
           ?>
-          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="px-3 py-2 text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
+          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
             <i class="fa-solid fa-left-long"></i>
           </a>
 
@@ -220,7 +219,7 @@ if ($tab_aktif === $TAB_MOTOR) {
           $link_hal_berikut = $halaman_berikutnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_berikutnya" : "#";
           ?>
 
-          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="px-3 py-2 text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
+          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
             <i class="fa-solid fa-right-long"></i>
           </a>
         </div>
