@@ -123,6 +123,7 @@ if ($tab_aktif === $TAB_MOTOR) {
                 <?php if ($tab_aktif === $TAB_MOTOR) : ?>
                   <th>Plat</th>
                   <th>Pemilik</th>
+                  <th>Lokasi Parkir</th>
                   <th>Tanggal Masuk</th>
                   <th>Action</th>
                 <?php else : ?>
@@ -140,6 +141,20 @@ if ($tab_aktif === $TAB_MOTOR) {
                   <tr class="[&>td]:p-2 text-center even:bg-gray-100">
                     <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
                     <td><?= $motor_arr[$i]['plat']; ?></td>
+                    <td>
+                      <?php
+                      $username = '';
+
+                      foreach ($semua_username as $user) {
+                        if ($user['id'] == $motor_arr[$i]['id_user_pemilik']) {
+                          $username = $user['username'];
+                          break;
+                        }
+                      }
+
+                      echo $username;
+                      ?>
+                    </td>
                     <td><?= $motor_arr[$i]['lokasi_parkir']; ?></td>
                     <td><?= $motor_arr[$i]['tanggal_masuk']; ?></td>
 
@@ -148,14 +163,9 @@ if ($tab_aktif === $TAB_MOTOR) {
                         <input type="hidden" name="plat-motor" value="<?= $motor_arr[$i]['plat']; ?>" />
                         <input type="hidden" name="token-parkiran" value="<?= $motor_arr[$i]['lokasi_parkir']; ?>" />
 
-                        <div class="flex items-center justify-center gap-2">
-                          <button id="info-motor-btn" type="button" class="px-3 py-2 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
-                            <i class="drop-shadow fa-solid fa-circle-info"></i>
-                          </button>
-                          <button id="hapus-motor-btn" class="px-3 py-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
-                            <i class="drop-shadow fa-regular fa-trash-can"></i>
-                          </button>
-                        </div>
+                        <button id="hapus-motor-btn" class="px-3 py-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
+                          <i class="drop-shadow fa-regular fa-trash-can"></i>
+                        </button>
                       </form>
                     </td>
                   </tr>
@@ -228,8 +238,9 @@ if ($tab_aktif === $TAB_MOTOR) {
     </div>
 
     <?php include "../components/admin/form-tambah-motor.php" ?>
-    <?php include "../components/admin/form-edit-user.php" ?>
+
+    <?php if ($tab_aktif === $TAB_USER) include "../components/admin/form-edit-user.php" ?>
   </dialog>
 </body>
 
-</html>:
+</html>

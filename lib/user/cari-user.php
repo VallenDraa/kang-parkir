@@ -93,7 +93,10 @@ function cariSemuaUser(mysqli $conn)
 function ambilSemuaUsername(mysqli $conn)
 {
   $semua_user = cariSemuaUser($conn);
-  $semua_username = array_map(fn ($user) => $user['username'], $semua_user);
+  $semua_username = array_map(fn ($user) => [
+    'id' => $user['id'],
+    'username' => $user['username']
+  ], $semua_user);
 
   return $semua_username;
 }

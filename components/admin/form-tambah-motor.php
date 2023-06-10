@@ -12,8 +12,8 @@
    </label>
 
    <select name="plat-user-lama" class="disabled:cursor-not-allowed" <?= count($semua_username) === 0 ? "disabled" : "" ?>>
-     <?php foreach ($semua_username as $username) : ?>
-       <option id="opsi-user" value="<?= $username ?>"><?= $username ?></option>
+     <?php foreach ($semua_username as $user) : ?>
+       <option id="opsi-user" value="<?= $user['username'] ?>"><?= $user['username'] ?></option>
      <?php endforeach ?>
    </select>
 
