@@ -92,15 +92,22 @@ if ($tab_aktif === $TAB_MOTOR) {
     <main class="max-w-screen-xl px-6 mx-auto mt-4">
       <h1 class="mb-6 text-3xl font-bold capitalize">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
 
-      <div class="relative flex items-center pl-3 mb-3 border border-gray-400 rounded-lg shadow shadow-gray-300">
-        <i class="text-gray-700 fa-solid fa-search"></i>
+      <!-- search bar -->
+      <form method="GET" class="relative flex items-center mb-3 border border-gray-400 rounded-lg shadow">
+        <input type="hidden" value="<?= $halaman_aktif ?>" name="halaman">
+        <input type="hidden" value="<?= $tab_aktif ?>" name="tab">
 
-        <input type="search" id="search-data-tabel" placeholder="Cari" class="w-full px-4 py-2 transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none placeholder:text-transparent peer disabled:cursor-not-allowed disabled:opacity-20">
+        <input type="search" name="keyword" id="search-data-tabel" placeholder="Cari" class="w-full px-4 py-2 transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none placeholder:text-transparent peer disabled:cursor-not-allowed disabled:opacity-20">
 
-        <label class="px-1 -translate-x-8 scale-90 transition-all absolute left-9 top-1/2 -translate-y-[30px] text-sm text-blue-500 peer-placeholder-shown:text-gray-500 bg-gray-50 peer-focus:-translate-x-8 peer-focus:-translate-y-[30px] peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
+        <label class="px-1 -translate-x-2 scale-90 transition-all absolute left-4 top-1/2 -translate-y-[35px] text-sm text-blue-500 peer-placeholder-shown:text-gray-500 bg-gray-50 peer-focus:-translate-x-2 peer-focus:-translate-y-[35px] peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
           Cari <?= $tab_aktif ?>
         </label>
-      </div>
+
+        <button id="hamburger-menu-btn" class="px-3 py-2 text-2xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-gray-200 active:bg-gray-300">
+          <i class="fa-solid fa-search"></i>
+        </button>
+
+      </form>
 
       <!-- table list user atau motor -->
       <div class="mt-2 rounded-lg shadow shadow-gray-300 overflow-clip">
