@@ -24,11 +24,7 @@ export function editUserHandler(users) {
       // ambil data motor milik user
       try {
         const motorArr = await fetch(
-          "../../../../parkiran-dua/api/cari-motor-dari-user-id.php",
-          {
-            method: "POST",
-            body: JSON.stringify({ "id-user": idUser }),
-          },
+          `../../../../parkiran-dua/api/cari-motor-dari-user-id.php?id-user=${idUser}`,
         ).then(res => res.json());
 
         // isi list motor di dalam dialog
