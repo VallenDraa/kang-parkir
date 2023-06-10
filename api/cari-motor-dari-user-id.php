@@ -12,9 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "GET") {
   exit;
 }
 
-if (
-  !isset($_GET['id-user'])
-) {
+if (!isset($_GET['id-user'])) {
   http_response_code(400);
   $response = ['error' => 'Parameter tidak sesuai !'];
   echo json_encode($response);
