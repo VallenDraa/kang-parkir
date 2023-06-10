@@ -10,7 +10,7 @@ import { qs } from "../../utils/dom-selector.js";
 
 export function editUserHandler(users) {
   editUserBtns?.forEach(btn => {
-    btn.addEventListener("click", async () => {
+    btn.addEventListener("click", () => {
       actionDialog?.openDialog();
       dialogTitle.textContent = "Edit User";
 
@@ -24,35 +24,30 @@ export function editUserHandler(users) {
       const { username, is_admin: isAdmin } = users.find(u => u.id === idUser);
 
       // ambil data motor milik user
-      try {
-        const motorArr = await fetch(
-          `../../../../parkiran-dua/api/cari-motor-dari-user-id.php?id-user=${idUser}`,
-        ).then(res => res.json());
+      const motorArr = window.dataMotorMilikUser[idUser];
 
-        // isi list motor di dalam dialog
-        let htmlListMotor = "";
-        motorArr.forEach(m => {
-          htmlListMotor += `
+      // isi list motor di dalam dialog
+      let htmlListMotor = "";
+      motorArr.forEach(m => {
+        htmlListMotor += `
           <li class="flex gap-5">
             <span>${m.plat}</span>
             <span>${m.lokasi_parkir}</span>
             <span>${new Date(m.tanggal_masuk).toLocaleString()}</span>
           </li>
           `;
-        });
+      });
 
-        qs("#list-motor-user").innerHTML = htmlListMotor;
+      // set isi list motor milik user
+      qs("#list-motor-user").innerHTML = htmlListMotor;
 
-        // isi data di dalam form
-        qs("#id-user-edit").value = idUser;
-        qs("[name='username']").value = username;
-        qs("[name='is-admin']").checked = isAdmin === 1;
+      // isi data di dalam form
+      qs("#id-user-edit").value = idUser;
+      qs("[name='username']").value = username;
+      qs("[name='is-admin']").checked = isAdmin === 1;
 
-        formEditUser?.classList.remove("hidden");
-        formTambahMotor?.classList.add("hidden");
-      } catch (error) {
-        console.error(error);
-      }
+      formEditUser?.classList.remove("hidden");
+      formTambahMotor?.classList.add("hidden");
     });
 
     // konfirmasi ketika menghapus motor

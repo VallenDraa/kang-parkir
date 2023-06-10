@@ -50,6 +50,13 @@ if ($tab_aktif === $TAB_MOTOR) {
     "halaman_sebelumnya" => $halaman_sebelumnya,
     "halaman_berikutnya" => $halaman_berikutnya
   ] = cariUser($conn, $keyword, $halaman_aktif, JUMLAH_PER_HALAMAN);
+
+
+  $data_motor_milik_user = new stdClass();
+
+  foreach ($user_arr as $user) {
+    $data_motor_milik_user->{$user["id"]} = cariMotorDariUserId($conn, $user["id"]);
+  }
 }
 ?>
 
@@ -59,6 +66,7 @@ if ($tab_aktif === $TAB_MOTOR) {
 <head>
   <?php include "../components/head-tags.php"; ?>
   <script defer>
+    window.dataMotorMilikUser = JSON.parse('<?= json_encode(isset($data_motor_milik_user) ? $data_motor_milik_user : []) ?>')
     window.users = JSON.parse('<?= json_encode(isset($user_arr) ? $user_arr : []) ?>');
     window.tabAktif = "<?= $tab_aktif ?>";
     window.tabelMaksHalaman = <?= $total_halaman ?>;
@@ -206,7 +214,7 @@ if ($tab_aktif === $TAB_MOTOR) {
           <?php
           $link_hal_sebelum = $halaman_sebelumnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_sebelumnya" : "#";
           ?>
-          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
+          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="w-10 h-10 grid place-content-center text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
             <i class="fa-solid fa-left-long"></i>
           </a>
 
@@ -219,7 +227,7 @@ if ($tab_aktif === $TAB_MOTOR) {
           $link_hal_berikut = $halaman_berikutnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_berikutnya" : "#";
           ?>
 
-          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
+          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="w-10 h-10 grid place-content-center text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
             <i class="fa-solid fa-right-long"></i>
           </a>
         </div>
