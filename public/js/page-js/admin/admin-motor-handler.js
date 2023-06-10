@@ -1,5 +1,6 @@
 import {
   actionDialog,
+  dialogTitle,
   formEditUser,
   formTambahMotor,
   hapusMotorforms,
@@ -12,6 +13,7 @@ export function adminMotorHandler() {
   // tampilkan modal ketika tombol tambah motor ditekan
   tambahMotorBtn?.addEventListener("click", () => {
     actionDialog?.openDialog();
+    dialogTitle.textContent = "Tambah Motor";
 
     formEditUser?.classList.add("hidden");
     formTambahMotor?.classList.remove("hidden");

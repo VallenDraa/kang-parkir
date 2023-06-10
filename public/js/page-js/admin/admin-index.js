@@ -34,6 +34,7 @@ export const actionDialog = new CustomDialog(
 export const inputHalaman = qs("#input-halaman");
 
 // konten dialog
+export const dialogTitle = qs("#dialog-title");
 export const formTambahMotor = qs("#form-tambah-motor");
 export const formEditUser = qs("#form-edit-user");
 

@@ -1,5 +1,6 @@
 import {
   actionDialog,
+  dialogTitle,
   editUserBtns,
   formEditUser,
   formTambahMotor,
@@ -11,6 +12,7 @@ export function editUserHandler(users) {
   editUserBtns?.forEach(btn => {
     btn.addEventListener("click", async () => {
       actionDialog?.openDialog();
+      dialogTitle.textContent = "Edit User";
 
       const idUser = parseInt(btn.getAttribute("data-id-user"));
 
