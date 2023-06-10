@@ -61,6 +61,8 @@ if ($tab_aktif === $TAB_MOTOR) {
   <?php include "../components/head-tags.php"; ?>
   <script defer>
     window.users = JSON.parse('<?= json_encode(isset($user_arr) ? $user_arr : []) ?>');
+    window.tabAktif = "<?= $tab_aktif ?>";
+    window.tabelMaksHalaman = <?= $total_halaman ?>;
   </script>
   <script src="../public/js/page-js/admin/admin-index.js" defer type="module"></script>
   <title>Halaman Utama Admin</title>
@@ -104,7 +106,7 @@ if ($tab_aktif === $TAB_MOTOR) {
           Cari <?= $tab_aktif ?>
         </label>
 
-        <button id="hamburger-menu-btn" class="px-3 py-2 text-2xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-gray-200 active:bg-gray-300">
+        <button id="hamburger-menu-btn" class="px-3 py-2 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-gray-200 active:bg-gray-300">
           <i class="fa-solid fa-search"></i>
         </button>
 
@@ -150,7 +152,7 @@ if ($tab_aktif === $TAB_MOTOR) {
                           <button id="info-motor-btn" type="button" class="px-3 py-2 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
                             <i class="drop-shadow fa-solid fa-circle-info"></i>
                           </button>
-                          <button id="hapus-motor-btn" class="px-3 py-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red -200 active:bg-red -300">
+                          <button id="hapus-motor-btn" class="px-3 py-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
                             <i class="drop-shadow fa-regular fa-trash-can"></i>
                           </button>
                         </div>
@@ -198,7 +200,10 @@ if ($tab_aktif === $TAB_MOTOR) {
             <i class="fa-solid fa-left-long"></i>
           </a>
 
-          <span id="indikator-halaman"><?= $halaman_aktif ?> / <?= $total_halaman ?></span>
+          <span id="indikator-halaman">
+            <input class="w-auto pl-2 rounded-lg shadow" type="number" min="1" max="<?= $total_halaman ?>" id="input-halaman" value="<?= $halaman_aktif ?>">
+            / <?= $total_halaman ?>
+          </span>
 
           <?php
           $link_hal_berikut = $halaman_berikutnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_berikutnya" : "#";
