@@ -44,7 +44,7 @@ export function editUserHandler(users) {
         // isi data di dalam form
         qs("#id-user-edit").value = idUser;
         qs("[name='username']").value = username;
-        qs("[name='is-admin']").checked = isAdmin === "1";
+        qs("[name='is-admin']").checked = isAdmin === 1;
 
         formEditUser?.classList.remove("hidden");
         formTambahMotor?.classList.add("hidden");

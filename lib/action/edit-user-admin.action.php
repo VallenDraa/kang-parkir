@@ -29,7 +29,7 @@ if (
 
 $id = $_POST['id-user'];
 $username = $_POST['username'];
-$is_admin = isset($_POST['is-admin']) ?  true : false;
+$is_admin = isset($_POST['is-admin']) ?  1 : 0;
 
 if (editUserOlehAdmin($conn, $id, $username, $is_admin)) {
   echo infoJs(
