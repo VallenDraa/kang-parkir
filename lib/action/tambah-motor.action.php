@@ -67,7 +67,10 @@ $id_target_user =
 if (
   tambahMotor($conn, $plat_motor, $token_parkiran, $id_target_user) &&
   isiParkiran($conn, $token_parkiran, $plat_motor) &&
-  tambahHistoriParkiran($conn, $token_parkiran, $plat_motor, true)
+  tambahHistoriMasukParkiran($conn, [[
+    "lokasi_parkir" => $token_parkiran,
+    "plat_motor" => $plat_motor
+  ]])
 ) {
   echo infoJs(
     "Motor dengan plat $plat_motor ditambahkan dan diparkir di $token_parkiran !",

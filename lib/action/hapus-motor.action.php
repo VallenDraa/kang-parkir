@@ -33,7 +33,7 @@ $token_parkiran = $_POST['token-parkiran'];
 if (
   hapusMotor($conn, $plat_motor) &&
   kosongkanParkiran($conn, $token_parkiran) &&
-  tambahHistoriParkiran($conn, $token_parkiran, $plat_motor, false)
+  tambahHistoriKeluarParkiran($conn, [$token_parkiran])
 ) {
   echo infoJs("Motor dengan plat $plat_motor berhasil keluar !", '../../admin/index.php');
 } else {

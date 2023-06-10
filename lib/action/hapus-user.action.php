@@ -47,7 +47,7 @@ if (
   hapusUser($conn, $id_user) &&
   hapusBanyakMotor($conn, $plat) &&
   kosongkanBanyakParkiran($conn, $token_parkir_arr) &&
-  tambahBanyakHistoriParkiran($conn, $motor_tanpa_tgl_masuk, false)
+  tambahHistoriKeluarParkiran($conn, $motor_tanpa_tgl_masuk)
 ) {
   echo infoJs("User berhasil dihapus !", '../../admin/index.php?tab=user');
 } else {
