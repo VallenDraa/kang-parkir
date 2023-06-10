@@ -37,7 +37,12 @@ $semua_username = ambilSemuaUsername($conn);
 $parkiran_kosong = cariParkiranKosong($conn);
 
 if ($tab_aktif === $TAB_MOTOR) {
-  $motor_arr = ambilSemuaMotor($conn);
+  [
+    'motors' => $motor_arr,
+    "total_halaman" => $total_halaman,
+    "halaman_sebelumnya" => $halaman_sebelumnya,
+    "halaman_berikutnya" => $halaman_berikutnya
+  ] = cariMotor($conn, $keyword, $halaman_aktif, JUMLAH_PER_HALAMAN);
 } else {
   [
     "users" => $user_arr,
@@ -56,16 +61,12 @@ if ($tab_aktif === $TAB_MOTOR) {
   <?php include "../components/head-tags.php"; ?>
   <script defer>
     window.users = JSON.parse('<?= json_encode(isset($user_arr) ? $user_arr : []) ?>');
-    window.motor = JSON.parse('<?= json_encode(isset($motor_arr) ? $motor_arr : []) ?>');
-    window.tabAktif = '<?= $tab_aktif ?>';
-    window.halamanAktif = '<?= $halaman_aktif ?>';
-    window.keyword = '<?= $keyword ?>';
   </script>
   <script src="../public/js/page-js/admin/admin-index.js" defer type="module"></script>
   <title>Halaman Utama Admin</title>
 </head>
 
-<body class="bg-gray-50 h-[200vh]">
+<body class="bg-gray-50">
   <div id="content" class="transition-transform duration-200">
     <header class="sticky top-0 z-[10000] py-2 bg-gray-50/50 backdrop-blur-lg">
       <div class="flex flex-wrap items-center justify-between max-w-screen-xl gap-2 px-6 mx-auto md:gap-0">
@@ -135,7 +136,7 @@ if ($tab_aktif === $TAB_MOTOR) {
                 <!-- isi list motor -->
                 <?php for ($i = 0; $i < count($motor_arr); $i++) : ?>
                   <tr class="[&>td]:p-2 text-center even:bg-gray-100">
-                    <td><?= $i + $halaman_aktif ?></td>
+                    <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
                     <td><?= $motor_arr[$i]['plat']; ?></td>
                     <td><?= $motor_arr[$i]['lokasi_parkir']; ?></td>
                     <td><?= $motor_arr[$i]['tanggal_masuk']; ?></td>
@@ -161,7 +162,7 @@ if ($tab_aktif === $TAB_MOTOR) {
                 <!-- isi list user-->
                 <?php for ($i = 0; $i < count($user_arr); $i++) : ?>
                   <tr class="[&>td]:p-2 text-center even:bg-gray-100">
-                    <td><?= $i + $halaman_aktif ?></td>
+                    <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
                     <td><?= $user_arr[$i]['username']; ?></td>
                     <td><?= $user_arr[$i]['jumlah_motor']; ?></td>
                     <td>

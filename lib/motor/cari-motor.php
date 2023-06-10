@@ -1,5 +1,54 @@
 <?php
-function ambilSemuaMotor(mysqli $conn)
+function cariMotor(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_per_halaman)
+{
+  // setting halaman dan query
+  $stmt_jml_motor = mysqli_query($conn, "SELECT plat FROM motor WHERE plat LIKE '%$keyword%'");
+  $jml_motor = mysqli_num_rows($stmt_jml_motor);
+  $total_halaman = ceil($jml_motor / $jml_per_halaman) > 0 ? ceil($jml_motor / $jml_per_halaman) : 1;
+
+  $halaman_aktif_sql = ($halaman_aktif - 1) * $jml_per_halaman;
+  $keyword_sql = "%$keyword%";
+
+  $stmt = mysqli_prepare(
+    $conn,
+    "SELECT plat, lokasi_parkir, tanggal_masuk, id_user_pemilik FROM motor WHERE plat LIKE ? LIMIT ?, ?"
+  );
+
+  mysqli_stmt_bind_param($stmt, "sdd", $keyword_sql, $halaman_aktif_sql, $jml_per_halaman);
+  mysqli_stmt_execute($stmt);
+
+  mysqli_stmt_bind_result(
+    $stmt,
+    $plat,
+    $lokasi_parkir,
+    $tanggal_masuk,
+    $id_user_pemilik,
+  );
+
+  // Rangkai data
+  $data = [
+    'motors' => [],
+    "total_halaman" => $total_halaman,
+    'halaman_aktif' => $halaman_aktif >= $total_halaman ? $halaman_aktif : $total_halaman,
+    'halaman_sebelumnya' => $halaman_aktif - 1 !== 0  ? $halaman_aktif - 1 : null,
+    'halaman_berikutnya' =>  $halaman_aktif + 1 <= $total_halaman  ? $halaman_aktif + 1 : null
+  ];
+
+  while (mysqli_stmt_fetch($stmt)) {
+    $motor = [
+      'plat' => $plat,
+      'lokasi_parkir' => $lokasi_parkir,
+      'tanggal_masuk' => $tanggal_masuk,
+      'id_user_pemilik' => $id_user_pemilik,
+    ];
+
+    array_push($data['motors'], $motor);
+  }
+
+  return $data;
+}
+
+function cariSemuaMotor(mysqli $conn)
 {
   $stmt = mysqli_prepare(
     $conn,
