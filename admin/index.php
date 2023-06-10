@@ -51,7 +51,6 @@ if ($tab_aktif === $TAB_MOTOR) {
     "halaman_berikutnya" => $halaman_berikutnya
   ] = cariUser($conn, $keyword, $halaman_aktif, JUMLAH_PER_HALAMAN);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +68,9 @@ if ($tab_aktif === $TAB_MOTOR) {
 </head>
 
 <body class="bg-gray-50">
-  <div id="content" class="transition-transform duration-200">
+  <?php include "../components/admin/admin-sidebar.php"; ?>
+
+  <div id="content" class="transition-transform duration-300 ease-out">
     <header class="sticky top-0 z-[10000] py-2 bg-gray-50/50 backdrop-blur-lg">
       <div class="flex flex-wrap items-center justify-between max-w-screen-xl gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
@@ -241,6 +242,7 @@ if ($tab_aktif === $TAB_MOTOR) {
 
     <?php if ($tab_aktif === $TAB_USER) include "../components/admin/form-edit-user.php" ?>
   </dialog>
+
 </body>
 
 </html>

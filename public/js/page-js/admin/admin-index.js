@@ -4,6 +4,7 @@ import { editUserHandler } from "./admin-user-handler.js";
 import { initAdminTooltip } from "./admin-tooltip.js";
 import { CustomDialog } from "../../components/dialog.js";
 import { adminTabel } from "./admin-tabel.js";
+import { Sidebar } from "../../components/sidebar.js";
 
 export const tambahMotorBtn = qs("#tambah-motor-btn");
 export const submitMotorBtn = qs("#submit-motor-btn");
@@ -27,6 +28,13 @@ export const actionDialog = new CustomDialog(
     formEditUser?.classList.add("hidden");
     formTambahMotor?.classList.add("hidden");
   },
+);
+
+export const sidebar = new Sidebar(
+  "#sidebar",
+  "#sidebar-backdrop",
+  "#hamburger-menu-btn",
+  "#content",
 );
 
 // konten tabel
