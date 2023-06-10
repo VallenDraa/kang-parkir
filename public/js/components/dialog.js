@@ -7,8 +7,6 @@ export class CustomDialog {
   /** @type {HTMLButtonElement | null} */
   #closeButtonEl;
 
-  static #escapeIntercepted = false;
-
   static #closeAnimationClasses = [
     "backdrop:opacity-0",
     "scale-95",

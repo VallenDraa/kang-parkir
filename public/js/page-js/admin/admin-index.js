@@ -3,7 +3,6 @@ import { adminMotorHandler } from "./admin-motor-handler.js";
 import { editUserHandler } from "./admin-user-handler.js";
 import { initAdminTooltip } from "./admin-tooltip.js";
 import { CustomDialog } from "../../components/dialog.js";
-import { adminCariDataTabel } from "./admin-cari-data-tabel.js";
 
 export const tambahMotorBtn = qs("#tambah-motor-btn");
 export const submitMotorBtn = qs("#submit-motor-btn");
@@ -45,4 +44,3 @@ export const formEditUser = qs("#form-edit-user");
 initAdminTooltip();
 editUserHandler(window.users);
 adminMotorHandler();
-adminCariDataTabel();
