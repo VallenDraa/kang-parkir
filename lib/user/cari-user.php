@@ -1,5 +1,4 @@
 <?php
-
 function cariUser(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_per_halaman)
 {
 
@@ -14,10 +13,10 @@ function cariUser(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_pe
   $stmt = mysqli_prepare(
     $conn,
     "SELECT user.id, user.username, user.is_admin, user.created_at, COUNT(motor.plat) AS jumlah_motor
-    FROM user 
-    LEFT JOIN motor ON user.id = motor.id_user_pemilik
+    FROM user LEFT JOIN motor ON user.id = motor.id_user_pemilik
     WHERE user.username LIKE ?
-    GROUP BY user.id LIMIT ?, ?"
+    GROUP BY user.id 
+    LIMIT ?, ?"
   );
 
   mysqli_stmt_bind_param($stmt, "sdd", $keyword_sql, $halaman_aktif_sql, $jml_per_halaman);
@@ -34,7 +33,7 @@ function cariUser(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_pe
 
   // Rangkai data
   $data = [
-    'users' => [],
+    'user_arr' => [],
     "total_halaman" => $total_halaman,
     'halaman_aktif' => $halaman_aktif >= $total_halaman ? $halaman_aktif : $total_halaman,
     'halaman_sebelumnya' => $halaman_aktif - 1 !== 0  ? $halaman_aktif - 1 : null,
@@ -50,7 +49,7 @@ function cariUser(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_pe
       'jumlah_motor' => $jumlah_motor,
     ];
 
-    array_push($data['users'], $user);
+    array_push($data['user_arr'], $user);
   }
 
   return $data;

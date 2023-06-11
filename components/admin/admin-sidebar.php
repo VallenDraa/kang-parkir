@@ -6,10 +6,10 @@ $currentURL = $_SERVER['REQUEST_URI'];
 <div id="sidebar-backdrop">
 </div>
 
-<aside id="sidebar" class="flex flex-col px-4 py-3 -translate-x-full">
+<aside id="sidebar" class="flex flex-col px-4 py-3 -translate-x-full transition-transform duration-300 ease-out shadow shadow-slate-300 absolute w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0">
   <!-- sidebar control -->
-  <div class="flex items-center justify-between pb-2 border-b border-gray-300">
-    <span class="pl-3 font-medium uppercase">Kang Parkir</span>
+  <div class="flex items-center justify-between pb-2 border-b border-slate-300">
+    <span class="pl-3 font-medium uppercase">Parkiran Dua</span>
 
     <div class="flex items-center gap-1">
       <button id="theme-btn" class="w-10 h-10 text-xl text-yellow-500 transition-colors duration-200 rounded-lg hover:bg-yellow-300/50 active:bg-yellow-300/60">
@@ -32,28 +32,29 @@ $currentURL = $_SERVER['REQUEST_URI'];
 
     <!-- nama -->
     <div class="flex flex-col">
-      <span class="text-sm font-medium text-gray-400">Selamat Datang, </span>
-      <span class="text-lg font-bold text-gray-900">UJANG</span>
+      <span class="text-sm font-medium text-slate-400">Selamat Datang, </span>
+      <span class="text-lg font-bold text-slate-900">Ujang Sumedang</span>
     </div>
   </div>
 
   <!-- konten sidebar -->
   <nav class="flex-grow space-y-1">
-    <a class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-gray-200 <?= strpos($currentURL, "index") !== false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
-      <i class="<?= strpos($currentURL, "index") !== false ? 'text-white' : 'text-gray-400' ?> fa-solid fa-house-user"></i>
+    <a href="index.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "index") !== false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
+      <i class="<?= strpos($currentURL, "index") !== false ? 'text-white' : 'text-slate-400' ?> fa-solid fa-house-user"></i>
       <span>Utama</span>
     </a>
-    <a class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-gray-200 <?= strpos($currentURL, "laporan") !== false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
-      <i class="<?= strpos($currentURL, "laporan") !== false ? 'text-white' : 'text-gray-400' ?> fa-solid fa-chart-line"></i>
+    <a href="laporan.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "laporan") !== false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
+      <i class="<?= strpos($currentURL, "laporan") !== false ? 'text-white' : 'text-slate-400' ?> fa-solid fa-chart-line"></i>
       <span>Laporan</span>
     </a>
-    <a class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-gray-200">
-      <i class="text-gray-400 fa-solid fa-file-pdf"></i>
-      <span>Download PDF</span>
-    </a>
+
+    <button class="text-red-500 w-full flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-red-200">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      <span>Keluar</span>
+    </button>
   </nav>
 
 
-  <span class="block mt-auto text-xs text-center text-gray-500">&copy;<?= date("Y") ?> | Kang Parkir Ltd.</span>
+  <span class="block mt-auto text-xs text-center text-slate-500">&copy;<?= date("Y") ?> | Kang Parkir Ltd.</span>
 
 </aside>

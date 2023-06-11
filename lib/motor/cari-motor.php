@@ -11,10 +11,14 @@ function cariMotor(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_p
 
   $stmt = mysqli_prepare(
     $conn,
-    "SELECT plat, lokasi_parkir, tanggal_masuk, id_user_pemilik FROM motor WHERE plat LIKE ? LIMIT ?, ?"
+    "SELECT plat, lokasi_parkir, tanggal_masuk, id_user_pemilik
+     FROM motor
+     WHERE plat LIKE ? OR lokasi_parkir LIKE ?
+     LIMIT ?, ?
+    "
   );
 
-  mysqli_stmt_bind_param($stmt, "sdd", $keyword_sql, $halaman_aktif_sql, $jml_per_halaman);
+  mysqli_stmt_bind_param($stmt, "ssdd", $keyword_sql, $keyword_sql, $halaman_aktif_sql, $jml_per_halaman);
   mysqli_stmt_execute($stmt);
 
   mysqli_stmt_bind_result(
@@ -27,7 +31,7 @@ function cariMotor(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_p
 
   // Rangkai data
   $data = [
-    'motors' => [],
+    'motor_arr' => [],
     "total_halaman" => $total_halaman,
     'halaman_aktif' => $halaman_aktif >= $total_halaman ? $halaman_aktif : $total_halaman,
     'halaman_sebelumnya' => $halaman_aktif - 1 !== 0  ? $halaman_aktif - 1 : null,
@@ -42,36 +46,10 @@ function cariMotor(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_p
       'id_user_pemilik' => $id_user_pemilik,
     ];
 
-    array_push($data['motors'], $motor);
+    array_push($data['motor_arr'], $motor);
   }
 
   return $data;
-}
-
-function cariSemuaMotor(mysqli $conn)
-{
-  $stmt = mysqli_prepare(
-    $conn,
-    "SELECT plat, lokasi_parkir, tanggal_masuk FROM motor"
-  );
-
-  mysqli_stmt_execute($stmt);
-  mysqli_stmt_bind_result($stmt, $plat, $lokasi_parkir, $tanggal_masuk);
-  $semua_motor = [];
-
-  while (mysqli_stmt_fetch($stmt)) {
-    $motor = [
-      'plat' => $plat,
-      'lokasi_parkir' => $lokasi_parkir,
-      'tanggal_masuk' => $tanggal_masuk
-    ];
-
-    array_push($semua_motor, $motor);
-  }
-
-  mysqli_stmt_close($stmt);
-
-  return $semua_motor;
 }
 
 function cekMotorSudahAda(mysqli $conn, string $plat)
@@ -118,21 +96,4 @@ function cariMotorDariUserId(mysqli $conn, int $id_user_pemilik)
   mysqli_stmt_close($stmt);
 
   return $hasil_cari_motor;
-}
-
-function jumlahMotorUser(mysqli $conn, string $id_user_pemilik): int
-{
-  $stmt = mysqli_prepare(
-    $conn,
-    "SELECT COUNT(*) as motor_count FROM motor WHERE id_user_pemilik = ?"
-  );
-
-  mysqli_stmt_bind_param($stmt, "s", $id_user_pemilik);
-  mysqli_stmt_execute($stmt);
-  mysqli_stmt_bind_result($stmt, $motor_count);
-
-  mysqli_stmt_fetch($stmt);
-  mysqli_stmt_close($stmt);
-
-  return $motor_count;
 }
