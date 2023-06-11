@@ -16,7 +16,6 @@ include "../components/button.php";
 include "../components/admin/data-motor-ekstra.php";
 include "../lib/chart-data.php";
 
-
 $data_tambahan = dataTambahanMotor($conn);
 $kapasitas_parkiran = cekKapasitasParkiran($conn);
 

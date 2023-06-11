@@ -84,7 +84,7 @@ function dataMotorPeriodik(mysqli $conn, $periode): array
       break;
   }
 
-  $dateComparison = date($format_tgl, strtotime("-6 $period"));
+  $dateComparison = date($format_tgl, strtotime("-$limit $period"));
 
   $result = mysqli_query(
     $conn,
@@ -97,6 +97,13 @@ function dataMotorPeriodik(mysqli $conn, $periode): array
   );
 
   $data_motor = [];
+
+  // mengisi array data motor dengan tanggal sesuai periode
+  for ($i = $limit; $i >= 1; $i--) {
+    $key_tanggal = date($format_tgl, strtotime("-$i $period"));
+
+    $data_motor[$key_tanggal] = [];
+  }
 
   while ($row = mysqli_fetch_assoc($result)) {
     $data_motor[$row['waktu']] = $row['jumlah_motor'];
