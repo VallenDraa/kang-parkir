@@ -38,14 +38,14 @@ $parkiran_kosong = cariParkiranKosong($conn);
 
 if ($tab_aktif === $TAB_MOTOR) {
   [
-    'motors' => $motor_arr,
+    'motor_arr' => $motor_arr,
     "total_halaman" => $total_halaman,
     "halaman_sebelumnya" => $halaman_sebelumnya,
     "halaman_berikutnya" => $halaman_berikutnya
   ] = cariMotor($conn, $keyword, $halaman_aktif, JUMLAH_PER_HALAMAN);
 } else {
   [
-    "users" => $user_arr,
+    "user_arr" => $user_arr,
     "total_halaman" => $total_halaman,
     "halaman_sebelumnya" => $halaman_sebelumnya,
     "halaman_berikutnya" => $halaman_berikutnya
@@ -71,19 +71,19 @@ if ($tab_aktif === $TAB_MOTOR) {
     window.tabAktif = "<?= $tab_aktif ?>";
     window.tabelMaksHalaman = <?= $total_halaman ?>;
   </script>
-  <script src="../public/js/page-js/admin/admin-index.js" defer type="module"></script>
+  <script src="../public/js/page-js/admin/index/admin-index.js" defer type="module"></script>
   <title>Halaman Utama Admin</title>
 </head>
 
-<body class="bg-gray-50">
+<body class="bg-slate-100">
   <?php include "../components/admin/admin-sidebar.php"; ?>
 
   <div id="content" class="transition-transform duration-300 ease-out">
-    <header class="sticky top-0 z-[10000] py-2 bg-gray-50/50 backdrop-blur-lg">
-      <div class="flex flex-wrap items-center justify-between max-w-screen-xl gap-2 px-6 mx-auto md:gap-0">
+    <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 backdrop-blur-lg shadow shadow-slate-300">
+      <div class="flex flex-wrap items-center justify-between  gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
         <div class="basis-1/3">
-          <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
+          <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-lg hover:bg-slate-200 active:bg-slate-300">
             <i class="fa-solid fa-bars"></i>
           </button>
         </div>
@@ -101,32 +101,32 @@ if ($tab_aktif === $TAB_MOTOR) {
       </div>
     </header>
 
-    <main class="max-w-screen-xl px-6 mx-auto mt-4">
-      <h1 class="mb-6 text-3xl font-bold capitalize">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
+    <main class=" px-6 mx-auto mt-8">
+      <h1 class="mb-6 text-2xl font-bold capitalize mx-auto bg-gradient-to-b from-blue-300 to-blue-400 shadow-blue-300 text-white py-1 px-6 rounded-full w-fit">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
 
       <!-- search bar -->
-      <form method="GET" class="relative flex items-center mb-3 border border-gray-400 rounded-lg shadow">
+      <form method="GET" class="relative flex items-center mb-3 border border-slate-400 rounded-lg shadow">
         <input type="hidden" value="<?= $halaman_aktif ?>" name="halaman">
         <input type="hidden" value="<?= $tab_aktif ?>" name="tab">
 
-        <input type="search" name="keyword" id="search-data-tabel" placeholder="Cari" class="w-full px-4 py-2 transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none placeholder:text-transparent peer disabled:cursor-not-allowed disabled:opacity-20">
+        <input type="search" name="keyword" id="search-data-tabel" placeholder="Cari" value="<?= $keyword ?>" class="w-full px-4 py-2 transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none placeholder:text-transparent peer disabled:cursor-not-allowed disabled:opacity-20">
 
-        <label class="px-1 -translate-x-2 scale-90 transition-all absolute left-4 top-1/2 -translate-y-[35px] text-sm text-blue-500 peer-placeholder-shown:text-gray-500 bg-gray-50 peer-focus:-translate-x-2 peer-focus:-translate-y-[35px] peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
+        <label class="px-1 -translate-x-2 scale-90 transition-all absolute left-4 top-1/2 -translate-y-[35px] text-sm text-blue-500 peer-placeholder-shown:text-slate-500 bg-slate-50 peer-focus:-translate-x-2 peer-focus:-translate-y-[35px] peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
           Cari <?= $tab_aktif ?>
         </label>
 
-        <button id="hamburger-menu-btn" class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-gray-200 active:bg-gray-300">
+        <button id="hamburger-menu-btn" class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-slate-200 active:bg-slate-300">
           <i class="fa-solid fa-search"></i>
         </button>
       </form>
 
       <!-- table list user atau motor -->
-      <div class="mt-2 rounded-lg shadow shadow-gray-300 overflow-clip">
+      <div class="mt-2 rounded-lg shadow shadow-slate-300 overflow-clip">
         <!-- tabel semi-responsive -->
         <div class="w-full overflow-auto">
           <table id="tabel-user-motor" class="w-full table-auto overflow-clip">
             <thead>
-              <tr class="[&>th]:p-2 bg-gray-200 text-gray-700">
+              <tr class="[&>th]:p-2 bg-slate-200 text-slate-700">
                 <th>No</th>
                 <?php if ($tab_aktif === $TAB_MOTOR) : ?>
                   <th>Plat</th>
@@ -146,7 +146,7 @@ if ($tab_aktif === $TAB_MOTOR) {
               <tbody>
                 <!-- isi list motor -->
                 <?php for ($i = 0; $i < count($motor_arr); $i++) : ?>
-                  <tr class="[&>td]:p-2 text-center even:bg-gray-100">
+                  <tr class="[&>td]:p-2 text-center even:bg-slate-100">
                     <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
                     <td><?= $motor_arr[$i]['plat']; ?></td>
                     <td>
@@ -181,7 +181,7 @@ if ($tab_aktif === $TAB_MOTOR) {
               <?php else : ?>
                 <!-- isi list user-->
                 <?php for ($i = 0; $i < count($user_arr); $i++) : ?>
-                  <tr class="[&>td]:p-2 text-center even:bg-gray-100">
+                  <tr class="[&>td]:p-2 text-center even:bg-slate-100">
                     <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
                     <td><?= $user_arr[$i]['username']; ?></td>
                     <td><?= $user_arr[$i]['jumlah_motor']; ?></td>
@@ -191,7 +191,7 @@ if ($tab_aktif === $TAB_MOTOR) {
 
                         <!-- tombol user -->
                         <div class="flex items-center justify-center gap-2">
-                          <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
+                          <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-slate-200 active:bg-slate-300">
                             <i class="drop-shadow fa-regular fa-pen-to-square"></i>
                           </button>
 
@@ -210,11 +210,11 @@ if ($tab_aktif === $TAB_MOTOR) {
         </div>
 
         <!-- kontrol dari tabel -->
-        <div class="flex items-center justify-center w-full gap-2 px-4 py-0.5 bg-gray-200">
+        <div class="flex items-center justify-center w-full gap-2 px-4 py-0.5 bg-slate-200">
           <?php
           $link_hal_sebelum = $halaman_sebelumnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_sebelumnya" : "#";
           ?>
-          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="w-10 h-10 grid place-content-center text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
+          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="w-10 h-10 grid place-content-center text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
             <i class="fa-solid fa-left-long"></i>
           </a>
 
@@ -227,7 +227,7 @@ if ($tab_aktif === $TAB_MOTOR) {
           $link_hal_berikut = $halaman_berikutnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_berikutnya" : "#";
           ?>
 
-          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="w-10 h-10 grid place-content-center text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-gray-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-gray-300 active:bg-gray-400">
+          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="w-10 h-10 grid place-content-center text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
             <i class="fa-solid fa-right-long"></i>
           </a>
         </div>

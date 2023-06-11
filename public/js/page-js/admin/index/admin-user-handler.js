@@ -6,7 +6,7 @@ import {
   formTambahMotor,
   hapusUserforms,
 } from "./admin-index.js";
-import { qs } from "../../utils/dom-selector.js";
+import { qs } from "../../../utils/dom-selector.js";
 
 export function editUserHandler(users) {
   editUserBtns?.forEach(btn => {

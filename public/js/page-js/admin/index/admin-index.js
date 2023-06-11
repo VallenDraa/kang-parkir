@@ -1,10 +1,10 @@
-import { qs, qsa } from "../../utils/dom-selector.js";
+import { qs, qsa } from "../../../utils/dom-selector.js";
 import { adminMotorHandler } from "./admin-motor-handler.js";
 import { editUserHandler } from "./admin-user-handler.js";
 import { initAdminTooltip } from "./admin-tooltip.js";
-import { CustomDialog } from "../../components/dialog.js";
+import { CustomDialog } from "../../../components/dialog.js";
 import { adminTabel } from "./admin-tabel.js";
-import { Sidebar } from "../../components/sidebar.js";
+import { Sidebar } from "../../../components/sidebar.js";
 
 export const tambahMotorBtn = qs("#tambah-motor-btn");
 export const submitMotorBtn = qs("#submit-motor-btn");
@@ -48,7 +48,9 @@ export const formTambahMotor = qs("#form-tambah-motor");
 export const formEditUser = qs("#form-edit-user");
 
 // inisialisasi
-initAdminTooltip();
-editUserHandler(window.users);
-adminMotorHandler();
-adminTabel();
+document.addEventListener("DOMContentLoaded", () => {
+  initAdminTooltip();
+  editUserHandler(window.users);
+  adminMotorHandler();
+  adminTabel();
+});

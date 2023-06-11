@@ -9,11 +9,11 @@
 
     <!-- tombol user -->
     <div class="flex items-center gap-2">
-      <button id="edit-user-btn" type="button" data-id-user="<?= $user['id']; ?>" class="p-2 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
+      <button id="edit-user-btn" type="button" data-id-user="<?= $user['id']; ?>" class="p-2 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-slate-200 active:bg-slate-300">
         <i class="drop-shadow fa-regular fa-pen-to-square"></i>
       </button>
 
-      <button id="hapus-user-btn" class="p-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-gray-200 active:bg-gray-300">
+      <button id="hapus-user-btn" class="p-2 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-slate-200 active:bg-slate-300">
         <i class="drop-shadow fa-regular fa-trash-can"></i>
       </button>
     </div>

@@ -2,12 +2,12 @@ import { qs } from "../utils/dom-selector.js";
 
 export class Sidebar {
   static #backdropClasses =
-    "opacity-0 transition-opacity duration-300 ease-out bg-gray-600/50 md:backdrop-blur-sm absolute z-[12000]".split(
+    "opacity-0 transition-opacity duration-300 ease-out bg-slate-600/50 md:backdrop-blur-sm absolute z-[12000]".split(
       " ",
     );
 
   static #sidebarClasses =
-    "-translate-x-full transition-transform duration-300 shadow shadow-gray-300 absolute w-full md:w-96 h-screen bg-gray-50 z-[15000] left-0".split(
+    "-translate-x-full transition-transform duration-300 ease-out shadow shadow-slate-300 absolute w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0".split(
       " ",
     );
 
@@ -87,13 +87,13 @@ export class Sidebar {
   }
 
   #openSidebarAnimation() {
-    document.body.style.overflowX = "hidden";
+    document.body.style.overflow = "hidden";
     this.#backdrop.classList.add("inset-0");
     this.#backdrop.classList.replace("opacity-0", "opacity-100");
 
     this.#sidebar?.classList.remove("-translate-x-full");
 
-    this.#mainContent?.classList.add("translate-x-96", "2xl:translate-x-64");
+    this.#mainContent?.classList.add("translate-x-96");
   }
 
   #closeSidebarAnimation() {
@@ -101,11 +101,11 @@ export class Sidebar {
 
     setTimeout(() => {
       this.#backdrop.classList.remove("inset-0");
-      document.body.style.overflowX = "auto";
+      document.body.style.overflow = "auto";
     }, 300);
 
     this.#sidebar?.classList.add("-translate-x-full");
 
-    this.#mainContent?.classList.remove("translate-x-96", "2xl:translate-x-64");
+    this.#mainContent?.classList.remove("translate-x-96");
   }
 }
