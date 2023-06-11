@@ -113,7 +113,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
         <!-- grafik batang motor per hari / bulan / tahun -->
         <div class="relative bg-slate-50 p-6 rounded-lg shadow shadow-slate-300 col-span-full md:col-span-5 xl:col-span-4 row-start-2 md:row-start-2 xl:row-start-1">
           <div class="flex justify-between">
-            <h3 class="text-2xl font-medium mb-4">Data Motor Perhari</h3>
+            <h3 class="text-2xl font-medium mb-4">Data Motor <?= $periode_data ?></h3>
 
             <select id="pilihan-periode-motor" class="disabled:cursor-not-allowed bg-transparent rounded-lg">
               <option id="opsi-periode" <?= $periode_data === PERIODE_HARIAN ? "selected" : "" ?> value="<?= PERIODE_HARIAN ?>"><?= PERIODE_HARIAN ?></option>
