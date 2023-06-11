@@ -59,7 +59,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
       <div class="grid grid-cols-8 gap-4">
 
         <!-- data ekstra -->
-        <div class="flex flex-col md:flex-row xl:flex-col gap-4 col-span-full xl:col-span-2 row-start-1">
+        <div class="flex flex-col md:flex-row 2xl:flex-col gap-4 col-span-full 2xl:col-span-2 row-start-1">
           <!-- Total motor yang pernah parkir  -->
           <div class="bg-slate-50 flex-1 overflow-hidden relative shadow shadow-slate-300 p-6 rounded-lg flex gap-5">
             <div class="relative z-10">
@@ -92,7 +92,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
           <!-- Motor terakhir keluar  -->
           <div class="bg-slate-50 flex-1 overflow-hidden relative shadow shadow-slate-300 p-6 rounded-lg flex gap-5">
             <div class="relative z-10">
-              <?= DataMotorEkstra($data_tambahan['terakhir_keluar'], 'Terbaru Keluar') ?>
+              <?= DataMotorEkstra($data_tambahan['terakhir_keluar'], 'Terbaru Keluar', false) ?>
             </div>
 
             <i class="absolute text-8xl top-1/2 -translate-y-1/2 right-5 text-slate-200 fa-solid fa-arrow-right-from-bracket"></i>
@@ -101,7 +101,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
 
 
         <!-- kapasitas parkiran -->
-        <div class="relative bg-slate-50 p-6 rounded-lg shadow shadow-slate-300 col-span-full md:col-span-3 xl:col-span-2 row-start-3 md:row-start-2 xl:row-start-1">
+        <div class="relative bg-slate-50 p-6 rounded-lg shadow shadow-slate-300 col-span-full md:col-span-3 2xl:col-span-2 row-start-3 md:row-start-2 2xl:row-start-1">
           <h3 class="text-2xl font-medium mb-4">Kapasitas Parkiran (%)</h3>
           <canvas id="kapasitas-parkiran"></canvas>
           <span class="block text-center mt-3 text-slate-500">
@@ -111,7 +111,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
 
 
         <!-- grafik batang motor per hari / bulan / tahun -->
-        <div class="relative bg-slate-50 p-6 rounded-lg shadow shadow-slate-300 col-span-full md:col-span-5 xl:col-span-4 row-start-2 md:row-start-2 xl:row-start-1">
+        <div class="relative bg-slate-50 p-6 rounded-lg shadow shadow-slate-300 col-span-full md:col-span-5 2xl:col-span-4 row-start-2 md:row-start-2 2xl:row-start-1">
           <div class="flex justify-between">
             <h3 class="text-2xl font-medium mb-4">Data Motor <?= $periode_data ?></h3>
 
