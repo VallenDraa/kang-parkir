@@ -34,7 +34,7 @@ export class Sidebar {
    * @param {string} sidebar
    * @param {string} backdrop
    * @param {string} menuBtn
-   * @param {string} `closeBtn`
+   * @param {string} closeBtn
    * @param {string} mainContent
    *
    * pastikan sidebar ada diluar HTML mainContent

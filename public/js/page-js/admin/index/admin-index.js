@@ -48,9 +48,7 @@ export const formTambahMotor = qs("#form-tambah-motor");
 export const formEditUser = qs("#form-edit-user");
 
 // inisialisasi
-document.addEventListener("DOMContentLoaded", () => {
-  initAdminTooltip();
-  editUserHandler(window.users);
-  adminMotorHandler();
-  adminTabel();
-});
+initAdminTooltip();
+editUserHandler(window.users);
+adminMotorHandler();
+adminTabel();

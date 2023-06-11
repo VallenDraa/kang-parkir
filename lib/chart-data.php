@@ -1,4 +1,8 @@
 <?php
+define("PERIODE_HARIAN", "Harian");
+define("PERIODE_BULANAN", "Bulanan");
+define("PERIODE_TAHUNAN", "Tahunan");
+
 function dataTambahanMotor(mysqli $conn): array
 {
   // hitung jumlah motor yang pernah parkir 
@@ -45,116 +49,77 @@ function dataTambahanMotor(mysqli $conn): array
   ];
 }
 
+$limit = 0;
+$period = "days";
+
+
 function dataMotorPeriodik(mysqli $conn, $periode): array
 {
-  $result = mysqli_query($conn, "SELECT * FROM histori_parkir");
+
+  $limit = 7;
+  $period = "days";
+  $format_tgl = 'Y-m-d';
+  $format_tgl_sql = '%Y-%m-%d';
+
+  switch ($periode) {
+    case PERIODE_HARIAN:
+      $limit = 7;
+      $period = "days";
+      $format_tgl = 'Y-m-d';
+      $format_tgl_sql = '%Y-%m-%d';
+      break;
+
+    case PERIODE_BULANAN:
+      $limit = 12;
+      $period = "months";
+      $format_tgl = 'Y-m';
+      $format_tgl_sql = '%Y-%m';
+      break;
+
+    case PERIODE_TAHUNAN:
+      $limit = 5;
+      $period = "years";
+      $format_tgl = 'Y';
+      $format_tgl_sql = '%Y';
+      break;
+  }
+
+  $dateComparison = date($format_tgl, strtotime("-6 $period"));
+
+  $result = mysqli_query(
+    $conn,
+    "SELECT DATE_FORMAT(tanggal_masuk, '$format_tgl_sql') AS waktu, COUNT(*) AS jumlah_motor
+     FROM histori_parkir
+     WHERE tanggal_masuk >= '$dateComparison'
+     GROUP BY waktu
+     ORDER BY waktu LIMIT $limit
+    "
+  );
+
   $data_motor = [];
 
-  while ($baris = mysqli_fetch_assoc($result)) {
-    $tanggal = strtotime($baris["tanggal_masuk"]);
-
-    switch ($periode) {
-      case 'hari':
-        $grup = date('Y-m-d', $tanggal);
-        break;
-        // case 'minggu':
-        //   $grup = date('Y-W', $tanggal);
-        //   break;
-      case 'bulan':
-        $grup = date('Y-m', $tanggal);
-        break;
-      case 'tahun':
-        $grup = date('Y', $tanggal);
-        break;
-      default:
-        $grup = date('Y-m-d', $tanggal);
-        break;
-    }
-
-    if (!isset($data_motor[$grup])) {
-      $data_motor[$grup] = [];
-    }
-
-    array_push($data_motor[$grup], $baris);
+  while ($row = mysqli_fetch_assoc($result)) {
+    $data_motor[$row['waktu']] = $row['jumlah_motor'];
   }
 
   return $data_motor;
 }
 
+
 function cekKapasitasParkiran(mysqli $conn)
 {
   $result = mysqli_query(
     $conn,
-    "SELECT 
-    (COUNT(CASE WHEN plat_motor IS NOT NULL THEN 1 END) / COUNT(*)) * 100 AS persen_terisi 
-    FROM tempat_parkir"
+    "SELECT COUNT(*) AS total_parkiran, COUNT(plat_motor) AS jml_terisi FROM tempat_parkir"
   );
 
   $data = mysqli_fetch_assoc($result);
 
-  $persen_terisi = $data['persen_terisi'];
+  $kapasitas = [
+    "total_parkiran" => $data["total_parkiran"],
+    "jml_terisi" => $data['jml_terisi'],
+    "persen_terisi" => ($data['jml_terisi'] / $data["total_parkiran"]) * 100
+  ];
 
-  return $persen_terisi;
-}
-
-function userMotorTerbanyak(mysqli $conn, int $jumlah)
-{
-  $stmt = mysqli_prepare(
-    $conn,
-    "SELECT user.id, user.username, COUNT(motor.plat) AS jumlah_motor
-    FROM user LEFT JOIN motor ON user.id = motor.id_user_pemilik
-    GROUP BY user.id 
-    ORDER BY jumlah_motor DESC
-    LIMIT ?"
-  );
-
-  mysqli_stmt_bind_param($stmt, "i", $jumlah);
-
-  mysqli_stmt_execute($stmt);
-
-  mysqli_stmt_bind_result($stmt, $id_user, $username, $total_motor);
-
-  $hasil = [];
-  while (mysqli_stmt_fetch($stmt)) {
-    array_push($hasil, [
-      "id_user" => $id_user,
-      "username" => $username,
-      "jumlah_motor" => $total_motor
-    ]);
-  }
-
-  mysqli_stmt_close($stmt);
-
-  return $hasil;
-}
-
-function motorDurasiParkirTerlama(mysqli $conn, int $jumlah)
-{
-  $stmt = mysqli_prepare(
-    $conn,
-    "SELECT * FROM motor
-    ORDER BY tanggal_masuk DESC
-    LIMIT ?"
-  );
-
-  mysqli_stmt_bind_param($stmt, "i", $jumlah);
-
-  mysqli_stmt_execute($stmt);
-
-  mysqli_stmt_bind_result($stmt, $plat, $lokasi_parkir, $tanggal_masuk, $id_user_pemilik);
-
-  $hasil = [];
-
-  while (mysqli_stmt_fetch($stmt)) {
-    array_push($hasil, [
-      "plat" => $plat,
-      "lokasi_parkir" => $lokasi_parkir,
-      "tanggal_masuk" => $tanggal_masuk,
-      "id_user_pemilik" => $id_user_pemilik
-    ]);
-  }
-
-  mysqli_stmt_close($stmt);
-
-  return $hasil;
+  return $kapasitas;
 }

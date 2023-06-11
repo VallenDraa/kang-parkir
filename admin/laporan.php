@@ -12,26 +12,28 @@ if (!aksesAdmin()) {
 }
 
 include "../db/koneksi.php";
+include "../components/button.php";
 include "../components/admin/data-motor-ekstra.php";
 include "../lib/chart-data.php";
 
+
 $data_tambahan = dataTambahanMotor($conn);
 $kapasitas_parkiran = cekKapasitasParkiran($conn);
-$data_motor_perhari = dataMotorPeriodik($conn, "hari");
-$user_motor_terbanyak = userMotorTerbanyak($conn, 10);
-$motor_durasi_parkir_terlama = motorDurasiParkirTerlama($conn, 10);
+
+$periode_data = isset($_GET["periode-data"]) ? $_GET["periode-data"] : PERIODE_HARIAN;
+$data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
   <?php include "../components/head-tags.php"; ?>
   <script defer>
-    window.kapasitasParkiran = <?= $kapasitas_parkiran ?>;
-    window.dataMotorPerhari = JSON.parse('<?= json_encode($data_motor_perhari) ?>');
-    window.userMotorTerbanyak = JSON.parse('<?= json_encode($user_motor_terbanyak) ?>');
-    window.motorDurasiParkirTerlama = JSON.parse('<?= json_encode($motor_durasi_parkir_terlama) ?>');
+    window.periodeValid = ['<?= PERIODE_HARIAN ?>', '<?= PERIODE_BULANAN ?>', '<?= PERIODE_TAHUNAN ?>'];
+    window.kapasitasParkiran = JSON.parse('<?= json_encode($kapasitas_parkiran) ?>');
+    window.dataMotorPerPeriode = JSON.parse('<?= json_encode($data_motor_per_periode) ?>');
+    window.periodeDataAktif = '<?= $periode_data ?>';
   </script>
   <script src="../public/js/page-js/admin/laporan/admin-laporan.js" defer type="module"></script>
   <title>Laporan Data Parkiran</title>
@@ -42,11 +44,13 @@ $motor_durasi_parkir_terlama = motorDurasiParkirTerlama($conn, 10);
 
   <div id="content" class="transition-transform duration-300 ease-out">
     <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 backdrop-blur-lg shadow shadow-slate-300">
-      <div class="flex flex-wrap items-center justify-between  gap-2 px-6 mx-auto md:gap-0">
+      <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
         <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-lg hover:bg-slate-200 active:bg-slate-300">
           <i class="text-slate-500 fa-solid fa-bars"></i>
         </button>
+
+        <?= Button("PDF Laporan", "blue", "primary", "button", "print-laporan-btn")  ?>
       </div>
     </header>
 
@@ -98,30 +102,29 @@ $motor_durasi_parkir_terlama = motorDurasiParkirTerlama($conn, 10);
 
 
         <!-- kapasitas parkiran -->
-        <div class="relative bg-slate-50 p-4 rounded-lg shadow shadow-slate-300 col-span-full md:col-span-3 xl:col-span-2 row-start-2 xl:row-start-1">
+        <div class="relative bg-slate-50 p-6 rounded-lg shadow shadow-slate-300 col-span-full md:col-span-3 xl:col-span-2 row-start-3 md:row-start-2 xl:row-start-1">
           <h3 class="text-2xl font-medium mb-4">Kapasitas Parkiran (%)</h3>
           <canvas id="kapasitas-parkiran"></canvas>
+          <span class="block text-center mt-3 text-slate-500">
+            Terisi <?= $kapasitas_parkiran['jml_terisi'] ?> / <?= $kapasitas_parkiran['total_parkiran'] ?>
+          </span>
         </div>
 
 
         <!-- grafik batang motor per hari / bulan / tahun -->
-        <div class="relative bg-slate-50 p-4 rounded-lg shadow shadow-slate-300 col-span-full md:col-span-5 xl:col-span-4 row-start-3 md:row-start-2 xl:row-start-1">
-          <h3 class="text-2xl font-medium mb-4">Data Motor Perhari</h3>
+        <div class="relative bg-slate-50 p-6 rounded-lg shadow shadow-slate-300 col-span-full md:col-span-5 xl:col-span-4 row-start-2 md:row-start-2 xl:row-start-1">
+          <div class="flex justify-between">
+            <h3 class="text-2xl font-medium mb-4">Data Motor Perhari</h3>
+
+            <select id="pilihan-periode-motor" class="disabled:cursor-not-allowed bg-transparent rounded-lg">
+              <option id="opsi-periode" <?= $periode_data === PERIODE_HARIAN ? "selected" : "" ?> value="<?= PERIODE_HARIAN ?>"><?= PERIODE_HARIAN ?></option>
+              <option id="opsi-periode" <?= $periode_data === PERIODE_BULANAN ? "selected" : "" ?> value="<?= PERIODE_BULANAN ?>"><?= PERIODE_BULANAN ?></option>
+              <option id="opsi-periode" <?= $periode_data === PERIODE_TAHUNAN ? "selected" : "" ?> value="<?= PERIODE_TAHUNAN ?>"><?= PERIODE_TAHUNAN ?></option>
+            </select>
+          </div>
+
           <canvas id="data-motor-perhari"></canvas>
         </div>
-
-
-        <!-- top 10 user dengan motor terbanyak -->
-        <!-- <div class="relative bg-slate-50 p-4 rounded-lg shadow shadow-slate-300 col-span-4">
-          <h3 class="text-2xl font-medium mb-4">10 User Dengan Motor Terbanyak</h3>
-          <canvas id="user-motor-terbanyak"></canvas>
-        </div> -->
-
-        <!-- top 10 motor dengan durasi parkir terlama -->
-        <!-- <div class="relative bg-slate-50 p-4 rounded-lg shadow shadow-slate-300 col-span-4">
-          <h3 class="text-2xl font-medium mb-4">10 Motor Dengan Durasi Parkir Terlama</h3>
-          <canvas id="motor-durasi-parkir-terlama"></canvas>
-        </div> -->
       </div>
     </main>
 

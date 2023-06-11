@@ -4,6 +4,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
+$_SESSION['is_admin'] = "1";
+
 include "../lib/admin/akses-admin.php";
 include "../config.php";
 
@@ -61,7 +63,7 @@ if ($tab_aktif === $TAB_MOTOR) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
   <?php include "../components/head-tags.php"; ?>
@@ -102,7 +104,7 @@ if ($tab_aktif === $TAB_MOTOR) {
     </header>
 
     <main class=" px-6 mx-auto mt-8">
-      <h1 class="mb-6 text-2xl font-bold capitalize mx-auto bg-gradient-to-b from-blue-300 to-blue-400 shadow-blue-300 text-white py-1 px-6 rounded-full w-fit">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
+      <h1 class="mb-6 text-4xl font-bold capitalize">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
 
       <!-- search bar -->
       <form method="GET" class="relative flex items-center mb-3 border border-slate-400 rounded-lg shadow">

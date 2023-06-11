@@ -9,7 +9,7 @@ $currentURL = $_SERVER['REQUEST_URI'];
 <aside id="sidebar" class="flex flex-col px-4 py-3 -translate-x-full transition-transform duration-300 ease-out shadow shadow-slate-300 absolute w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0">
   <!-- sidebar control -->
   <div class="flex items-center justify-between pb-2 border-b border-slate-300">
-    <span class="pl-3 font-medium uppercase">Kang Parkir</span>
+    <span class="pl-3 font-medium uppercase">Parkiran Dua</span>
 
     <div class="flex items-center gap-1">
       <button id="theme-btn" class="w-10 h-10 text-xl text-yellow-500 transition-colors duration-200 rounded-lg hover:bg-yellow-300/50 active:bg-yellow-300/60">
@@ -33,7 +33,7 @@ $currentURL = $_SERVER['REQUEST_URI'];
     <!-- nama -->
     <div class="flex flex-col">
       <span class="text-sm font-medium text-slate-400">Selamat Datang, </span>
-      <span class="text-lg font-bold text-slate-900">UJANG</span>
+      <span class="text-lg font-bold text-slate-900">Ujang Sumedang</span>
     </div>
   </div>
 
@@ -47,10 +47,11 @@ $currentURL = $_SERVER['REQUEST_URI'];
       <i class="<?= strpos($currentURL, "laporan") !== false ? 'text-white' : 'text-slate-400' ?> fa-solid fa-chart-line"></i>
       <span>Laporan</span>
     </a>
-    <a class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200">
-      <i class="text-slate-400 fa-solid fa-file-pdf"></i>
-      <span>Download PDF</span>
-    </a>
+
+    <button class="text-red-500 w-full flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-red-200">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      <span>Keluar</span>
+    </button>
   </nav>
 
 

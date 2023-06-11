@@ -11,11 +11,11 @@ export const sidebar = new Sidebar(
 );
 
 export const kapasitasParkiranChart = qs("#kapasitas-parkiran");
-export const dataMotorPerhariChart = qs("#data-motor-perhari");
-export const userMotorTerbanyakChart = qs("#user-motor-terbanyak");
-export const motorDurasiParkirTerlamaChart = qs("#motor-durasi-parkir-terlama");
+
+export const dataMotorPeriodikChart = qs("#data-motor-perhari");
+export const pilihanPeriodeMotor = qs("#pilihan-periode-motor");
+
+export const printLaporan = qs("#print-laporan-btn");
 
 // inisialisasi
-document.addEventListener("DOMContentLoaded", () => {
-  adminChart();
-});
+adminChart();
