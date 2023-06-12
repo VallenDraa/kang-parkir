@@ -39,8 +39,8 @@ $currentURL = $_SERVER['REQUEST_URI'];
 
   <!-- konten sidebar -->
   <nav class="flex-grow space-y-1">
-    <a href="index.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "index") !== false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
-      <i class="<?= strpos($currentURL, "index") !== false ? 'text-white' : 'text-slate-400' ?> fa-solid fa-house-user"></i>
+    <a href="index.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "laporan") === false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
+      <i class="<?= strpos($currentURL, "laporan") === false ? 'text-white' : 'text-slate-400' ?> fa-solid fa-house-user"></i>
       <span>Utama</span>
     </a>
     <a href="laporan.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "laporan") !== false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
