@@ -60,6 +60,8 @@ if ($tab_aktif === $TAB_MOTOR) {
     $data_motor_milik_user->{$user["id"]} = cariMotorDariUserId($conn, $user["id"]);
   }
 }
+
+$parkiran = ambilSemuaParkiran($conn);
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +84,7 @@ if ($tab_aktif === $TAB_MOTOR) {
 
   <div id="content" class="transition-transform duration-300 ease-out">
     <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 backdrop-blur-lg shadow shadow-slate-300">
-      <div class="flex flex-wrap items-center justify-between  gap-2 px-6 mx-auto md:gap-0">
+      <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
         <div class="basis-1/3">
           <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-lg hover:bg-slate-200 active:bg-slate-300">
@@ -103,17 +105,17 @@ if ($tab_aktif === $TAB_MOTOR) {
       </div>
     </header>
 
-    <main class=" px-6 mx-auto mt-8">
+    <main class="px-6 mx-auto mt-8">
       <h1 class="mb-6 text-4xl font-bold capitalize">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
 
       <!-- search bar -->
-      <form method="GET" class="relative flex items-center mb-3 border border-slate-400 rounded-lg shadow">
+      <form method="GET" class="relative flex items-center mb-3 border rounded-lg shadow border-slate-400">
         <input type="hidden" value="<?= $halaman_aktif ?>" name="halaman">
         <input type="hidden" value="<?= $tab_aktif ?>" name="tab">
 
         <input type="search" name="keyword" id="search-data-tabel" placeholder="Cari" value="<?= $keyword ?>" class="w-full px-4 py-2 transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none placeholder:text-transparent peer disabled:cursor-not-allowed disabled:opacity-20">
 
-        <label class="px-1 -translate-x-2 scale-90 transition-all absolute left-4 top-1/2 -translate-y-[35px] text-sm text-blue-500 peer-placeholder-shown:text-slate-500 bg-slate-50 peer-focus:-translate-x-2 peer-focus:-translate-y-[35px] peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
+        <label class="px-1 -translate-x-2 scale-90 transition-all absolute left-4 top-1/2 -translate-y-[35px] text-sm text-blue-500 peer-placeholder-shown:text-slate-500 bg-slate-100 peer-focus:-translate-x-2 peer-focus:-translate-y-[35px] peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
           Cari <?= $tab_aktif ?>
         </label>
 
@@ -216,7 +218,7 @@ if ($tab_aktif === $TAB_MOTOR) {
           <?php
           $link_hal_sebelum = $halaman_sebelumnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_sebelumnya" : "#";
           ?>
-          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="w-10 h-10 grid place-content-center text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
+          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-lg place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
             <i class="fa-solid fa-left-long"></i>
           </a>
 
@@ -229,14 +231,17 @@ if ($tab_aktif === $TAB_MOTOR) {
           $link_hal_berikut = $halaman_berikutnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_berikutnya" : "#";
           ?>
 
-          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="w-10 h-10 grid place-content-center text-xl text-blue-500 transition-colors duration-200 rounded-lg disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
+          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-lg place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
             <i class="fa-solid fa-right-long"></i>
           </a>
         </div>
       </div>
 
     </main>
-    <footer></footer>
+
+    <footer class="px-6 mt-12">
+      <?php include "../components/peta-parkiran.php" ?>
+    </footer>
   </div>
 
   <dialog id="action-dialog">

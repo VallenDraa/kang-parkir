@@ -6,7 +6,7 @@ $currentURL = $_SERVER['REQUEST_URI'];
 <div id="sidebar-backdrop">
 </div>
 
-<aside id="sidebar" class="flex flex-col px-4 py-3 -translate-x-full transition-transform duration-300 ease-out shadow shadow-slate-300 absolute w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0">
+<aside id="sidebar" class="flex flex-col px-4 py-3 -translate-x-full transition-transform duration-300 ease-out shadow shadow-slate-300 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0">
   <!-- sidebar control -->
   <div class="flex items-center justify-between pb-2 border-b border-slate-300">
     <span class="pl-3 font-medium uppercase">Parkiran Dua</span>
@@ -48,7 +48,7 @@ $currentURL = $_SERVER['REQUEST_URI'];
       <span>Laporan</span>
     </a>
 
-    <button class="text-red-500 w-full flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-red-200">
+    <button class="flex items-center w-full gap-3 px-3 py-2 text-red-500 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-red-200">
       <i class="fa-solid fa-arrow-right-from-bracket"></i>
       <span>Keluar</span>
     </button>
