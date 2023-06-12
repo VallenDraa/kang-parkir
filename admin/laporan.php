@@ -56,7 +56,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
     </header>
 
     <main class="px-6 mx-auto mt-4">
-      <h1 class="mb-6 text-4xl font-bold capitalize">Laporan Dari Kang Parkir</h1>
+      <h1 class="mb-6 text-4xl font-bold capitalize">Data Terkini Dari Kang Parkir</h1>
 
       <div class="grid grid-cols-8 gap-4">
 

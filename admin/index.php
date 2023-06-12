@@ -99,9 +99,9 @@ $parkiran = ambilSemuaParkiran($conn);
 
         <!-- tab halaman admin -->
         <nav class="flex justify-end gap-4 text-lg md:justify-center basis-1/3">
+          <a href="?tab=<?= TAB_MOTOR ?>" class="<?= $tab_aktif === TAB_MOTOR ? "text-blue-500" : "" ?>">Motor</a>
           <a href="?tab=<?= TAB_USER ?>" class="<?= $tab_aktif === TAB_USER ? "text-blue-500" : "" ?>">User</a>
           <a href="?tab=<?= TAB_ADMIN ?>" class="<?= $tab_aktif === TAB_ADMIN ? "text-blue-500" : "" ?>">Admin</a>
-          <a href="?tab=<?= TAB_MOTOR ?>" class="<?= $tab_aktif === TAB_MOTOR ? "text-blue-500" : "" ?>">Motor</a>
         </nav>
 
         <!-- tambah motor -->
