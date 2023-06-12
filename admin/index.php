@@ -21,16 +21,21 @@ include "../lib/parkiran/cari-parkiran.php";
 include "../lib/motor/cari-motor.php";
 include "../lib/user/cari-user.php";
 
-$TAB_USER = 'user';
-$TAB_MOTOR = 'motor';
+define("TAB_USER", "user");
+define("TAB_ADMIN", "admin");
+define("TAB_MOTOR", "motor");
 
-$tab_aktif = $TAB_MOTOR;
+$tab_aktif = TAB_MOTOR;
 $halaman_aktif = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
 
 
 if (isset($_GET['tab'])) {
-  if ($_GET['tab'] === $TAB_USER || $_GET['tab'] === $TAB_MOTOR) {
+  if (
+    $_GET['tab'] === TAB_USER ||
+    $_GET['tab'] === TAB_ADMIN ||
+    $_GET['tab'] === TAB_MOTOR
+  ) {
     $tab_aktif = $_GET['tab'];
   }
 }
@@ -38,7 +43,7 @@ if (isset($_GET['tab'])) {
 $semua_username = ambilSemuaUsername($conn);
 $parkiran_kosong = cariParkiranKosong($conn);
 
-if ($tab_aktif === $TAB_MOTOR) {
+if ($tab_aktif === TAB_MOTOR) {
   [
     'motor_arr' => $motor_arr,
     "total_halaman" => $total_halaman,
@@ -51,7 +56,7 @@ if ($tab_aktif === $TAB_MOTOR) {
     "total_halaman" => $total_halaman,
     "halaman_sebelumnya" => $halaman_sebelumnya,
     "halaman_berikutnya" => $halaman_berikutnya
-  ] = cariUser($conn, $keyword, $halaman_aktif, JUMLAH_PER_HALAMAN);
+  ] = cariUser($conn, $keyword, $halaman_aktif, JUMLAH_PER_HALAMAN, $tab_aktif === TAB_ADMIN);
 
 
   $data_motor_milik_user = new stdClass();
@@ -94,8 +99,9 @@ $parkiran = ambilSemuaParkiran($conn);
 
         <!-- tab halaman admin -->
         <nav class="flex justify-end gap-4 text-lg md:justify-center basis-1/3">
-          <a href="?tab=user" class="<?= $tab_aktif === $TAB_USER ? "text-blue-500" : "" ?>">User</a>
-          <a href="?tab=motor" class="<?= $tab_aktif === $TAB_MOTOR ? "text-blue-500" : "" ?>">Motor</a>
+          <a href="?tab=<?= TAB_USER ?>" class="<?= $tab_aktif === TAB_USER ? "text-blue-500" : "" ?>">User</a>
+          <a href="?tab=<?= TAB_ADMIN ?>" class="<?= $tab_aktif === TAB_ADMIN ? "text-blue-500" : "" ?>">Admin</a>
+          <a href="?tab=<?= TAB_MOTOR ?>" class="<?= $tab_aktif === TAB_MOTOR ? "text-blue-500" : "" ?>">Motor</a>
         </nav>
 
         <!-- tambah motor -->
@@ -106,7 +112,7 @@ $parkiran = ambilSemuaParkiran($conn);
     </header>
 
     <main class="px-6 mx-auto mt-8">
-      <h1 class="mb-6 text-4xl font-bold capitalize">Tabel <?= $tab_aktif === $TAB_MOTOR ? $TAB_MOTOR : $TAB_USER ?></h1>
+      <h1 class="mb-6 text-4xl font-bold capitalize">Tabel <?= $tab_aktif ?></h1>
 
       <!-- search bar -->
       <form method="GET" class="relative flex items-center mb-3 border rounded-lg shadow border-slate-400">
@@ -132,7 +138,7 @@ $parkiran = ambilSemuaParkiran($conn);
             <thead>
               <tr class="[&>th]:p-2 bg-slate-200 text-slate-700">
                 <th>No</th>
-                <?php if ($tab_aktif === $TAB_MOTOR) : ?>
+                <?php if ($tab_aktif === TAB_MOTOR) : ?>
                   <th>Plat</th>
                   <th>Pemilik</th>
                   <th>Lokasi Parkir</th>
@@ -146,7 +152,7 @@ $parkiran = ambilSemuaParkiran($conn);
               </tr>
             </thead>
 
-            <?php if ($tab_aktif === $TAB_MOTOR) : ?>
+            <?php if ($tab_aktif === TAB_MOTOR) : ?>
               <tbody>
                 <!-- isi list motor -->
                 <?php for ($i = 0; $i < count($motor_arr); $i++) : ?>
@@ -254,7 +260,7 @@ $parkiran = ambilSemuaParkiran($conn);
 
     <?php include "../components/admin/form-tambah-motor.php" ?>
 
-    <?php if ($tab_aktif === $TAB_USER) include "../components/admin/form-edit-user.php" ?>
+    <?php if ($tab_aktif !== TAB_MOTOR) include "../components/admin/form-edit-user.php" ?>
   </dialog>
 
 </body>
