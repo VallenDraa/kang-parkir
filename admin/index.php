@@ -88,7 +88,7 @@ $parkiran = ambilSemuaParkiran($conn);
   <?php include "../components/admin/admin-sidebar.php"; ?>
 
   <div id="content" class="transition-transform duration-300 ease-out">
-    <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 backdrop-blur-lg shadow shadow-slate-300">
+    <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 backdrop-blur-lg shadow shadow-slate-200">
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
         <div class="basis-1/3">
@@ -115,13 +115,13 @@ $parkiran = ambilSemuaParkiran($conn);
       <h1 class="mb-6 text-4xl font-bold capitalize">Tabel <?= $tab_aktif ?></h1>
 
       <!-- search bar -->
-      <form method="GET" class="relative flex items-center mb-3 border rounded-lg shadow border-slate-400">
+      <form method="GET" class="relative flex items-center mb-3 border rounded-lg shadow shadow-slate-200 border-slate-300">
         <input type="hidden" value="<?= $halaman_aktif ?>" name="halaman">
         <input type="hidden" value="<?= $tab_aktif ?>" name="tab">
 
         <input type="search" name="keyword" id="search-data-tabel" placeholder="Cari" value="<?= $keyword ?>" class="w-full px-4 py-2 transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none placeholder:text-transparent peer disabled:cursor-not-allowed disabled:opacity-20">
 
-        <label class="px-1 -translate-x-2 scale-90 transition-all absolute left-4 top-1/2 -translate-y-[35px] text-sm text-blue-500 peer-placeholder-shown:text-slate-500 bg-slate-100 peer-focus:-translate-x-2 peer-focus:-translate-y-[35px] peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
+        <label class="absolute px-1 text-sm text-blue-500 transition-all scale-90 -translate-x-2 -translate-y-[30px] left-4 top-1/2 peer-placeholder-shown:text-slate-500 bg-slate-100 peer-focus:-translate-x-2 peer-focus:-translate-y-[30px] peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
           Cari <?= $tab_aktif ?>
         </label>
 
@@ -131,7 +131,7 @@ $parkiran = ambilSemuaParkiran($conn);
       </form>
 
       <!-- table list user atau motor -->
-      <div class="mt-2 rounded-lg shadow shadow-slate-300 overflow-clip">
+      <div class="mt-2 rounded-lg shadow shadow-slate-200 overflow-clip">
         <!-- tabel semi-responsive -->
         <div class="w-full overflow-auto">
           <table id="tabel-user-motor" class="w-full table-auto overflow-clip">

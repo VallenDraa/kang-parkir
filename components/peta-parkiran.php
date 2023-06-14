@@ -6,7 +6,7 @@ $gap_row = false;
 
 <h2 class="mb-6 text-4xl font-bold text-center capitalize">Peta Parkiran</h2>
 
-<div id="peta-parkiran" class="flex flex-col items-center justify-center w-full gap-4 p-4 overflow-x-auto rounded-lg shadow md:flex-row shadow-slate-300 bg-slate-100">
+<div id="peta-parkiran" class="flex flex-col items-center justify-center w-full gap-4 p-4 overflow-x-auto rounded-lg shadow md:flex-row shadow-slate-200 bg-slate-100">
 
   <div class="flex flex-row gap-4 md:flex-col">
     <?php for ($i = 1; $i <= 5; $i++) : ?>

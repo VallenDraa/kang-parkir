@@ -7,7 +7,7 @@ export class Sidebar {
     );
 
   static #sidebarClasses =
-    "-translate-x-full fixed transition-transform duration-300 ease-out shadow shadow-slate-300 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0".split(
+    "-translate-x-full fixed transition-transform duration-300 ease-out shadow shadow-slate-400 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0".split(
       " ",
     );
 

@@ -6,7 +6,7 @@ $currentURL = $_SERVER['REQUEST_URI'];
 <div id="sidebar-backdrop">
 </div>
 
-<aside id="sidebar" class="flex flex-col px-4 py-3 -translate-x-full transition-transform duration-300 ease-out shadow shadow-slate-300 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0">
+<aside id="sidebar" class="flex flex-col px-4 py-3 -translate-x-full transition-transform duration-300 ease-out shadow shadow-slate-200 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0">
   <!-- sidebar control -->
   <div class="flex items-center justify-between pb-2 border-b border-slate-300">
     <span class="pl-3 font-medium uppercase">Parkiran Dua</span>
