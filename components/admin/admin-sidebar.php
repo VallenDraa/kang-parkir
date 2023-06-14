@@ -12,14 +12,14 @@ $currentURL = $_SERVER['REQUEST_URI'];
     <span class="pl-3 font-medium uppercase">Parkiran Dua</span>
 
     <div class="flex items-center gap-1">
-      <button id="theme-btn" class="w-10 h-10 text-xl text-yellow-500 transition-colors duration-200 rounded-lg hover:bg-yellow-300/50 active:bg-yellow-300/60">
+      <button id="theme-btn" class="w-10 h-10 text-xl text-yellow-500 transition-colors duration-200 rounded-xl hover:bg-yellow-300/50 active:bg-yellow-300/60">
         <i class="fa-solid fa-lightbulb"></i>
 
         <!-- dark mode icon -->
         <!-- <i class="fa-regular fa-lightbulb"></i> -->
       </button>
 
-      <button id="close-sidebar-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
+      <button id="close-sidebar-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
@@ -39,16 +39,16 @@ $currentURL = $_SERVER['REQUEST_URI'];
 
   <!-- konten sidebar -->
   <nav class="flex-grow space-y-1">
-    <a href="index.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "laporan") === false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
+    <a href="index.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-xl cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "laporan") === false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
       <i class="<?= strpos($currentURL, "laporan") === false ? 'text-white' : 'text-slate-400' ?> fa-solid fa-house-user"></i>
       <span>Utama</span>
     </a>
-    <a href="laporan.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "laporan") !== false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
+    <a href="laporan.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-xl cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "laporan") !== false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
       <i class="<?= strpos($currentURL, "laporan") !== false ? 'text-white' : 'text-slate-400' ?> fa-solid fa-chart-line"></i>
       <span>Laporan</span>
     </a>
 
-    <button class="flex items-center w-full gap-3 px-3 py-2 text-red-500 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-red-200">
+    <button class="flex items-center w-full gap-3 px-3 py-2 text-red-500 transition-colors duration-200 rounded-xl cursor-pointer hover:bg-red-200">
       <i class="fa-solid fa-arrow-right-from-bracket"></i>
       <span>Keluar</span>
     </button>

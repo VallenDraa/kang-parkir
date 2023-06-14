@@ -92,7 +92,7 @@ $parkiran = ambilSemuaParkiran($conn);
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
         <div class="basis-1/3">
-          <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-lg hover:bg-slate-200 active:bg-slate-300">
+          <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
             <i class="fa-solid fa-bars"></i>
           </button>
         </div>
@@ -115,7 +115,7 @@ $parkiran = ambilSemuaParkiran($conn);
       <h1 class="mb-6 text-4xl font-bold capitalize">Tabel <?= $tab_aktif ?></h1>
 
       <!-- search bar -->
-      <form method="GET" class="relative flex items-center mb-3 border rounded-lg shadow shadow-slate-200 border-slate-300">
+      <form method="GET" class="relative flex items-center mb-3 border rounded-xl shadow shadow-slate-200 border-slate-300">
         <input type="hidden" value="<?= $halaman_aktif ?>" name="halaman">
         <input type="hidden" value="<?= $tab_aktif ?>" name="tab">
 
@@ -131,7 +131,7 @@ $parkiran = ambilSemuaParkiran($conn);
       </form>
 
       <!-- table list user atau motor -->
-      <div class="mt-2 rounded-lg shadow shadow-slate-200 overflow-clip">
+      <div class="mt-2 rounded-xl shadow shadow-slate-200 overflow-clip">
         <!-- tabel semi-responsive -->
         <div class="w-full overflow-auto">
           <table id="tabel-user-motor" class="w-full table-auto overflow-clip">
@@ -181,7 +181,7 @@ $parkiran = ambilSemuaParkiran($conn);
                         <input type="hidden" name="plat-motor" value="<?= $motor_arr[$i]['plat']; ?>" />
                         <input type="hidden" name="token-parkiran" value="<?= $motor_arr[$i]['lokasi_parkir']; ?>" />
 
-                        <button id="hapus-motor-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
+                        <button id="hapus-motor-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
                           <i class="drop-shadow fa-regular fa-trash-can"></i>
                         </button>
                       </form>
@@ -201,11 +201,11 @@ $parkiran = ambilSemuaParkiran($conn);
 
                         <!-- tombol user -->
                         <div class="flex items-center justify-center gap-2">
-                          <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-lg hover:bg-slate-200 active:bg-slate-300">
+                          <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
                             <i class="drop-shadow fa-regular fa-pen-to-square"></i>
                           </button>
 
-                          <button id="hapus-user-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-lg hover:bg-red-200 active:bg-red-300">
+                          <button id="hapus-user-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
                             <i class="drop-shadow fa-regular fa-trash-can"></i>
                           </button>
                         </div>
@@ -224,12 +224,12 @@ $parkiran = ambilSemuaParkiran($conn);
           <?php
           $link_hal_sebelum = $halaman_sebelumnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_sebelumnya" : "#";
           ?>
-          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-lg place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
+          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-xl place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
             <i class="fa-solid fa-left-long"></i>
           </a>
 
           <span id="indikator-halaman">
-            <input class="w-auto pl-2 rounded-lg shadow" type="number" min="1" max="<?= $total_halaman ?>" id="input-halaman" value="<?= $halaman_aktif ?>">
+            <input class="w-auto pl-2 rounded-xl shadow" type="number" min="1" max="<?= $total_halaman ?>" id="input-halaman" value="<?= $halaman_aktif ?>">
             / <?= $total_halaman ?>
           </span>
 
@@ -237,17 +237,12 @@ $parkiran = ambilSemuaParkiran($conn);
           $link_hal_berikut = $halaman_berikutnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_berikutnya" : "#";
           ?>
 
-          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-lg place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
+          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-xl place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
             <i class="fa-solid fa-right-long"></i>
           </a>
         </div>
       </div>
-
     </main>
-
-    <footer class="px-6 mt-12">
-      <?php include "../components/peta-parkiran.php" ?>
-    </footer>
   </div>
 
   <dialog id="action-dialog">
