@@ -2,7 +2,7 @@
 $currentURL = $_SERVER['REQUEST_URI'];
 ?>
 
-<aside id="sidebar" class="flex flex-col py-3 -translate-x-full transition-transform duration-300 ease-out shadow shadow-slate-200 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0">
+<aside id="sidebar" class="flex flex-col py-3 transition-transform duration-300 ease-out shadow shadow-slate-200 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0">
   <!-- sidebar control -->
   <div class="flex items-center justify-between px-4 pb-1 border-b border-slate-300">
     <span class="pl-3 font-medium uppercase">Parkiran Dua</span>
@@ -35,10 +35,28 @@ $currentURL = $_SERVER['REQUEST_URI'];
 
   <!-- konten sidebar -->
   <nav class="flex-grow px-4 space-y-1">
-    <a href="index.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "laporan") === false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
-      <i class="<?= strpos($currentURL, "laporan") === false ? 'text-white' : 'text-slate-400' ?> fa-solid fa-house-user"></i>
-      <span>Utama</span>
-    </a>
+    <details <?= isset($tab_aktif) ? "open" : "" ?>>
+      <summary class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200">
+        <i class="text-slate-400 fa-solid fa-house-user"></i>
+        <span>Utama</span>
+      </summary>
+
+      <div class="pl-4">
+        <a href="index.php?tab=<?= TAB_USER ?>" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= $tab_aktif === TAB_USER ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
+          <i class="<?= $tab_aktif === TAB_USER ? 'text-white' : 'text-slate-400' ?> fa-solid fa-user"></i>
+          <span>User</span>
+        </a>
+        <a href="index.php?tab=<?= TAB_ADMIN ?>" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= $tab_aktif === TAB_ADMIN ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
+          <i class="<?= $tab_aktif === TAB_ADMIN ? 'text-white' : 'text-slate-400' ?> fa-solid fa-key"></i>
+          <span>Admin</span>
+        </a>
+        <a href="index.php?tab=<?= TAB_MOTOR ?>" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= $tab_aktif === TAB_MOTOR ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
+          <i class="<?= $tab_aktif === TAB_MOTOR ? 'text-white' : 'text-slate-400' ?> fa-solid fa-motorcycle"></i>
+          <span>Motor</span>
+        </a>
+      </div>
+    </details>
+
     <a href="laporan.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "laporan") !== false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
       <i class="<?= strpos($currentURL, "laporan") !== false ? 'text-white' : 'text-slate-400' ?> fa-solid fa-chart-line"></i>
       <span>Laporan</span>

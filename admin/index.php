@@ -69,7 +69,7 @@ if ($tab_aktif === TAB_MOTOR) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="overflow-x-hidden scroll-smooth">
 
 <head>
   <?php include "../components/head-tags.php"; ?>
@@ -95,13 +95,6 @@ if ($tab_aktif === TAB_MOTOR) {
             <i class="fa-solid fa-bars"></i>
           </button>
         </div>
-
-        <!-- tab halaman admin -->
-        <nav class="flex justify-end gap-4 text-lg md:justify-center basis-1/3">
-          <a href="?tab=<?= TAB_MOTOR ?>" class="<?= $tab_aktif === TAB_MOTOR ? "text-blue-500" : "" ?>">Motor</a>
-          <a href="?tab=<?= TAB_USER ?>" class="<?= $tab_aktif === TAB_USER ? "text-blue-500" : "" ?>">User</a>
-          <a href="?tab=<?= TAB_ADMIN ?>" class="<?= $tab_aktif === TAB_ADMIN ? "text-blue-500" : "" ?>">Admin</a>
-        </nav>
 
         <!-- tambah motor -->
         <div class="flex justify-end md:basis-1/3 basis-full [&>button]:w-full md:[&>button]:w-fit">

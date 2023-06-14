@@ -9,7 +9,7 @@ export class Sidebar {
     );
 
   static #sidebarClasses =
-    "-translate-x-full fixed transition-transform duration-300 ease-out shadow shadow-slate-400 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0".split(
+    "fixed transition-transform duration-300 ease-out shadow shadow-slate-400 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0".split(
       " ",
     );
 
@@ -78,6 +78,15 @@ export class Sidebar {
       });
       Sidebar.#terinisiasiSekali = true;
     }
+
+    if (window.innerWidth < 768) {
+      this.#sidebar?.classList.add("-translate-x-full");
+    }
+
+    if (window.innerWidth >= 768) {
+      this.#mainContent?.classList.add("translate-x-96");
+      this.#mainContent.style.width = `calc(100% - ${Sidebar.LEBAR_SIDEBAR_REM}rem)`;
+    }
   }
 
   openSidebar() {
@@ -102,6 +111,7 @@ export class Sidebar {
 
   #closeSidebarAnimation() {
     this.#sidebar?.classList.add("-translate-x-full");
+
     this.#mainContent?.classList.remove("translate-x-96");
     this.#mainContent.style.width = `auto`;
   }
