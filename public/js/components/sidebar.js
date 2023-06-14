@@ -1,6 +1,8 @@
 import { qs } from "../utils/dom-selector.js";
 
 export class Sidebar {
+  static LEBAR_SIDEBAR_REM = 24;
+
   static #backdropClasses =
     "opacity-0 transition-opacity duration-300 ease-out bg-slate-600/50 md:backdrop-blur-sm fixed z-[12000]".split(
       " ",
@@ -11,13 +13,10 @@ export class Sidebar {
       " ",
     );
 
-  static #escCloseTelahDiSetel = false;
+  static #terinisiasiSekali = false;
 
   /**@type {HTMLElement} */
   #sidebar;
-
-  /**@type {HTMLElement} */
-  #backdrop;
 
   /**@type {HTMLElement} */
   #menuBtn;
@@ -32,39 +31,35 @@ export class Sidebar {
 
   /**
    * @param {string} sidebar
-   * @param {string} backdrop
    * @param {string} menuBtn
    * @param {string} closeBtn
    * @param {string} mainContent
    *
    * pastikan sidebar ada diluar HTML mainContent
    */
-  constructor(sidebar, backdrop, menuBtn, closeBtn, mainContent) {
+  constructor(sidebar, menuBtn, closeBtn, mainContent) {
     this.#sidebar = qs(sidebar);
-    this.#backdrop = qs(backdrop);
     this.#mainContent = qs(mainContent);
     this.#menuBtn = qs(menuBtn);
     this.#closeBtn = qs(closeBtn);
 
     // menambahkan kelas ke elemen
-    this.#backdrop?.classList.add(...Sidebar.#backdropClasses);
     this.#sidebar?.classList.add(...Sidebar.#sidebarClasses);
 
     this.#menuBtn?.addEventListener("click", () => {
-      this.openSidebar();
+      if (this.terbuka) {
+        this.closeSidebar();
+      } else {
+        this.openSidebar();
+      }
     });
 
     this.#closeBtn?.addEventListener("click", () => {
       this.closeSidebar();
     });
 
-    // tertutup ketika backdrop ditekan
-    this.#backdrop.addEventListener("click", () => {
-      this.closeSidebar();
-    });
-
     // sembunyikan dialog ketika escape ditekan
-    if (!Sidebar.#escCloseTelahDiSetel) {
+    if (!Sidebar.#terinisiasiSekali) {
       window.addEventListener("keyup", e => {
         if (!this.terbuka) return;
 
@@ -72,7 +67,16 @@ export class Sidebar {
           this.closeSidebar();
         }
       });
-      Sidebar.#escCloseTelahDiSetel = true;
+
+      window.addEventListener("click", e => {
+        if (
+          !this.#menuBtn?.contains(e.target) &&
+          !this.#sidebar?.contains(e.target)
+        ) {
+          this.closeSidebar();
+        }
+      });
+      Sidebar.#terinisiasiSekali = true;
     }
   }
 
@@ -87,25 +91,18 @@ export class Sidebar {
   }
 
   #openSidebarAnimation() {
-    document.body.style.overflow = "hidden";
-    this.#backdrop.classList.add("inset-0");
-    this.#backdrop.classList.replace("opacity-0", "opacity-100");
-
     this.#sidebar?.classList.remove("-translate-x-full");
 
     this.#mainContent?.classList.add("translate-x-96");
+
+    if (window.innerWidth >= 768) {
+      this.#mainContent.style.width = `calc(100% - ${Sidebar.LEBAR_SIDEBAR_REM}rem)`;
+    }
   }
 
   #closeSidebarAnimation() {
-    this.#backdrop.classList.replace("opacity-100", "opacity-0");
-
-    setTimeout(() => {
-      this.#backdrop.classList.remove("inset-0");
-      document.body.style.overflow = "auto";
-    }, 300);
-
     this.#sidebar?.classList.add("-translate-x-full");
-
     this.#mainContent?.classList.remove("translate-x-96");
+    this.#mainContent.style.width = `auto`;
   }
 }

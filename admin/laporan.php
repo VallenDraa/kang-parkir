@@ -27,7 +27,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
 ?>
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="overflow-x-hidden scroll-smooth">
 
 <head>
   <?php include "../components/head-tags.php"; ?>
@@ -44,7 +44,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
 <body class="bg-slate-100">
   <?php include "../components/admin/admin-sidebar.php"; ?>
 
-  <div id="content" class="transition-transform duration-300 ease-out">
+  <div id="content" class="transition-all duration-300 ease-out">
     <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 backdrop-blur-lg shadow shadow-slate-200">
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
