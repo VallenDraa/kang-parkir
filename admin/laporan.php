@@ -20,6 +20,7 @@ include "../lib/parkiran/cari-parkiran.php";
 
 $data_tambahan = dataTambahanMotor($conn);
 $kapasitas_parkiran = cekKapasitasParkiran($conn);
+$parkiran = ambilSemuaParkiran($conn);
 
 $periode_data = isset($_GET["periode-data"]) ? $_GET["periode-data"] : PERIODE_HARIAN;
 $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
@@ -125,6 +126,10 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
 
           <canvas id="data-motor-perhari"></canvas>
         </div>
+      </section>
+
+      <section class="px-6 mt-12">
+        <?php include "../components/peta-parkiran.php" ?>
       </section>
     </main>
 

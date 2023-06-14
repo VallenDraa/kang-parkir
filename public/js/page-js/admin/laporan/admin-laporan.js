@@ -1,3 +1,4 @@
+import { PetaParkiran } from "../../../components/peta-parkiran.js";
 import { Sidebar } from "../../../components/sidebar.js";
 import { qs } from "../../../utils/dom-selector.js";
 import { adminChart } from "./admin-chart.js";
@@ -9,6 +10,8 @@ export const sidebar = new Sidebar(
   "#close-sidebar-btn",
   "#content",
 );
+
+export const petaParkiran = new PetaParkiran("#slot-parkiran");
 
 export const kapasitasParkiranChart = qs("#kapasitas-parkiran");
 

@@ -5,7 +5,6 @@ import { initAdminTooltip } from "./admin-tooltip.js";
 import { CustomDialog } from "../../../components/dialog.js";
 import { adminTabel } from "./admin-tabel.js";
 import { Sidebar } from "../../../components/sidebar.js";
-import { PetaParkiran } from "../../../components/peta-parkiran.js";
 
 export const tambahMotorBtn = qs("#tambah-motor-btn");
 export const submitMotorBtn = qs("#submit-motor-btn");
@@ -38,8 +37,6 @@ export const sidebar = new Sidebar(
   "#close-sidebar-btn",
   "#content",
 );
-
-export const petaParkiran = new PetaParkiran("#slot-parkiran");
 
 // konten tabel
 /** @type {HTMLInputElement} */

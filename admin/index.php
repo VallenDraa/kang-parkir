@@ -66,7 +66,6 @@ if ($tab_aktif === TAB_MOTOR) {
   }
 }
 
-$parkiran = ambilSemuaParkiran($conn);
 ?>
 
 <!DOCTYPE html>
@@ -115,7 +114,7 @@ $parkiran = ambilSemuaParkiran($conn);
       <h1 class="mb-6 text-4xl font-bold capitalize">Tabel <?= $tab_aktif ?></h1>
 
       <!-- search bar -->
-      <form method="GET" class="relative flex items-center mb-3 border rounded-xl shadow shadow-slate-200 border-slate-300">
+      <form method="GET" class="relative flex items-center mb-3 border shadow rounded-xl shadow-slate-200 border-slate-300">
         <input type="hidden" value="<?= $halaman_aktif ?>" name="halaman">
         <input type="hidden" value="<?= $tab_aktif ?>" name="tab">
 
@@ -131,7 +130,7 @@ $parkiran = ambilSemuaParkiran($conn);
       </form>
 
       <!-- table list user atau motor -->
-      <div class="mt-2 rounded-xl shadow shadow-slate-200 overflow-clip">
+      <section class="mt-2 shadow rounded-xl shadow-slate-200 overflow-clip">
         <!-- tabel semi-responsive -->
         <div class="w-full overflow-auto">
           <table id="tabel-user-motor" class="w-full table-auto overflow-clip">
@@ -229,7 +228,7 @@ $parkiran = ambilSemuaParkiran($conn);
           </a>
 
           <span id="indikator-halaman">
-            <input class="w-auto pl-2 rounded-xl shadow" type="number" min="1" max="<?= $total_halaman ?>" id="input-halaman" value="<?= $halaman_aktif ?>">
+            <input class="w-auto pl-2 shadow rounded-xl" type="number" min="1" max="<?= $total_halaman ?>" id="input-halaman" value="<?= $halaman_aktif ?>">
             / <?= $total_halaman ?>
           </span>
 
@@ -241,7 +240,7 @@ $parkiran = ambilSemuaParkiran($conn);
             <i class="fa-solid fa-right-long"></i>
           </a>
         </div>
-      </div>
+      </section>
     </main>
   </div>
 
