@@ -65,7 +65,7 @@ export class CustomDialog {
   }
 
   openDialog(callback = null) {
-    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     this.#terbuka = true;
 
     this.#dialogEl?.showModal();
@@ -77,7 +77,7 @@ export class CustomDialog {
   }
 
   hideDialog(callback = null) {
-    document.body.style.overflow = null;
+    document.documentElement.style.overflow = null;
     this.#terbuka = false;
 
     this.#openAnimation(false);
