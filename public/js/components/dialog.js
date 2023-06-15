@@ -24,6 +24,8 @@ export class CustomDialog {
   /** @type {HTMLButtonElement | null} */
   #closeButtonEl;
 
+  #terbuka = false;
+
   /**
    * @param {string} dialogSelector
    * @param {string} dialogSelector
@@ -34,6 +36,14 @@ export class CustomDialog {
     this.#closeButtonEl = qs(closeBtnSelector);
 
     this.#dialogEl?.classList.add(...CustomDialog.#classes);
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && this.#terbuka) {
+        e.preventDefault();
+
+        this.hideDialog();
+      }
+    });
 
     // sembunyikan dialog ketika backdrop di click
     this.#dialogEl?.addEventListener("click", e => {
@@ -56,6 +66,7 @@ export class CustomDialog {
 
   openDialog(callback = null) {
     document.body.style.overflow = "hidden";
+    this.#terbuka = true;
 
     this.#dialogEl?.showModal();
 
@@ -66,7 +77,8 @@ export class CustomDialog {
   }
 
   hideDialog(callback = null) {
-    document.body.style.overflow = "auto";
+    document.body.style.overflow = null;
+    this.#terbuka = false;
 
     this.#openAnimation(false);
     this.#closeAnimation(true);
