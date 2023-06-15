@@ -241,9 +241,9 @@ if ($tab_aktif === TAB_MOTOR) {
       </button>
     </div>
 
-    <?php include "../components/admin/form-tambah-motor.php" ?>
+    <?php include "../components/konten-dialog/form-tambah-motor.php" ?>
 
-    <?php if ($tab_aktif !== TAB_MOTOR) include "../components/admin/form-edit-user.php" ?>
+    <?php if ($tab_aktif !== TAB_MOTOR) include "../components/konten-dialog/form-edit-user.php" ?>
   </dialog>
 
 </body>

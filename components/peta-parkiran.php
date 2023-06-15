@@ -14,7 +14,7 @@
     <div class="flex flex-row gap-4 border-slate-300 md:flex-col even:pb-2 md:even:pb-0 even:pr-0 md:even:pr-2 odd:pt-2 md:odd:pt-0 odd:pl-0 md:odd:pl-2 even:border-b md:even:border-b-0 even:border-r-0 md:even:border-r even:mt-10 md:even:mt-0 even:ml-0 even:md:ml-10">
       <span id="grup-parkiran" class="self-center w-3 text-lg font-bold"><?= $grup ?></span>
       <?php foreach ($slot_arr as $slot) : ?>
-        <div id="slot-parkiran" data-plat-motor="<?= $slot['plat_motor'] ?>" data-no-token="<?= $slot['lokasi_parkir'] ?>" class="<?= !$slot['plat_motor'] ? "bg-slate-300 shadow-slate-400" : "bg-red-400 shadow-red-500" ?> h-8 w-10 rounded-md">
+        <div id="slot-parkiran" data-plat-motor="<?= $slot['plat_motor'] ?>" data-no-token="<?= $slot['lokasi_parkir'] ?>" class="<?= !$slot['plat_motor'] ? "bg-slate-300 shadow-slate-400" : "bg-red-400 shadow-red-500 cursor-pointer" ?> h-8 w-10 rounded-md">
         </div>
       <?php endforeach ?>
     </div>

@@ -133,6 +133,18 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
       <section class="px-6 mt-12">
         <?php include "../components/peta-parkiran.php" ?>
       </section>
+
+
+      <dialog id="dialog">
+        <div>
+          <span id="dialog-title">Detail Motor</span>
+          <button id="close-dialog-btn">
+            <i class="drop-shadow fa fa-window-close" aria-hidden='true'></i>
+          </button>
+        </div>
+
+        <?php include "../components/konten-dialog/detail-motor-terparkir.php" ?>
+      </dialog>
     </main>
 
   </div>

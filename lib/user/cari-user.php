@@ -119,6 +119,24 @@ function idDariUsername(mysqli $conn, string $username): string | null
   return $id;
 }
 
+function usernameDariId(mysqli $conn, int $id)
+{
+  $stmt = mysqli_prepare(
+    $conn,
+    "SELECT username FROM user WHERE id = ?"
+  );
+
+  mysqli_stmt_bind_param($stmt, "s", $id);
+  mysqli_stmt_execute($stmt);
+
+  mysqli_stmt_bind_result($stmt, $username);
+
+  mysqli_stmt_fetch($stmt);
+  mysqli_stmt_close($stmt);
+
+  return $username;
+}
+
 function cekUsernameSudahAda(mysqli $conn, string $username): bool
 {
   $sudah_ada = idDariUsername($conn, $username) !== null;
