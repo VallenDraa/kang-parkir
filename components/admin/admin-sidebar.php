@@ -2,7 +2,15 @@
 $currentURL = $_SERVER['REQUEST_URI'];
 
 
+function activeMenu(bool $kondisi)
+{
+  return $kondisi ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "";
+}
 
+function activeIcon(bool $kondisi)
+{
+  return $kondisi ? 'text-white' : 'text-slate-400';
+}
 ?>
 
 <aside id="sidebar" class="flex flex-col py-3 shadow shadow-slate-200 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0">
@@ -45,16 +53,16 @@ $currentURL = $_SERVER['REQUEST_URI'];
       </summary>
 
       <div class="pl-4">
-        <a href="index.php?tab=<?= TAB_USER ?>" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= isset($tab_aktif) && $tab_aktif === TAB_USER ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
-          <i class="<?= isset($tab_aktif) && $tab_aktif === TAB_USER ? 'text-white' : 'text-slate-400' ?> w-4 fa-solid fa-user"></i>
+        <a href="index.php?tab=<?= TAB_USER ?>" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= activeMenu(isset($tab_aktif) && $tab_aktif === TAB_USER) ?>">
+          <i class="<?= activeIcon(isset($tab_aktif) && $tab_aktif === TAB_USER) ?> w-4 fa-solid fa-user"></i>
           <span>User</span>
         </a>
-        <a href="index.php?tab=<?= TAB_ADMIN ?>" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= isset($tab_aktif) && $tab_aktif === TAB_ADMIN ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
-          <i class="<?= isset($tab_aktif) && $tab_aktif === TAB_ADMIN ? 'text-white' : 'text-slate-400' ?> w-4 fa-solid fa-key"></i>
+        <a href="index.php?tab=<?= TAB_ADMIN ?>" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= activeMenu(isset($tab_aktif) && $tab_aktif === TAB_ADMIN) ?>">
+          <i class="<?= activeIcon(isset($tab_aktif) && $tab_aktif === TAB_ADMIN) ?> w-4 fa-solid fa-key"></i>
           <span>Admin</span>
         </a>
-        <a href="index.php?tab=<?= TAB_MOTOR ?>" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= isset($tab_aktif) && $tab_aktif === TAB_MOTOR ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
-          <i class="<?= isset($tab_aktif) && $tab_aktif === TAB_MOTOR ? 'text-white' : 'text-slate-400' ?> w-4 fa-solid fa-motorcycle"></i>
+        <a href="index.php?tab=<?= TAB_MOTOR ?>" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= activeMenu(isset($tab_aktif) && $tab_aktif === TAB_MOTOR) ?>">
+          <i class="<?= activeIcon(isset($tab_aktif) && $tab_aktif === TAB_MOTOR) ?> w-4 fa-solid fa-motorcycle"></i>
           <span>Motor</span>
         </a>
       </div>
