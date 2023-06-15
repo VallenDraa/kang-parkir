@@ -91,4 +91,8 @@ export class CustomDialog {
       ...CustomDialog.#closeAnimationClasses,
     );
   }
+
+  get dialogEl() {
+    return this.#dialogEl;
+  }
 }
