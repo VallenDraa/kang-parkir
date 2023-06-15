@@ -3,13 +3,8 @@ import { qs } from "../utils/dom-selector.js";
 export class Sidebar {
   static LEBAR_SIDEBAR_REM = 24;
 
-  static #backdropClasses =
-    "opacity-0 transition-opacity duration-300 ease-out bg-slate-600/50 md:backdrop-blur-sm fixed z-[12000]".split(
-      " ",
-    );
-
   static #sidebarClasses =
-    "fixed transition-transform duration-300 ease-out shadow shadow-slate-400 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0".split(
+    "fixed shadow shadow-slate-400 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0".split(
       " ",
     );
 
@@ -27,7 +22,7 @@ export class Sidebar {
   /**@type {HTMLElement} */
   #closeBtn;
 
-  terbuka = false;
+  terbuka = window.innerWidth >= 768;
 
   /**
    * @param {string} sidebar
@@ -68,25 +63,51 @@ export class Sidebar {
         }
       });
 
-      window.addEventListener("click", e => {
-        if (
-          !this.#menuBtn?.contains(e.target) &&
-          !this.#sidebar?.contains(e.target)
-        ) {
-          this.closeSidebar();
+      window.addEventListener("resize", () => {
+        const { innerWidth } = window;
+
+        if (this.terbuka) {
+          if (innerWidth >= 768) {
+            this.#mainContent?.classList.add("translate-x-96");
+            this.#mainContent.style.width = `calc(100% - ${Sidebar.LEBAR_SIDEBAR_REM}rem)`;
+          } else {
+            this.#mainContent?.classList.remove("translate-x-96");
+            this.#mainContent.style.width = `auto`;
+          }
         }
       });
+
       Sidebar.#terinisiasiSekali = true;
     }
 
+    // mengatur posisi awal sidebar
     if (window.innerWidth < 768) {
       this.#sidebar?.classList.add("-translate-x-full");
     }
 
+    // mengatur posisi awal konten
     if (window.innerWidth >= 768) {
       this.#mainContent?.classList.add("translate-x-96");
       this.#mainContent.style.width = `calc(100% - ${Sidebar.LEBAR_SIDEBAR_REM}rem)`;
+    } else {
+      this.#mainContent?.classList.remove("translate-x-96");
+      this.#mainContent.style.width = `auto`;
     }
+
+    // ketika semua selesai di inisialiasi baru tambahkan transisi
+    setTimeout(() => {
+      this.#sidebar?.classList.add(
+        "transition-transform",
+        "duration-300",
+        "ease-out",
+      );
+
+      this.#mainContent?.classList.add(
+        "transition-transform",
+        "duration-300",
+        "ease-out",
+      );
+    }, 100);
   }
 
   openSidebar() {

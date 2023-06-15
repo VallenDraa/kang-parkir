@@ -21,10 +21,6 @@ include "../lib/parkiran/cari-parkiran.php";
 include "../lib/motor/cari-motor.php";
 include "../lib/user/cari-user.php";
 
-define("TAB_USER", "user");
-define("TAB_ADMIN", "admin");
-define("TAB_MOTOR", "motor");
-
 $tab_aktif = TAB_MOTOR;
 $halaman_aktif = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
@@ -86,13 +82,13 @@ if ($tab_aktif === TAB_MOTOR) {
 <body class="bg-slate-100">
   <?php include "../components/admin/admin-sidebar.php"; ?>
 
-  <div id="content" class="transition-transform duration-300 ease-out">
+  <div id="content">
     <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 backdrop-blur-lg shadow shadow-slate-200">
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
         <div class="basis-1/3">
           <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
-            <i class="fa-solid fa-bars"></i>
+            <i class="text-slate-500 fa-solid fa-bars"></i>
           </button>
         </div>
 
