@@ -5,13 +5,14 @@ ini_set('display_errors', 1);
 
 session_start();
 
+include "../db/koneksi.php";
 include "../lib/hak-akses.php";
+include "../lib/user/cari-user.php";
 
-if (!aksesAdmin()) {
+if (!aksesAdmin($conn)) {
   header("Location: ../login.php");
 }
 
-include "../db/koneksi.php";
 include "../config.php";
 
 include "../components/button.php";

@@ -5,8 +5,9 @@ ini_set('display_errors', 1);
 session_start();
 
 include "./lib/hak-akses.php";
+include "lib/user/cari-user.php";
 
-if (!aksesUser()) {
+if (!aksesUser($conn)) {
   header("Location: ./login.php");
 }
 
@@ -15,7 +16,6 @@ include "config.php";
 include "db/koneksi.php";
 include "lib/motor/cari-motor.php";
 include "components/button.php";
-include "lib/user/cari-user.php";
 
 $data_user = userDariId($conn, $_SESSION['id']);
 
@@ -28,10 +28,8 @@ $data_user = userDariId($conn, $_SESSION['id']);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="./public/js/page-js/user/index/user-index.js" defer type="module"></script>
+  <?php include "components/head-tags.php"; ?>
   <title>Halaman User</title>
-  <?php
-  include "components/head-tags.php";
-  ?>
 </head>
 
 <body class="flex flex-col min-h-screen bg-slate-100">

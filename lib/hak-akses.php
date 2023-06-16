@@ -1,25 +1,26 @@
 <?php
-function aksesAdmin(): bool
+function aksesAdmin(mysqli $conn): bool
 {
-  $punyak_akses = false;
+  $punya_akses = false;
 
   if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
-    return $punyak_akses;
+    return $punya_akses;
   }
 
-  $punyak_akses = true;
-  return $punyak_akses;
+  // cek apakah akun admin masih ada
+  $punya_akses = cekUsernameSudahAda($conn, $_SESSION['username']);
+  return $punya_akses;
 }
 
-
-function aksesUser(): bool
+function aksesUser(mysqli $conn): bool
 {
-  $punyak_akses = false;
+  $punya_akses = false;
 
   if (!isset($_SESSION['username'])) {
-    return $punyak_akses;
+    return $punya_akses;
   }
 
-  $punyak_akses = true;
-  return $punyak_akses;
+  // cek apakah akun user masih ada
+  $punya_akses = cekUsernameSudahAda($conn, $_SESSION['username']);
+  return $punya_akses;
 }

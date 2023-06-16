@@ -4,14 +4,15 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
+include "db/koneksi.php";
 include "./lib/hak-akses.php";
+include "lib/user/cari-user.php";
 
-if (!aksesUser()) {
+if (!aksesUser($conn)) {
   header("Location: login.php");
 }
 
 include "lib/motor/cari-motor.php";
-include "db/koneksi.php";
 include "config.php";
 
 $halaman_aktif = isset($_GET['halaman']) ? $_GET['halaman'] : 1;

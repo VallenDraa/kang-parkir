@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   die("File ini hanya menghandle method POST !");
 }
 
-if (!aksesAdmin()) {
+if (!aksesAdmin($conn)) {
   die("Anda bukan admin !");
 }
 

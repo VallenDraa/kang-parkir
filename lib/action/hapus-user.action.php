@@ -5,6 +5,7 @@ ini_set('display_errors', 1);
 
 include "../../db/koneksi.php";
 include "../user/hapus-user.php";
+include "../user/cari-user.php";
 include "../motor/hapus-motor.php";
 include "../motor/cari-motor.php";
 include "../parkiran/hapus-parkiran.php";
@@ -20,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   die("File ini hanya menghandle method POST !");
 }
 
-if (!aksesAdmin()) {
+if (!aksesAdmin($conn)) {
   die("Anda bukan admin !");
 }
 
