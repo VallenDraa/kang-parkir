@@ -85,7 +85,7 @@ if ($tab_aktif === TAB_MOTOR) {
         <!-- hamburger menu -->
         <div class="basis-1/3">
           <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
-            <i class="text-slate-500 fa-solid fa-bars"></i>
+            <i class="text-slate-400 fa-solid fa-bars"></i>
           </button>
         </div>
 

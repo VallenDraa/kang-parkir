@@ -68,7 +68,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto lg:gap-0">
         <!-- hamburger menu -->
         <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
-          <i class="text-slate-500 fa-solid fa-bars"></i>
+          <i class="text-slate-400 fa-solid fa-bars"></i>
         </button>
 
         <?= Button("PDF Laporan", "blue", "primary", "button", "print-laporan-btn")  ?>
