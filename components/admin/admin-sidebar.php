@@ -13,7 +13,7 @@ function activeIcon(bool $kondisi)
 }
 ?>
 
-<aside id="sidebar" class="flex flex-col py-3 shadow shadow-slate-200 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0">
+<aside id="sidebar" class="flex flex-col py-3 shadow shadow-slate-200 w-full md:w-80 h-screen bg-slate-50 z-[15000] left-0">
   <!-- sidebar control -->
   <div class="flex items-center justify-between px-4 pb-1 border-b border-slate-300">
     <span class="pl-3 font-medium uppercase">Parkiran Dua</span>

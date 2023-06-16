@@ -204,7 +204,6 @@ if ($tab_aktif === TAB_MOTOR) {
               <?php endif ?>
               </tbody>
           </table>
-
         </div>
 
         <!-- kontrol dari tabel -->
