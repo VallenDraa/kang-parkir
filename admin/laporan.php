@@ -178,15 +178,23 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
               </thead>
 
               <tbody>
-                <?php for ($i = 0; $i < count($histori_arr); $i++) : ?>
-                  <tr class="[&>td]:p-2 text-center even:bg-slate-100">
-                    <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
-                    <td><?= $histori_arr[$i]['lokasi_parkir']; ?></td>
-                    <td><?= $histori_arr[$i]['plat_motor']; ?></td>
-                    <td><?= $histori_arr[$i]['tanggal_masuk']; ?></td>
-                    <td><?= $histori_arr[$i]['tanggal_keluar'] ? $histori_arr[$i]['tanggal_keluar'] : "-" ?></td>
+                <?php if (count($histori_arr) > 0) : ?>
+                  <?php for ($i = 0; $i < count($histori_arr); $i++) : ?>
+                    <tr class="[&>td]:p-2 text-center even:bg-slate-50">
+                      <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
+                      <td><?= $histori_arr[$i]['lokasi_parkir']; ?></td>
+                      <td><?= $histori_arr[$i]['plat_motor']; ?></td>
+                      <td><?= $histori_arr[$i]['tanggal_masuk']; ?></td>
+                      <td><?= $histori_arr[$i]['tanggal_keluar'] ? $histori_arr[$i]['tanggal_keluar'] : "-" ?></td>
+                    </tr>
+                  <?php endfor ?>
+                <?php else : ?>
+                  <tr>
+                    <td colspan="10" class="p-2 font-medium text-center text-slate-400">
+                      Tabel Masih Kosong
+                    </td>
                   </tr>
-                <?php endfor ?>
+                <?php endif ?>
               </tbody>
             </table>
           </div>
