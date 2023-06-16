@@ -14,6 +14,7 @@ function cariHistoriParkiran(mysqli $conn, string $keyword, int $halaman_aktif, 
     "SELECT * 
      FROM histori_parkir 
      WHERE plat_motor LIKE ? OR lokasi_parkir LIKE ? 
+     ORDER BY tanggal_masuk DESC
      LIMIT ?, ?
     "
   );

@@ -14,9 +14,6 @@
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>
 
-<!-- polyfill container query -->
-<script src="https://cdn.jsdelivr.net/npm/container-query-polyfill@1/dist/container-query-polyfill.modern.js"></script>
-
 <!-- matikan touch highlight untuk mobile-->
 <style>
   * {

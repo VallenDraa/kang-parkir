@@ -55,14 +55,6 @@ export class Sidebar {
 
     // sembunyikan dialog ketika escape ditekan
     if (!Sidebar.#terinisiasiSekali) {
-      window.addEventListener("keyup", e => {
-        if (!this.terbuka) return;
-
-        if (e.key === "Escape") {
-          this.closeSidebar();
-        }
-      });
-
       window.addEventListener("resize", () => {
         const { innerWidth } = window;
 

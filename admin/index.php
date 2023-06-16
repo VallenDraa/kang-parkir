@@ -143,68 +143,83 @@ if ($tab_aktif === TAB_MOTOR) {
             <?php if ($tab_aktif === TAB_MOTOR) : ?>
               <tbody>
                 <!-- isi list motor -->
-                <?php for ($i = 0; $i < count($motor_arr); $i++) : ?>
-                  <tr class="[&>td]:p-2 text-center even:bg-slate-100">
-                    <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
-                    <td><?= $motor_arr[$i]['plat']; ?></td>
-                    <td>
-                      <?php
-                      $username = '';
+                <?php if (count($motor_arr) > 0) : ?>
+                  <?php for ($i = 0; $i < count($motor_arr); $i++) : ?>
+                    <tr class="[&>td]:p-2 text-center even:bg-slate-50">
+                      <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
+                      <td><?= $motor_arr[$i]['plat']; ?></td>
+                      <td>
+                        <?php
+                        $username = '';
 
-                      foreach ($semua_username as $user) {
-                        if ($user['id'] == $motor_arr[$i]['id_user_pemilik']) {
-                          $username = $user['username'];
-                          break;
+                        foreach ($semua_username as $user) {
+                          if ($user['id'] == $motor_arr[$i]['id_user_pemilik']) {
+                            $username = $user['username'];
+                            break;
+                          }
                         }
-                      }
 
-                      echo $username;
-                      ?>
-                    </td>
-                    <td><?= $motor_arr[$i]['lokasi_parkir']; ?></td>
-                    <td><?= $motor_arr[$i]['tanggal_masuk']; ?></td>
+                        echo $username;
+                        ?>
+                      </td>
+                      <td><?= $motor_arr[$i]['lokasi_parkir']; ?></td>
+                      <td><?= $motor_arr[$i]['tanggal_masuk']; ?></td>
 
-                    <td>
-                      <form action="../lib/action/hapus-motor.action.php" id="hapus-motor-form" method="POST">
-                        <input type="hidden" name="plat-motor" value="<?= $motor_arr[$i]['plat']; ?>" />
-                        <input type="hidden" name="token-parkiran" value="<?= $motor_arr[$i]['lokasi_parkir']; ?>" />
+                      <td>
+                        <form action="../lib/action/hapus-motor.action.php" id="hapus-motor-form" method="POST">
+                          <input type="hidden" name="plat-motor" value="<?= $motor_arr[$i]['plat']; ?>" />
+                          <input type="hidden" name="token-parkiran" value="<?= $motor_arr[$i]['lokasi_parkir']; ?>" />
 
-                        <button id="hapus-motor-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
-                          <i class="drop-shadow fa-regular fa-trash-can"></i>
-                        </button>
-                      </form>
-                    </td>
-                  </tr>
-                <?php endfor ?>
-              <?php else : ?>
-                <!-- isi list user-->
-                <?php for ($i = 0; $i < count($user_arr); $i++) : ?>
-                  <tr class="[&>td]:p-2 text-center even:bg-slate-100">
-                    <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
-                    <td><?= $user_arr[$i]['username']; ?></td>
-                    <td><?= $user_arr[$i]['jumlah_motor']; ?></td>
-                    <td>
-                      <form action="../lib/action/hapus-user.action.php" id="hapus-user-form" method="POST">
-                        <input type="hidden" name="id-user" value="<?= $user_arr[$i]['id']; ?>" />
-
-                        <!-- tombol user -->
-                        <div class="flex items-center justify-center gap-2">
-                          <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
-                            <i class="drop-shadow fa-regular fa-pen-to-square"></i>
-                          </button>
-
-                          <button id="hapus-user-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
+                          <button id="hapus-motor-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
                             <i class="drop-shadow fa-regular fa-trash-can"></i>
                           </button>
-                        </div>
-                      </form>
+                        </form>
+                      </td>
+                    </tr>
+                  <?php endfor ?>
+                <?php else : ?>
+                  <tr>
+                    <td colspan="10" class="p-2 font-medium text-center text-slate-400">
+                      Tabel Masih Kosong
                     </td>
                   </tr>
-                <?php endfor ?>
+                <?php endif ?>
+              <?php else : ?>
+                <!-- isi list user-->
+                <?php if (count($user_arr) > 0) : ?>
+                  <?php for ($i = 0; $i < count($user_arr); $i++) : ?>
+                    <tr class="[&>td]:p-2 text-center even:bg-slate-50">
+                      <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
+                      <td><?= $user_arr[$i]['username']; ?></td>
+                      <td><?= $user_arr[$i]['jumlah_motor']; ?></td>
+                      <td>
+                        <form action="../lib/action/hapus-user.action.php" id="hapus-user-form" method="POST">
+                          <input type="hidden" name="id-user" value="<?= $user_arr[$i]['id']; ?>" />
+
+                          <!-- tombol user -->
+                          <div class="flex items-center justify-center gap-2">
+                            <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
+                              <i class="drop-shadow fa-regular fa-pen-to-square"></i>
+                            </button>
+
+                            <button id="hapus-user-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
+                              <i class="drop-shadow fa-regular fa-trash-can"></i>
+                            </button>
+                          </div>
+                        </form>
+                      </td>
+                    </tr>
+                  <?php endfor ?>
+                <?php else : ?>
+                  <tr>
+                    <td colspan="10" class="p-2 font-medium text-center text-slate-400">
+                      Tabel Masih Kosong
+                    </td>
+                  </tr>
+                <?php endif ?>
               <?php endif ?>
               </tbody>
           </table>
-
         </div>
 
         <!-- kontrol dari tabel -->
