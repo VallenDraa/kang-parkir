@@ -17,32 +17,49 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   die("File ini hanya menghandle method POST !");
 }
 
-if (!aksesAdmin($conn)) {
-  die("Anda bukan admin !");
+if (!aksesUser($conn)) {
+  die("Anda belum login !");
 }
 
 if (
   !isset($_POST['username']) ||
-  !isset($_POST['password-baru']) ||
   !isset($_POST['password-lama']) ||
   !isset($_POST['id-user'])
 ) {
   die("Data yang dibutuhkan tidak diberikan !");
 }
 
+
 $id = $_POST['id-user'];
 $username = $_POST['username'];
 $pw_lama = $_POST['password-lama'];
-$pw_baru = $_POST['password-baru'];
+$pw_baru = isset($_POST['password-baru']) && $_POST['password-baru'] !== null ? $_POST['password-baru'] : null;
+
+
+if ($target_user = userDariId($conn, $id)) {
+  if (
+    $target_user['username'] !== $username &&
+    cekUsernameSudahAda($conn, $username)
+  ) {
+    echo infoJs(
+      "Username yang baru sudah digunakan user lain !",
+      "../../pengaturan-user.php"
+    );
+  }
+}
+
 
 if (editUser($conn, $id, $username, $pw_lama, $pw_baru)) {
+  // jika berhasil di edit update session
+  $_SESSION['username'] = $username;
+
   echo infoJs(
-    "User berhasil di edit!",
+    "User berhasil di edit !",
     "../../pengaturan-user.php"
   );
 } else {
   echo infoJs(
-    "User gagal di edit!",
+    "User gagal di edit !",
     "../../pengaturan-user.php"
   );
 }

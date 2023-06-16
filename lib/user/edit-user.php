@@ -4,7 +4,7 @@ function editUser(
   string $id,
   string $username,
   string $pw_lama,
-  string $pw_baru
+  string | null $pw_baru
 ): bool {
   $berhasil = false;
 
@@ -28,21 +28,38 @@ function editUser(
     return $berhasil;
   }
 
-  $encrypted_pw = password_hash($pw_baru, PASSWORD_BCRYPT, ["cost" => 12]);
+  // cek apakah password juga ingin diubah
+  if ($pw_baru !== null) {
+    $encrypted_pw = password_hash($pw_baru, PASSWORD_BCRYPT, ["cost" => 12]);
 
-  $stmt = mysqli_prepare(
-    $conn,
-    "UPDATE user SET username = ?, password = ? WHERE id = ?"
-  );
+    $stmt = mysqli_prepare(
+      $conn,
+      "UPDATE user SET username = ?, password = ? WHERE id = ?"
+    );
 
-  mysqli_stmt_bind_param($stmt, "sss", $username, $encrypted_pw, $id);
-  mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_param($stmt, "sss", $username, $encrypted_pw, $id);
+    mysqli_stmt_execute($stmt);
 
-  $berhasil = mysqli_stmt_affected_rows($stmt) > 0;
+    $berhasil = mysqli_stmt_affected_rows($stmt) > 0;
 
-  mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmt);
 
-  return $berhasil;
+    return $berhasil;
+  } else {
+    $stmt = mysqli_prepare(
+      $conn,
+      "UPDATE user SET username = ? WHERE id = ?"
+    );
+
+    mysqli_stmt_bind_param($stmt, "ss", $username, $id);
+    mysqli_stmt_execute($stmt);
+
+    $berhasil = mysqli_stmt_affected_rows($stmt) > 0;
+
+    mysqli_stmt_close($stmt);
+
+    return $berhasil;
+  }
 }
 
 
