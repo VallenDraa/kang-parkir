@@ -53,6 +53,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
     window.kapasitasParkiran = JSON.parse('<?= json_encode($kapasitas_parkiran) ?>');
     window.dataMotorPerPeriode = JSON.parse('<?= json_encode($data_motor_per_periode) ?>');
     window.keyword = '<?= $keyword ?>';
+    window.tabelMaksHalaman = <?= $total_halaman ?>;
     window.periodeDataAktif = '<?= $periode_data ?>';
   </script>
   <script src="../public/js/page-js/admin/laporan/admin-laporan.js" defer type="module"></script>

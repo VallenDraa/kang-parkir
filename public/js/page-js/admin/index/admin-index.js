@@ -3,7 +3,6 @@ import { adminMotorHandler } from "./admin-motor-handler.js";
 import { editUserHandler } from "./admin-user-handler.js";
 import { initAdminTooltip } from "./admin-tooltip.js";
 import { CustomDialog } from "../../../components/dialog.js";
-import { adminTabel } from "./admin-tabel.js";
 import { Sidebar } from "../../../components/sidebar.js";
 import { KontrolTabel } from "../../../components/kontrol-tabel.js";
 
@@ -50,4 +49,3 @@ export const formEditUser = qs("#form-edit-user");
 initAdminTooltip();
 editUserHandler();
 adminMotorHandler();
-adminTabel();
