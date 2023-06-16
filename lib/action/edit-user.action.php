@@ -33,7 +33,7 @@ if (
 $id = $_POST['id-user'];
 $username = $_POST['username'];
 $pw_lama = $_POST['password-lama'];
-$pw_baru = isset($_POST['password-baru']) && $_POST['password-baru'] !== null ? $_POST['password-baru'] : null;
+$pw_baru = isset($_POST['password-baru']) && $_POST['password-baru'] !== "" ? $_POST['password-baru'] : null;
 
 
 if ($target_user = userDariId($conn, $id)) {
