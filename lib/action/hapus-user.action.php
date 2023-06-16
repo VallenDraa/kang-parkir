@@ -35,19 +35,12 @@ $motor_milik_user = cariMotorDariUserId($conn, $id_user);
 
 $plat = array_map(fn ($m) => $m['plat'], $motor_milik_user);
 $token_parkir_arr = array_map(fn ($m) => $m['lokasi_parkir'], $motor_milik_user);
-$motor_tanpa_tgl_masuk  = array_map(
-  fn ($data) => [
-    'plat_motor' => $data['plat'],
-    'lokasi_parkir' => $data['lokasi_parkir']
-  ],
-  $motor_milik_user
-);
 
 if (
   hapusUser($conn, $id_user) &&
   hapusBanyakMotor($conn, $plat) &&
   kosongkanBanyakParkiran($conn, $token_parkir_arr) &&
-  tambahHistoriKeluarParkiran($conn, $motor_tanpa_tgl_masuk)
+  tambahHistoriKeluarParkiran($conn, $token_parkir_arr)
 ) {
   echo infoJs("User berhasil dihapus !", '../../admin/index.php?tab=user');
 } else {

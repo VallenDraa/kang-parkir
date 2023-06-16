@@ -48,6 +48,6 @@ export const formEditUser = qs("#form-edit-user");
 
 // inisialisasi
 initAdminTooltip();
-editUserHandler(window.users);
+editUserHandler();
 adminMotorHandler();
 adminTabel();

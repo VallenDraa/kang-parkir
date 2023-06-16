@@ -18,6 +18,10 @@ function hapusMotor(mysqli $conn, string $plat_motor): bool
 
 function hapusBanyakMotor(mysqli $conn, array $plat_motor)
 {
+  if (count($plat_motor) === 0) {
+    return true;
+  }
+
   $placeholders = implode(',', array_fill(0, count($plat_motor), '?'));
 
   $stmt = mysqli_prepare(
@@ -29,7 +33,7 @@ function hapusBanyakMotor(mysqli $conn, array $plat_motor)
   mysqli_stmt_bind_param($stmt, $tipe_data_token, ...$plat_motor);
   mysqli_stmt_execute($stmt);
 
-  $berhasil =  mysqli_stmt_affected_rows($stmt) > 0;
+  $berhasil = mysqli_stmt_affected_rows($stmt) > 0;
 
   mysqli_stmt_close($stmt);
 

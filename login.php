@@ -16,7 +16,7 @@ logout();
   <div class="absolute inset-0 bg-black/60"></div>
 
   <div class="flex items-center justify-center h-full mx-auto">
-    <form action="./lib/action/login-proc.php" method="post" class="relative z-10 flex flex-col items-center justify-center w-screen h-screen gap-3 p-8 rounded-md shadow-2xl text-slate-200 bg-black/50 sm:w-fit sm:h-fit">
+    <form action="./lib/action/login-proc.action.php" method="post" class="relative z-10 flex flex-col items-center justify-center w-screen h-screen gap-3 p-8 rounded-md shadow-2xl text-slate-200 bg-black/50 sm:w-fit sm:h-fit">
       <div class="flex flex-col items-center justify-center gap-2">
         <i class="text-4xl fa-solid fa-circle-user"></i>
         <h2 class="mb-3 text-3xl font-medium text-center">Login</h2>

@@ -53,20 +53,33 @@ function cariMotor(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_p
   return $data;
 }
 
-function cekMotorSudahAda(mysqli $conn, string $plat)
+function motorDariPlat(mysqli $conn, string $plat_arg)
 {
   $stmt = mysqli_prepare(
     $conn,
     "SELECT * FROM motor WHERE plat = ?"
   );
 
-  mysqli_stmt_bind_param($stmt, "s", $plat);
+  mysqli_stmt_bind_param($stmt, "s", $plat_arg);
 
   mysqli_stmt_execute($stmt);
-  mysqli_stmt_store_result($stmt);
 
-  $motor_sudah_ada =  mysqli_stmt_num_rows($stmt) > 0;
+  mysqli_stmt_bind_result($stmt, $plat, $lokasi_parkir, $tanggal_masuk, $id_user_pemilik);
+
   mysqli_stmt_close($stmt);
+
+  return [
+    "plat" => $plat,
+    "lokasi_parkir" => $lokasi_parkir,
+    "tanggal_masuk" => $tanggal_masuk,
+    "id_user_pemilik" => $id_user_pemilik,
+  ];
+}
+
+
+function cekMotorSudahAda(mysqli $conn, string $plat)
+{
+  $motor_sudah_ada =  motorDariPlat($conn, $plat)['plat'] !== null;
 
   return $motor_sudah_ada;
 }

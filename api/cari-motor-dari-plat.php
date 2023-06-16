@@ -31,11 +31,10 @@ if (!$motor) {
   exit;
 }
 
-
-$pemilik = usernameDariId($conn, $motor['id_user_pemilik']);
+$pemilik = userDariUsername($conn, $motor['id_user_pemilik']);
 
 http_response_code(200);
 echo json_encode([
-  "pemilik" => $pemilik,
+  "pemilik" => $pemilik['username'],
   ...$motor,
 ]);

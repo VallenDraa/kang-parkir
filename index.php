@@ -34,7 +34,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
   <?php include "components/head-tags.php"; ?>
 </head>
 
-<body>
+<body class="bg-slate-100">
   <?php include "components/user-sidebar.php"; ?>
 
   <div id="content">
@@ -54,12 +54,12 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
 
       <!-- table list motor -->
       <!-- search bar -->
-      <form method="GET" class="relative flex items-center mb-3 border rounded-lg shadow border-slate-400">
+      <form method="GET" class="relative flex items-center mb-3 border rounded-lg shadow shadow-slate-200 border-slate-400">
         <input type="hidden" value="<?= $halaman_aktif ?>" name="halaman">
 
         <input type="search" name="keyword" id="search-data-tabel" placeholder="Cari" value="<?= $keyword ?>" class="w-full px-4 py-2 transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none placeholder:text-transparent peer disabled:cursor-not-allowed disabled:opacity-20">
 
-        <label class="absolute px-1 text-sm text-blue-500 transition-all scale-90 -translate-x-2 -translate-y-8 left-4 top-1/2 peer-placeholder-shown:text-slate-500 bg-slate-50 peer-focus:-translate-x-2 peer-focus:-translate-y-8 peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
+        <label class="absolute px-1 text-sm text-blue-500 transition-all scale-90 -translate-x-2 -translate-y-8 left-4 top-1/2 peer-placeholder-shown:text-slate-500 bg-slate-100 peer-focus:-translate-x-2 peer-focus:-translate-y-8 peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100" for="search-data-tabel">
           Cari Motor
         </label>
 
@@ -84,14 +84,22 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
 
             <tbody>
               <!-- isi list motor -->
-              <?php for ($i = 0; $i < count($motor_arr); $i++) : ?>
-                <tr class="[&>td]:p-2 text-center even:bg-slate-100">
-                  <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
-                  <td><?= $motor_arr[$i]['plat']; ?></td>
-                  <td><?= $motor_arr[$i]['lokasi_parkir']; ?></td>
-                  <td><?= $motor_arr[$i]['tanggal_masuk']; ?></td>
+              <?php if (count($motor_arr) > 0) : ?>
+                <?php for ($i = 0; $i < count($motor_arr); $i++) : ?>
+                  <tr class="[&>td]:p-2 text-center even:bg-slate-100">
+                    <td><?= $i + (($halaman_aktif - 1) * JUMLAH_PER_HALAMAN) + 1 ?></td>
+                    <td><?= $motor_arr[$i]['plat']; ?></td>
+                    <td><?= $motor_arr[$i]['lokasi_parkir']; ?></td>
+                    <td><?= $motor_arr[$i]['tanggal_masuk']; ?></td>
+                  </tr>
+                <?php endfor ?>
+              <?php else : ?>
+                <tr>
+                  <td colspan="10" class="p-2 font-medium text-center text-slate-400">
+                    Tabel Masih Kosong
+                  </td>
                 </tr>
-              <?php endfor ?>
+              <?php endif ?>
             </tbody>
           </table>
 

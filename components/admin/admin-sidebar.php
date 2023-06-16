@@ -13,9 +13,9 @@ function activeIcon(bool $kondisi)
 }
 ?>
 
-<aside id="sidebar" class="flex flex-col py-3 shadow shadow-slate-200 w-full md:w-80 h-screen bg-slate-50 z-[15000] left-0">
+<aside id="sidebar" class="flex flex-col pb-2 shadow shadow-slate-200 w-full md:w-80 h-screen bg-slate-50 z-[15000] left-0">
   <!-- sidebar control -->
-  <div class="flex items-center justify-between px-4 pb-1 border-b border-slate-300">
+  <div class="flex items-center justify-between px-4 py-2 border-b border-slate-300">
     <span class="pl-3 font-medium uppercase">Parkiran Dua</span>
 
     <div class="flex items-center gap-1">
@@ -40,7 +40,7 @@ function activeIcon(bool $kondisi)
     <!-- nama -->
     <div class="flex flex-col">
       <span class="text-sm font-medium text-slate-400">Selamat Datang, </span>
-      <span class="text-lg font-bold text-slate-900">Ujang Sumedang</span>
+      <span class="text-lg font-bold text-slate-900"><?= $_SESSION['username'] ?></span>
     </div>
   </div>
 
@@ -73,7 +73,7 @@ function activeIcon(bool $kondisi)
       <span>Laporan</span>
     </a>
 
-    <form action="../lib/action/logout-proc.php" method="GET">
+    <form action="../lib/action/logout-proc.action.php" method="GET">
       <button class="flex items-center w-full gap-3 px-3 py-2 text-red-500 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-red-200">
         <i class="fa-solid fa-arrow-right-from-bracket"></i>
         <span>Keluar</span>

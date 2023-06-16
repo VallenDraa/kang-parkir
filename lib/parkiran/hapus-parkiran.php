@@ -20,6 +20,10 @@ function kosongkanParkiran(mysqli $conn, string $token_parkiran): bool
 
 function kosongkanBanyakParkiran(mysqli $conn, array $token_parkiran): bool
 {
+  if (count($token_parkiran) === 0) {
+    return true;
+  }
+
   $plat_kosong = null;
 
   $placeholders = implode(',', array_fill(0, count($token_parkiran), '?'));

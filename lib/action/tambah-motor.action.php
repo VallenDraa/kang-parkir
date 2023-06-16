@@ -61,7 +61,7 @@ if (cekParkiranTerisi($conn, $token_parkiran)) {
 $id_target_user =
   $motor_untuk_user_baru || !$motor_untuk_user_lama
   ? tambahUser($conn, $plat_motor)
-  : idDariUsername($conn, $motor_untuk_user_lama);
+  : userDariUsername($conn, $motor_untuk_user_lama)['id'];
 
 // Jika lolos pengecekan lakukan tiga hal dibawah
 if (
