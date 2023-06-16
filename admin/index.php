@@ -4,13 +4,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
-$_SESSION['is_admin'] = "1";
-
 include "../lib/admin/akses-admin.php";
 include "../config.php";
 
 if (!aksesAdmin()) {
-  header("Location: ../index.php");
+  header("Location: ../login.php");
 }
 
 include "../db/koneksi.php";

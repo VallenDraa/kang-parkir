@@ -23,7 +23,7 @@ if (!aksesAdmin()) {
 }
 
 if (!isset($_POST['plat-motor']) || !isset($_POST['token-parkiran'])) {
-  die("Plat motor dan token parkiran tidak diberikan !");
+  die("Data yang dibutuhkan tidak diberikan !");
 }
 
 $plat_motor = $_POST['plat-motor'];

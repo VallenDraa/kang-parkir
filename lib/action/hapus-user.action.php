@@ -25,7 +25,7 @@ if (!aksesAdmin()) {
 }
 
 if (!isset($_POST['id-user'])) {
-  die("Plat motor dan token parkiran tidak diberikan !");
+  die("Data yang dibutuhkan tidak diberikan !");
 }
 
 // Jika lolos cek diatas maka user bisa dihapus beserta 

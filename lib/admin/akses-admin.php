@@ -1,12 +1,12 @@
 <?php
 function aksesAdmin(): bool
 {
-  $is_permitted = false;
+  $punyak_akses = false;
 
-  if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== '1') {
-    return $is_permitted;
+  if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] !== 1) {
+    return $punyak_akses;
   }
 
-  $is_permitted = true;
-  return $is_permitted;
+  $punyak_akses = true;
+  return $punyak_akses;
 }
