@@ -16,7 +16,7 @@ function activeIcon(bool $kondisi)
 <aside id="sidebar" class="flex flex-col pb-2 shadow shadow-slate-200 w-full md:w-80 h-screen bg-slate-50 z-[15000] left-0">
   <!-- sidebar control -->
   <div class="flex items-center justify-between px-4 py-2 border-b border-slate-300">
-    <span class="pl-3 font-medium uppercase">Parkiran Dua</span>
+    <span class="pl-3 font-medium uppercase">Kang Parkir</span>
 
     <div class="flex items-center gap-1">
       <button id="theme-btn" class="w-10 h-10 text-xl text-yellow-500 transition-colors duration-200 rounded-xl hover:bg-yellow-300/50 active:bg-yellow-300/60">
@@ -35,7 +35,7 @@ function activeIcon(bool $kondisi)
   <!-- profile admin -->
   <div class="flex items-center gap-3 my-5 px-7">
     <!-- profile picture -->
-    <div class="w-12 h-12 bg-blue-100 rounded-full"></div>
+    <i class="text-5xl fa-solid fa-circle-user text-slate-300"></i>
 
     <!-- nama -->
     <div class="flex flex-col">
