@@ -34,7 +34,12 @@ function cekParkiranTerisi(mysqli $conn, string $token_parkiran)
 
 function ambilSemuaParkiran(mysqli $conn)
 {
-  $result = mysqli_query($conn, "SELECT * FROM tempat_parkir");
+  $result = mysqli_query(
+    $conn,
+    "SELECT * FROM tempat_parkir 
+     ORDER BY lokasi_parkir ASC
+    "
+  );
 
   $slot_parkiran = [];
 

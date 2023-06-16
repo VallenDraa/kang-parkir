@@ -102,45 +102,57 @@ function ambilSemuaUsername(mysqli $conn)
   return $semua_username;
 }
 
-function idDariUsername(mysqli $conn, string $username): string | null
+function userDariUsername(mysqli $conn, string $username_arg): array
 {
   $stmt = mysqli_prepare(
     $conn,
-    "SELECT id FROM user WHERE username = ?"
+    "SELECT * FROM user WHERE username = ?"
   );
 
-  mysqli_stmt_bind_param($stmt, "s", $username);
+  mysqli_stmt_bind_param($stmt, "s", $username_arg);
   mysqli_stmt_execute($stmt);
 
-  mysqli_stmt_bind_result($stmt, $id);
+  mysqli_stmt_bind_result($stmt, $id, $username, $password, $is_admin, $created_at);
 
   mysqli_stmt_fetch($stmt);
   mysqli_stmt_close($stmt);
 
-  return $id;
+  return [
+    "id" => $id,
+    "username" => $username,
+    "password" => $password,
+    "is_admin" => $is_admin,
+    "created_at" => $created_at
+  ];
 }
 
-function usernameDariId(mysqli $conn, int $id)
+function userDariId(mysqli $conn, int $id_arg)
 {
   $stmt = mysqli_prepare(
     $conn,
-    "SELECT username FROM user WHERE id = ?"
+    "SELECT * FROM user WHERE id = ?"
   );
 
-  mysqli_stmt_bind_param($stmt, "s", $id);
+  mysqli_stmt_bind_param($stmt, "s", $id_arg);
   mysqli_stmt_execute($stmt);
 
-  mysqli_stmt_bind_result($stmt, $username);
+  mysqli_stmt_bind_result($stmt, $id, $username, $password, $is_admin, $created_at);
 
   mysqli_stmt_fetch($stmt);
   mysqli_stmt_close($stmt);
 
-  return $username;
+  return [
+    "id" => $id,
+    "username" => $username,
+    "password" => $password,
+    "is_admin" => $is_admin,
+    "created_at" => $created_at
+  ];
 }
 
 function cekUsernameSudahAda(mysqli $conn, string $username): bool
 {
-  $sudah_ada = idDariUsername($conn, $username) !== null;
+  $sudah_ada = userDariUsername($conn, $username)['id'] !== null;
 
   return $sudah_ada;
 }

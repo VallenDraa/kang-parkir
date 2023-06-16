@@ -8,7 +8,7 @@ import {
 } from "./admin-index.js";
 import { qs } from "../../../utils/dom-selector.js";
 
-export function editUserHandler(users) {
+export function editUserHandler() {
   editUserBtns?.forEach(btn => {
     btn.addEventListener("click", () => {
       actionDialog?.openDialog();
@@ -21,7 +21,9 @@ export function editUserHandler(users) {
         console.error("Id user tidak ada");
       }
 
-      const { username, is_admin: isAdmin } = users.find(u => u.id === idUser);
+      const { username, is_admin: isAdmin } = window.users.find(
+        u => u.id === idUser,
+      );
 
       // ambil data motor milik user
       const motorArr = window.dataMotorMilikUser[idUser];
@@ -49,18 +51,18 @@ export function editUserHandler(users) {
       formEditUser?.classList.remove("hidden");
       formTambahMotor?.classList.add("hidden");
     });
+  });
 
-    // konfirmasi ketika menghapus motor
-    hapusUserforms?.forEach(form => {
-      form.addEventListener("submit", e => {
-        e.preventDefault();
+  // konfirmasi ketika menghapus motor
+  hapusUserforms?.forEach(form => {
+    form.addEventListener("submit", e => {
+      e.preventDefault();
 
-        const konfirmasiHapus = confirm(
-          "Apakah anda yakin ingin menghapus user ini ?",
-        );
+      const konfirmasiHapus = confirm(
+        "Apakah anda yakin ingin menghapus user ini ?",
+      );
 
-        if (konfirmasiHapus) form.submit();
-      });
+      if (konfirmasiHapus) form.submit();
     });
   });
 }

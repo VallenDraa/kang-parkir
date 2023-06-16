@@ -1,4 +1,5 @@
 import { CustomDialog } from "../../../components/dialog.js";
+import { KontrolTabel } from "../../../components/kontrol-tabel.js";
 import { PetaParkiran } from "../../../components/peta-parkiran.js";
 import { Sidebar } from "../../../components/sidebar.js";
 import { qs, qsa } from "../../../utils/dom-selector.js";
@@ -23,11 +24,14 @@ export const petaParkiran = new PetaParkiran(
 export const slotParkiran = qsa("#slot-parkiran");
 
 export const kapasitasParkiranChart = qs("#kapasitas-parkiran");
-
 export const dataMotorPeriodikChart = qs("#data-motor-perhari");
 export const pilihanPeriodeMotor = qs("#pilihan-periode-motor");
 
 export const printLaporan = qs("#print-laporan-btn");
+
+new KontrolTabel("#input-halaman", halaman => {
+  window.location.href = `?keyword=${window.keyword}&halaman=${halaman}`;
+});
 
 // inisialisasi
 adminChart();

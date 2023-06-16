@@ -5,13 +5,14 @@ ini_set('display_errors', 1);
 
 session_start();
 
-include "../lib/admin/akses-admin.php";
+include "../db/koneksi.php";
+include "../lib/hak-akses.php";
+include "../lib/user/cari-user.php";
 
-if (!aksesAdmin()) {
+if (!aksesAdmin($conn)) {
   header("Location: ../login.php");
 }
 
-include "../db/koneksi.php";
 include "../config.php";
 
 include "../components/button.php";
@@ -51,6 +52,8 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
     window.periodeValid = ['<?= PERIODE_HARIAN ?>', '<?= PERIODE_BULANAN ?>', '<?= PERIODE_TAHUNAN ?>'];
     window.kapasitasParkiran = JSON.parse('<?= json_encode($kapasitas_parkiran) ?>');
     window.dataMotorPerPeriode = JSON.parse('<?= json_encode($data_motor_per_periode) ?>');
+    window.keyword = '<?= $keyword ?>';
+    window.tabelMaksHalaman = <?= $total_halaman ?>;
     window.periodeDataAktif = '<?= $periode_data ?>';
   </script>
   <script src="../public/js/page-js/admin/laporan/admin-laporan.js" defer type="module"></script>
@@ -65,7 +68,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto lg:gap-0">
         <!-- hamburger menu -->
         <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
-          <i class="text-slate-500 fa-solid fa-bars"></i>
+          <i class="text-slate-400 fa-solid fa-bars"></i>
         </button>
 
         <?= Button("PDF Laporan", "blue", "primary", "button", "print-laporan-btn")  ?>

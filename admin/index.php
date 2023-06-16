@@ -4,25 +4,24 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
-include "../lib/admin/akses-admin.php";
+include "../db/koneksi.php";
+include "../lib/hak-akses.php";
+include "../lib/user/cari-user.php";
 include "../config.php";
 
-if (!aksesAdmin()) {
+if (!aksesAdmin($conn)) {
   header("Location: ../login.php");
 }
 
-include "../db/koneksi.php";
 include "../components/button.php";
 
 include "../lib/user/tambah-user.php";
 include "../lib/parkiran/cari-parkiran.php";
 include "../lib/motor/cari-motor.php";
-include "../lib/user/cari-user.php";
 
 $tab_aktif = TAB_MOTOR;
 $halaman_aktif = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
-
 
 if (isset($_GET['tab'])) {
   if (
@@ -52,11 +51,10 @@ if ($tab_aktif === TAB_MOTOR) {
     "halaman_berikutnya" => $halaman_berikutnya
   ] = cariUser($conn, $keyword, $halaman_aktif, JUMLAH_PER_HALAMAN, $tab_aktif === TAB_ADMIN);
 
-
   $data_motor_milik_user = new stdClass();
 
   foreach ($user_arr as $user) {
-    $data_motor_milik_user->{$user["id"]} = cariMotorDariUserId($conn, $user["id"]);
+    $data_motor_milik_user->{$user["id"]} = cariMotorDariUserId($conn, $user["id"], "", 1, 1)["motor_arr"];
   }
 }
 
@@ -71,6 +69,7 @@ if ($tab_aktif === TAB_MOTOR) {
     window.dataMotorMilikUser = JSON.parse('<?= json_encode(isset($data_motor_milik_user) ? $data_motor_milik_user : []) ?>')
     window.users = JSON.parse('<?= json_encode(isset($user_arr) ? $user_arr : []) ?>');
     window.tabAktif = "<?= $tab_aktif ?>";
+    window.keyword = '<?= $keyword ?>';
     window.tabelMaksHalaman = <?= $total_halaman ?>;
   </script>
   <script src="../public/js/page-js/admin/index/admin-index.js" defer type="module"></script>
@@ -86,7 +85,7 @@ if ($tab_aktif === TAB_MOTOR) {
         <!-- hamburger menu -->
         <div class="basis-1/3">
           <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
-            <i class="text-slate-500 fa-solid fa-bars"></i>
+            <i class="text-slate-400 fa-solid fa-bars"></i>
           </button>
         </div>
 
@@ -196,13 +195,17 @@ if ($tab_aktif === TAB_MOTOR) {
 
                           <!-- tombol user -->
                           <div class="flex items-center justify-center gap-2">
-                            <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
-                              <i class="drop-shadow fa-regular fa-pen-to-square"></i>
-                            </button>
+                            <?php if ($user_arr[$i]['id'] !== $_SESSION['id']) : ?>
+                              <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
+                                <i class="drop-shadow fa-regular fa-pen-to-square"></i>
+                              </button>
 
-                            <button id="hapus-user-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
-                              <i class="drop-shadow fa-regular fa-trash-can"></i>
-                            </button>
+                              <button id="hapus-user-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
+                                <i class="drop-shadow fa-regular fa-trash-can"></i>
+                              </button>
+                            <?php else : ?>
+                              <span class="font-medium text-slate-400">Anda</span>
+                            <?php endif ?>
                           </div>
                         </form>
                       </td>

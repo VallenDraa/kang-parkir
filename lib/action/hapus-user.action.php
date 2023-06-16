@@ -5,11 +5,12 @@ ini_set('display_errors', 1);
 
 include "../../db/koneksi.php";
 include "../user/hapus-user.php";
+include "../user/cari-user.php";
 include "../motor/hapus-motor.php";
 include "../motor/cari-motor.php";
 include "../parkiran/hapus-parkiran.php";
 include "../histori-parkiran/tambah-histori-parkiran.php";
-include "../admin/akses-admin.php";
+include "../hak-akses.php";
 
 include "../info.php";
 
@@ -20,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   die("File ini hanya menghandle method POST !");
 }
 
-if (!aksesAdmin()) {
+if (!aksesAdmin($conn)) {
   die("Anda bukan admin !");
 }
 
@@ -35,19 +36,12 @@ $motor_milik_user = cariMotorDariUserId($conn, $id_user);
 
 $plat = array_map(fn ($m) => $m['plat'], $motor_milik_user);
 $token_parkir_arr = array_map(fn ($m) => $m['lokasi_parkir'], $motor_milik_user);
-$motor_tanpa_tgl_masuk  = array_map(
-  fn ($data) => [
-    'plat_motor' => $data['plat'],
-    'lokasi_parkir' => $data['lokasi_parkir']
-  ],
-  $motor_milik_user
-);
 
 if (
   hapusUser($conn, $id_user) &&
   hapusBanyakMotor($conn, $plat) &&
   kosongkanBanyakParkiran($conn, $token_parkir_arr) &&
-  tambahHistoriKeluarParkiran($conn, $motor_tanpa_tgl_masuk)
+  tambahHistoriKeluarParkiran($conn, $token_parkir_arr)
 ) {
   echo infoJs("User berhasil dihapus !", '../../admin/index.php?tab=user');
 } else {

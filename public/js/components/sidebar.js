@@ -4,7 +4,7 @@ export class Sidebar {
   static LEBAR_SIDEBAR_REM = 20;
 
   static #sidebarClasses =
-    "fixed shadow shadow-slate-400 w-full md:w-80 h-screen bg-slate-50 z-[15000] left-0".split(
+    "fixed shadow shadow-slate-300 w-full md:w-80 h-screen bg-slate-50 z-[15000] left-0".split(
       " ",
     );
 

@@ -11,7 +11,7 @@ include "../parkiran/tambah-parkiran.php";
 include "../user/tambah-user.php";
 include "../user/cari-user.php";
 include "../histori-parkiran/tambah-histori-parkiran.php";
-include "../admin/akses-admin.php";
+include "../hak-akses.php";
 
 include "../info.php";
 
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
   die("File ini hanya menghandle method POST !");
 }
 
-if (!aksesAdmin()) {
+if (!aksesAdmin($conn)) {
   die("Anda bukan admin !");
 }
 
@@ -61,7 +61,7 @@ if (cekParkiranTerisi($conn, $token_parkiran)) {
 $id_target_user =
   $motor_untuk_user_baru || !$motor_untuk_user_lama
   ? tambahUser($conn, $plat_motor)
-  : idDariUsername($conn, $motor_untuk_user_lama);
+  : userDariUsername($conn, $motor_untuk_user_lama)['id'];
 
 // Jika lolos pengecekan lakukan tiga hal dibawah
 if (
