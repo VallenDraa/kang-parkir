@@ -1,9 +1,10 @@
 <?php
-function cariUser(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_per_halaman)
+function cariUser(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_per_halaman, bool $cari_admin = false)
 {
+  $is_admin = $cari_admin ? 1 : 0;
 
   // setting halaman dan query
-  $stmt_jml_user = mysqli_query($conn, "SELECT id FROM user WHERE username LIKE '%$keyword%'");
+  $stmt_jml_user = mysqli_query($conn, "SELECT id FROM user WHERE username LIKE '%$keyword%' AND is_admin = $is_admin");
   $jml_user = mysqli_num_rows($stmt_jml_user);
   $total_halaman = ceil($jml_user / $jml_per_halaman) > 0 ? ceil($jml_user / $jml_per_halaman) : 1;
 
@@ -14,7 +15,7 @@ function cariUser(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_pe
     $conn,
     "SELECT user.id, user.username, user.is_admin, user.created_at, COUNT(motor.plat) AS jumlah_motor
     FROM user LEFT JOIN motor ON user.id = motor.id_user_pemilik
-    WHERE user.username LIKE ?
+    WHERE user.username LIKE ? AND is_admin = $is_admin 
     GROUP BY user.id 
     LIMIT ?, ?"
   );
@@ -116,6 +117,24 @@ function idDariUsername(mysqli $conn, string $username): string | null
   mysqli_stmt_close($stmt);
 
   return $id;
+}
+
+function usernameDariId(mysqli $conn, int $id)
+{
+  $stmt = mysqli_prepare(
+    $conn,
+    "SELECT username FROM user WHERE id = ?"
+  );
+
+  mysqli_stmt_bind_param($stmt, "s", $id);
+  mysqli_stmt_execute($stmt);
+
+  mysqli_stmt_bind_result($stmt, $username);
+
+  mysqli_stmt_fetch($stmt);
+  mysqli_stmt_close($stmt);
+
+  return $username;
 }
 
 function cekUsernameSudahAda(mysqli $conn, string $username): bool

@@ -1,14 +1,26 @@
+import { CustomDialog } from "../../../components/dialog.js";
+import { PetaParkiran } from "../../../components/peta-parkiran.js";
 import { Sidebar } from "../../../components/sidebar.js";
-import { qs } from "../../../utils/dom-selector.js";
+import { qs, qsa } from "../../../utils/dom-selector.js";
 import { adminChart } from "./admin-chart.js";
+
+export const dialogDetailMotorTerparkir = new CustomDialog(
+  "#dialog",
+  "#close-dialog-btn",
+);
 
 export const sidebar = new Sidebar(
   "#sidebar",
-  "#sidebar-backdrop",
   "#hamburger-menu-btn",
   "#close-sidebar-btn",
   "#content",
 );
+
+export const petaParkiran = new PetaParkiran(
+  "#slot-parkiran",
+  dialogDetailMotorTerparkir,
+);
+export const slotParkiran = qsa("#slot-parkiran");
 
 export const kapasitasParkiranChart = qs("#kapasitas-parkiran");
 

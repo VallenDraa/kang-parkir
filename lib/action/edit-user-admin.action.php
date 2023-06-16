@@ -31,14 +31,17 @@ $id = $_POST['id-user'];
 $username = $_POST['username'];
 $is_admin = isset($_POST['is-admin']) ?  1 : 0;
 
+$tab = $is_admin ? 'admin' : 'user';
+$redirect = "../../admin/index.php?tab=$tab";
+
 if (editUserOlehAdmin($conn, $id, $username, $is_admin)) {
   echo infoJs(
     "User berhasil di edit!",
-    '../../admin/index.php?tab=user'
+    $redirect
   );
 } else {
   echo infoJs(
     "User gagal di edit!",
-    '../../admin/index.php?tab=user'
+    $redirect
   );
 }

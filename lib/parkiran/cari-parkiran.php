@@ -31,3 +31,25 @@ function cekParkiranTerisi(mysqli $conn, string $token_parkiran)
 
   return $terisi;
 }
+
+function ambilSemuaParkiran(mysqli $conn)
+{
+  $result = mysqli_query($conn, "SELECT * FROM tempat_parkir");
+
+  $slot_parkiran = [];
+
+  while ($baris = mysqli_fetch_assoc($result)) {
+    $kolom = $baris['lokasi_parkir'][0];
+
+    if (!isset($slot_parkiran[$kolom])) {
+      $slot_parkiran[$kolom] = [];
+    }
+
+    array_push(
+      $slot_parkiran[$kolom],
+      $baris
+    );
+  }
+
+  return $slot_parkiran;
+}

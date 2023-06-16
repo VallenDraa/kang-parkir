@@ -14,7 +14,7 @@ export class CustomDialog {
   ];
 
   static #classes =
-    "backdrop:transition-opacity backdrop:transition-300 backdrop:bg-slate-600/50 transition duration-300 m-0 max-w-[100vw] max-h-screen md:m-auto w-screen h-screen md:rounded-lg shadow-md shadow-slate-300 md:w-[650px] md:h-max md:backdrop:backdrop-blur-sm ease-out"
+    "backdrop:transition-opacity backdrop:transition-300 backdrop:bg-slate-600/50 transition duration-300 m-0 max-w-[100vw] max-h-screen md:m-auto w-screen h-screen md:rounded-xl shadow-md shadow-slate-400 md:w-[650px] md:h-max md:backdrop:backdrop-blur-sm ease-out"
       .split(" ")
       .concat(CustomDialog.#closeAnimationClasses);
 
@@ -23,6 +23,8 @@ export class CustomDialog {
 
   /** @type {HTMLButtonElement | null} */
   #closeButtonEl;
+
+  #terbuka = false;
 
   /**
    * @param {string} dialogSelector
@@ -34,6 +36,14 @@ export class CustomDialog {
     this.#closeButtonEl = qs(closeBtnSelector);
 
     this.#dialogEl?.classList.add(...CustomDialog.#classes);
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && this.#terbuka) {
+        e.preventDefault();
+
+        this.hideDialog();
+      }
+    });
 
     // sembunyikan dialog ketika backdrop di click
     this.#dialogEl?.addEventListener("click", e => {
@@ -55,7 +65,8 @@ export class CustomDialog {
   }
 
   openDialog(callback = null) {
-    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    this.#terbuka = true;
 
     this.#dialogEl?.showModal();
 
@@ -66,7 +77,8 @@ export class CustomDialog {
   }
 
   hideDialog(callback = null) {
-    document.body.style.overflow = "auto";
+    document.documentElement.style.overflow = null;
+    this.#terbuka = false;
 
     this.#openAnimation(false);
     this.#closeAnimation(true);
@@ -90,5 +102,9 @@ export class CustomDialog {
     this.#dialogEl?.classList[open ? "add" : "remove"](
       ...CustomDialog.#closeAnimationClasses,
     );
+  }
+
+  get dialogEl() {
+    return this.#dialogEl;
   }
 }
