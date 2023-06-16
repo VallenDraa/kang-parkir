@@ -10,3 +10,16 @@ function aksesAdmin(): bool
   $punyak_akses = true;
   return $punyak_akses;
 }
+
+
+function aksesUser(): bool
+{
+  $punyak_akses = false;
+
+  if (!isset($_SESSION['username'])) {
+    return $punyak_akses;
+  }
+
+  $punyak_akses = true;
+  return $punyak_akses;
+}

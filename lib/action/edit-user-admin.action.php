@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 include "../../db/koneksi.php";
 include "../../lib/user/edit-user.php";
-include "../admin/akses-admin.php";
+include "../hak-akses.php";
 
 include "../info.php";
 

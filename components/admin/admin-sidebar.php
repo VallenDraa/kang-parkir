@@ -68,8 +68,8 @@ function activeIcon(bool $kondisi)
       </div>
     </details>
 
-    <a href="laporan.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= strpos($currentURL, "laporan") !== false ? 'shadow bg-gradient-to-b from-blue-400 to-blue-500 shadow-blue-300 text-white' : "" ?>">
-      <i class="<?= strpos($currentURL, "laporan") !== false ? 'text-white' : 'text-slate-400' ?> w-4 fa-solid fa-chart-line"></i>
+    <a href="laporan.php" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= activeMenu(strpos($currentURL, "laporan") !== false) ?>">
+      <i class="<?= activeIcon(strpos($currentURL, "laporan") !== false) ?> w-4 fa-solid fa-chart-line"></i>
       <span>Laporan</span>
     </a>
 

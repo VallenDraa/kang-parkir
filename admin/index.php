@@ -4,7 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
 
-include "../lib/admin/akses-admin.php";
+include "../lib/hak-akses.php";
 include "../config.php";
 
 if (!aksesAdmin()) {
@@ -22,7 +22,6 @@ include "../lib/user/cari-user.php";
 $tab_aktif = TAB_MOTOR;
 $halaman_aktif = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
-
 
 if (isset($_GET['tab'])) {
   if (

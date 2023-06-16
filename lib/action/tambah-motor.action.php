@@ -11,7 +11,7 @@ include "../parkiran/tambah-parkiran.php";
 include "../user/tambah-user.php";
 include "../user/cari-user.php";
 include "../histori-parkiran/tambah-histori-parkiran.php";
-include "../admin/akses-admin.php";
+include "../hak-akses.php";
 
 include "../info.php";
 

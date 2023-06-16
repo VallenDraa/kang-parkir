@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 session_start();
 
-include "../lib/admin/akses-admin.php";
+include "../lib/hak-akses.php";
 
 if (!aksesAdmin()) {
   header("Location: ../login.php");

@@ -9,7 +9,7 @@ include "../motor/hapus-motor.php";
 include "../motor/cari-motor.php";
 include "../parkiran/hapus-parkiran.php";
 include "../histori-parkiran/tambah-histori-parkiran.php";
-include "../admin/akses-admin.php";
+include "../hak-akses.php";
 
 include "../info.php";
 

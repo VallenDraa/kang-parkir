@@ -26,9 +26,7 @@ $user_data = login($conn, $_POST['username'], $_POST['password'], isset($_POST['
 if (!$user_data) {
   echo infoJs("Username atau password salah !", "../../login.php");
 } else {
-  $_SESSION['id'] = $user_data['id'];
-  $_SESSION['username'] = $user_data['username'];
-  $_SESSION['is_admin'] = $user_data['is_admin'];
+  $_SESSION = $user_data;
 
   echo infoJs(
     "Selamat Datang $_SESSION[username]!",
