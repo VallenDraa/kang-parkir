@@ -24,7 +24,7 @@ if (
   !isset($_POST['username']) ||
   !isset($_POST['id-user'])
 ) {
-  die("Body tidak sesuai !");
+  die("Data yang dibutuhkan tidak diberikan !");
 }
 
 $id = $_POST['id-user'];

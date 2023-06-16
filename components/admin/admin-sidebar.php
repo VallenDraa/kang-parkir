@@ -73,10 +73,12 @@ function activeIcon(bool $kondisi)
       <span>Laporan</span>
     </a>
 
-    <button class="flex items-center w-full gap-3 px-3 py-2 text-red-500 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-red-200">
-      <i class="fa-solid fa-arrow-right-from-bracket"></i>
-      <span>Keluar</span>
-    </button>
+    <form action="../lib/action/logout-proc.php" method="GET">
+      <button class="flex items-center w-full gap-3 px-3 py-2 text-red-500 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-red-200">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Keluar</span>
+      </button>
+    </form>
   </nav>
 
 
