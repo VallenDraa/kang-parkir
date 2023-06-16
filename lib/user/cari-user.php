@@ -17,6 +17,7 @@ function cariUser(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_pe
     FROM user LEFT JOIN motor ON user.id = motor.id_user_pemilik
     WHERE user.username LIKE ? AND is_admin = $is_admin 
     GROUP BY user.id 
+    ORDER BY user.created_at DESC
     LIMIT ?, ?"
   );
 

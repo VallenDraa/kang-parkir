@@ -14,6 +14,7 @@ function cariMotor(mysqli $conn, string $keyword, int $halaman_aktif, int $jml_p
     "SELECT plat, lokasi_parkir, tanggal_masuk, id_user_pemilik
      FROM motor
      WHERE plat LIKE ? OR lokasi_parkir LIKE ?
+     ORDER BY tanggal_masuk DESC
      LIMIT ?, ?
     "
   );
