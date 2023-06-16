@@ -48,7 +48,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
 
   <div id="content">
     <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 backdrop-blur-lg shadow shadow-slate-200">
-      <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto md:gap-0">
+      <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto lg:gap-0">
         <!-- hamburger menu -->
         <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
           <i class="text-slate-500 fa-solid fa-bars"></i>
@@ -63,7 +63,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
 
       <section class="grid grid-cols-8 gap-4">
         <!-- data ekstra -->
-        <div class="flex flex-col row-start-1 gap-4 md:flex-row 2xl:flex-col col-span-full 2xl:col-span-2">
+        <div class="flex flex-col row-start-1 gap-4 lg:flex-row 2xl:flex-col col-span-full 2xl:col-span-2">
           <!-- Total motor yang pernah parkir  -->
           <div class="relative flex flex-1 gap-5 p-6 overflow-hidden shadow rounded-xl bg-slate-50 shadow-slate-200">
             <div class="relative z-10">
@@ -105,7 +105,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
 
 
         <!-- kapasitas parkiran -->
-        <div class="relative row-start-3 p-6 shadow rounded-xl bg-slate-50 shadow-slate-200 col-span-full md:col-span-3 2xl:col-span-2 md:row-start-2 2xl:row-start-1">
+        <div class="relative row-start-3 p-6 shadow rounded-xl bg-slate-50 shadow-slate-200 col-span-full lg:col-span-3 2xl:col-span-2 lg:row-start-2 2xl:row-start-1">
           <h3 class="mb-4 text-2xl font-medium">Kapasitas Parkiran (%)</h3>
           <canvas id="kapasitas-parkiran"></canvas>
           <span class="block mt-3 text-center text-slate-500">
@@ -115,7 +115,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
 
 
         <!-- grafik batang motor per hari / bulan / tahun -->
-        <div class="relative row-start-2 p-6 shadow rounded-xl bg-slate-50 shadow-slate-200 col-span-full md:col-span-5 2xl:col-span-4 md:row-start-2 2xl:row-start-1">
+        <div class="relative row-start-2 p-6 shadow rounded-xl bg-slate-50 shadow-slate-200 col-span-full lg:col-span-5 2xl:col-span-4 lg:row-start-2 2xl:row-start-1">
           <div class="flex justify-between">
             <h3 class="mb-4 text-2xl font-medium">Data Motor <?= $periode_data ?></h3>
 
@@ -130,7 +130,7 @@ $data_motor_per_periode = dataMotorPeriodik($conn, $periode_data);
         </div>
       </section>
 
-      <section class="px-6 mt-12">
+      <section class="py-6 mt-6">
         <?php include "../components/peta-parkiran.php" ?>
       </section>
 

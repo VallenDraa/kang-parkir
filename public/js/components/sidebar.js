@@ -1,10 +1,10 @@
 import { qs } from "../utils/dom-selector.js";
 
 export class Sidebar {
-  static LEBAR_SIDEBAR_REM = 24;
+  static LEBAR_SIDEBAR_REM = 20;
 
   static #sidebarClasses =
-    "fixed shadow shadow-slate-400 w-full md:w-96 h-screen bg-slate-50 z-[15000] left-0".split(
+    "fixed shadow shadow-slate-400 w-full md:w-80 h-screen bg-slate-50 z-[15000] left-0".split(
       " ",
     );
 
@@ -68,10 +68,10 @@ export class Sidebar {
 
         if (this.terbuka) {
           if (innerWidth >= 768) {
-            this.#mainContent?.classList.add("translate-x-96");
+            this.#mainContent?.classList.add("translate-x-80");
             this.#mainContent.style.width = `calc(100% - ${Sidebar.LEBAR_SIDEBAR_REM}rem)`;
           } else {
-            this.#mainContent?.classList.remove("translate-x-96");
+            this.#mainContent?.classList.remove("translate-x-80");
             this.#mainContent.style.width = `auto`;
           }
         }
@@ -87,10 +87,10 @@ export class Sidebar {
 
     // mengatur posisi awal konten
     if (window.innerWidth >= 768) {
-      this.#mainContent?.classList.add("translate-x-96");
+      this.#mainContent?.classList.add("translate-x-80");
       this.#mainContent.style.width = `calc(100% - ${Sidebar.LEBAR_SIDEBAR_REM}rem)`;
     } else {
-      this.#mainContent?.classList.remove("translate-x-96");
+      this.#mainContent?.classList.remove("translate-x-80");
       this.#mainContent.style.width = `auto`;
     }
 
@@ -123,7 +123,7 @@ export class Sidebar {
   #openSidebarAnimation() {
     this.#sidebar?.classList.remove("-translate-x-full");
 
-    this.#mainContent?.classList.add("translate-x-96");
+    this.#mainContent?.classList.add("translate-x-80");
 
     if (window.innerWidth >= 768) {
       this.#mainContent.style.width = `calc(100% - ${Sidebar.LEBAR_SIDEBAR_REM}rem)`;
@@ -133,7 +133,7 @@ export class Sidebar {
   #closeSidebarAnimation() {
     this.#sidebar?.classList.add("-translate-x-full");
 
-    this.#mainContent?.classList.remove("translate-x-96");
+    this.#mainContent?.classList.remove("translate-x-80");
     this.#mainContent.style.width = `auto`;
   }
 }
