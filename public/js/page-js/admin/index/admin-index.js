@@ -5,11 +5,11 @@ import { initAdminTooltip } from "./admin-tooltip.js";
 import { CustomDialog } from "../../../components/dialog.js";
 import { adminTabel } from "./admin-tabel.js";
 import { Sidebar } from "../../../components/sidebar.js";
+import { KontrolTabel } from "../../../components/kontrol-tabel.js";
 
 export const tambahMotorBtn = qs("#tambah-motor-btn");
 export const submitMotorBtn = qs("#submit-motor-btn");
 export const hapusMotorforms = qsa("#hapus-motor-form");
-// export const inputPlat = qs("[name='plat-motor']");
 
 export const opsiUser = qsa("#opsi-user");
 export const editUserBtns = qsa("#edit-user-btn");
@@ -37,9 +37,9 @@ export const sidebar = new Sidebar(
   "#content",
 );
 
-// konten tabel
-/** @type {HTMLInputElement} */
-export const inputHalaman = qs("#input-halaman");
+new KontrolTabel("#input-halaman", halaman => {
+  window.location.href = `?tab=${window.tabAktif}&halaman=${halaman}&keyword=${window.keyword}`;
+});
 
 // konten dialog
 export const dialogTitle = qs("#dialog-title");

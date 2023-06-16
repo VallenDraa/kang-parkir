@@ -16,11 +16,20 @@ include "lib/motor/cari-motor.php";
 include "config.php";
 
 $halaman_aktif = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
-$halaman_sebelumnya = 1;
-$halaman_berikutnya = 1;
-$total_halaman = 1;
-$motor_arr = cariMotorDariUserId($conn, $_SESSION["id"]);
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
+
+[
+  'motor_arr' => $motor_arr,
+  "total_halaman" => $total_halaman,
+  "halaman_sebelumnya" => $halaman_sebelumnya,
+  "halaman_berikutnya" => $halaman_berikutnya
+] = cariMotorDariUserId(
+  $conn,
+  $_SESSION["id"],
+  $keyword,
+  $halaman_aktif,
+  JUMLAH_PER_HALAMAN
+);
 ?>
 
 <!DOCTYPE html>
@@ -30,9 +39,13 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer>
+    window.keyword = '<?= $keyword ?>';
+    window.tabelMaksHalaman = <?= $total_halaman ?>;
+  </script>
   <script src="./public/js/page-js/user/index/user-index.js" defer type="module"></script>
-  <title>Halaman User</title>
   <?php include "components/head-tags.php"; ?>
+  <title>Halaman User</title>
 </head>
 
 <body class="bg-slate-100">

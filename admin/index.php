@@ -51,11 +51,10 @@ if ($tab_aktif === TAB_MOTOR) {
     "halaman_berikutnya" => $halaman_berikutnya
   ] = cariUser($conn, $keyword, $halaman_aktif, JUMLAH_PER_HALAMAN, $tab_aktif === TAB_ADMIN);
 
-
   $data_motor_milik_user = new stdClass();
 
   foreach ($user_arr as $user) {
-    $data_motor_milik_user->{$user["id"]} = cariMotorDariUserId($conn, $user["id"]);
+    $data_motor_milik_user->{$user["id"]} = cariMotorDariUserId($conn, $user["id"], "", 1, 1)["motor_arr"];
   }
 }
 
@@ -70,6 +69,7 @@ if ($tab_aktif === TAB_MOTOR) {
     window.dataMotorMilikUser = JSON.parse('<?= json_encode(isset($data_motor_milik_user) ? $data_motor_milik_user : []) ?>')
     window.users = JSON.parse('<?= json_encode(isset($user_arr) ? $user_arr : []) ?>');
     window.tabAktif = "<?= $tab_aktif ?>";
+    window.keyword = '<?= $keyword ?>';
     window.tabelMaksHalaman = <?= $total_halaman ?>;
   </script>
   <script src="../public/js/page-js/admin/index/admin-index.js" defer type="module"></script>
