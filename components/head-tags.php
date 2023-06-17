@@ -28,6 +28,14 @@
   }
 </style>
 
-<!-- meta tags -->
+<!-- tailwind config -->
+<script>
+  tailwind.config = {
+    darkMode: "class",
+  }
+</script>
+
+
+<!--meta tags-->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -11,10 +11,10 @@
 
     <!-- tombol motor -->
     <div class="flex items-center gap-2">
-      <button id="info-motor-btn" type="button" class="p-2 text-2xl text-blue-500 transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
+      <button id="info-motor-btn" type="button" class="p-2 text-2xl text-blue-500 dark:text-blue-400 transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300 dark:hover:bg-slate-600 dark:active:bg-slate-700">
         <i class="drop-shadow fa-solid fa-circle-info"></i>
       </button>
-      <button id="hapus-motor-btn" class="p-2 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
+      <button id="hapus-motor-btn" class="p-2 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300 dark:hover:bg-slate-600 dark:active:bg-slate-700">
         <i class="drop-shadow fa-regular fa-trash-can"></i>
       </button>
     </div>

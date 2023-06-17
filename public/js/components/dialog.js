@@ -14,7 +14,7 @@ export class CustomDialog {
   ];
 
   static #classes =
-    "backdrop:transition-opacity fixed backdrop:transition-300 backdrop:bg-slate-600/50 transition duration-300 m-0 max-w-[100vw] max-h-screen m-auto w-[95vw] rounded-xl shadow-md shadow-slate-300 md:w-[650px] h-max backdrop:backdrop-blur-sm ease-out p-6"
+    "backdrop:transition-opacity fixed backdrop:transition-300 backdrop:bg-slate-600/50 dark:backdrop:bg-slate-900/50 transition duration-300 m-0 max-w-[100vw] max-h-screen m-auto w-[95vw] rounded-xl shadow-md shadow-slate-300 dark:shadow-slate-700 md:w-[650px] h-max backdrop:backdrop-blur-sm ease-out p-6 dark:bg-slate-900"
       .split(" ")
       .concat(CustomDialog.#closeAnimationClasses);
 

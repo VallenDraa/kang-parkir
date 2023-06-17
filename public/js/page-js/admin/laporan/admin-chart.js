@@ -16,6 +16,7 @@ export function adminChart() {
             window.kapasitasParkiran.persen_terisi,
             100 - window.kapasitasParkiran.persen_terisi,
           ],
+          borderWidth: 0,
           backgroundColor: [
             "rgba(239, 68, 68, 0.6)",
             "rgba(59, 130, 246, 0.6)",
@@ -38,7 +39,7 @@ export function adminChart() {
           label: "Jumlah Motor Perhari",
           data: dataMotorPerhari,
           backgroundColor: "rgba(59, 130, 246, 0.6)",
-          borderWidth: 1,
+          borderWidth: 0,
         },
       ],
     },

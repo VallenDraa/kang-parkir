@@ -5,6 +5,7 @@ import { initAdminTooltip } from "./admin-tooltip.js";
 import { CustomDialog } from "../../../components/dialog.js";
 import { Sidebar } from "../../../components/sidebar.js";
 import { KontrolTabel } from "../../../components/kontrol-tabel.js";
+import { Tema } from "../../../components/tema.js";
 
 export const tambahMotorBtn = qs("#tambah-motor-btn");
 export const submitMotorBtn = qs("#submit-motor-btn");
@@ -39,6 +40,8 @@ export const sidebar = new Sidebar(
 new KontrolTabel("#input-halaman", halaman => {
   window.location.href = `?tab=${window.tabAktif}&halaman=${halaman}&keyword=${window.keyword}`;
 });
+
+new Tema("#tema-btn", "#icon-tema");
 
 // konten dialog
 export const dialogTitle = qs("#dialog-title");

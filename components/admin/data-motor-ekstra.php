@@ -4,7 +4,7 @@ function DataMotorEkstra(array | null $baris_histori_parkir, string $title, $mas
   if (!$baris_histori_parkir) {
     return "
       <div class='flex flex-col flex-1'>
-        <span class='font-medium text-slate-600'>$title</span>
+        <span class='font-medium text-slate-500'>$title</span>
         <span class='block mb-2 text-3xl font-bold text-blue-500'>
           Belum Ada
         </span>
@@ -20,7 +20,7 @@ function DataMotorEkstra(array | null $baris_histori_parkir, string $title, $mas
 
   return "
     <div class='flex flex-col flex-1'>
-      <span class='font-medium text-slate-600'>$title</span>
+      <span class='font-medium text-slate-500'>$title</span>
       <span class='block mb-2 text-3xl font-bold text-blue-500'>
          $baris_histori_parkir[plat_motor]
       </span>

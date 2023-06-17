@@ -34,7 +34,7 @@ export function editUserHandler() {
       if (motorArr.length === 0) {
         htmlListMotor = `
           <tr>
-            <td colspan="10" class="p-2 font-medium text-center text-slate-400">
+            <td colspan="10" class="p-2 font-medium text-center text-slate-500">
               User Tidak Punya Motor
             </td>
           </tr>
@@ -42,7 +42,7 @@ export function editUserHandler() {
       } else {
         motorArr.forEach((m, i) => {
           htmlListMotor += `
-            <tr class="[&>td]:p-2 text-center even:bg-slate-50">
+            <tr class="[&>td]:p-2 text-center dark:text-slate-400 even:bg-slate-50 dark:even:bg-slate-800">
               <td>${i + 1}</td>
               <td>${m.plat}</td>
               <td>${m.lokasi_parkir}</td>
