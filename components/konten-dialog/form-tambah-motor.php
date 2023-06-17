@@ -22,7 +22,7 @@
    </div>
 
    <!-- pilihan motor untuk siapa -->
-   <div class="flex flex-col gap-5 mb-5">
+   <div class="flex flex-col gap-5 mb-2">
      <div class="relative flex items-center pl-3 border shadow rounded-xl shadow-slate-200 border-slate-300">
        <i class="fa-solid fa-user text-slate-400"></i>
 
@@ -42,7 +42,7 @@
        <span class="absolute px-2 text-sm -translate-x-1/2 -translate-y-1/2 bg-white text-slate-400 left-1/2 top-1/2">Atau</span>
      </div>
 
-     <label for="plat-user-baru" class="flex items-center self-center gap-2 text-lg select-none text-slate-700">
+     <label for="plat-user-baru" class="flex items-center self-center gap-2 text-lg font-medium select-none text-slate-600">
        <input type="checkbox" id="plat-user-baru" name="plat-user-baru" class="scale-105">
        Plat untuk user baru
      </label>

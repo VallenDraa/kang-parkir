@@ -1,8 +1,4 @@
-/**
- *
- * @param {"dark" | "light"} theme
- */
-export function initAdminTooltip(theme = "light") {
+export function initAdminTooltip() {
   tippy("#edit-user-btn", { content: "Edit User" });
   tippy("#hapus-user-btn", { content: "Hapus User" });
 
@@ -11,6 +7,4 @@ export function initAdminTooltip(theme = "light") {
 
   tippy("#info-motor-btn", { content: "Info Motor" });
   tippy("#hapus-motor-btn", { content: "Hapus Motor" });
-
-  const themeTooltip = tippy("#theme-btn", { content: "Matikan Lampu" });
 }
