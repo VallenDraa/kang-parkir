@@ -32,7 +32,7 @@ $data_user = userDariId($conn, $_SESSION['id']);
 
 <body class="flex flex-col min-h-screen bg-slate-100 dark:bg-slate-950">
   <?php include "components/user-sidebar.php"; ?>
-  <div id="content" class="flex flex-col flex-grow">
+  <div id="content" style="width: calc(100% - 20rem);" class="flex flex-col flex-grow translate-x-80">
     <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-lg shadow shadow-slate-300 dark:shadow-slate-900">
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->

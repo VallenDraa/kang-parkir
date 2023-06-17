@@ -1,6 +1,6 @@
 <h2 class="mb-6 text-4xl font-medium text-center capitalize dark:text-slate-100">Peta Parkiran</h2>
 
-<div id="peta-parkiran" class="flex flex-col items-center justify-center w-full overflow-x-auto shadow rounded-xl lg:flex-row dark:text-slate-300">
+<div id="peta-parkiran" class="flex flex-col items-center justify-center w-full overflow-x-auto rounded-xl lg:flex-row dark:text-slate-300">
   <div class="flex flex-row gap-4 lg:flex-col">
     <?php for ($i = 1; $i <= 5; $i++) : ?>
       <span class="<?= $i === 1 ? "mt-0 lg:mt-12 ml-7 lg:ml-0" : "" ?> w-10 h-8 text-lg font-bold text-center">

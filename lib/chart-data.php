@@ -2,6 +2,7 @@
 define("PERIODE_HARIAN", "Harian");
 define("PERIODE_BULANAN", "Bulanan");
 define("PERIODE_TAHUNAN", "Tahunan");
+date_default_timezone_set('Asia/Jakarta');
 
 function dataTambahanMotor(mysqli $conn): array
 {
@@ -30,7 +31,6 @@ function dataTambahanMotor(mysqli $conn): array
   );
   $motor_keluar_terbaru = mysqli_fetch_assoc($result_keluar_terbaru);
 
-
   // ambil jumlah penambahan motor hari ini
   $hari_ini = date('Y-m-d');
   $penambahan_res = mysqli_query(
@@ -48,10 +48,6 @@ function dataTambahanMotor(mysqli $conn): array
     "jumlah_motor_baru_hari_ini" => $penambahan['penambahan']
   ];
 }
-
-$limit = 0;
-$period = "days";
-
 
 function dataMotorPeriodik(mysqli $conn, $periode): array
 {

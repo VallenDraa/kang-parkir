@@ -80,7 +80,7 @@ if ($tab_aktif === TAB_MOTOR) {
 <body class="bg-slate-100 dark:bg-slate-950">
   <?php include "../components/admin/admin-sidebar.php"; ?>
 
-  <div id="content">
+  <div id="content" style="width: calc(100% - 20rem);" class="translate-x-80">
     <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 dark:bg-slate-950/50 backdrop-blur-lg shadow shadow-slate-300 dark:shadow-slate-800">
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
@@ -100,7 +100,7 @@ if ($tab_aktif === TAB_MOTOR) {
     </header>
 
     <main class="px-6 mx-auto mt-8">
-      <h1 class="mb-6 text-4xl font-medium capitalize dark:text-slate-100">Tabel <?= $tab_aktif ?></h1>
+      <h1 class="mb-6 text-4xl font-medium text-center capitalize dark:text-slate-100">Tabel <?= $tab_aktif ?></h1>
 
       <!-- search bar -->
       <form method="GET" class="relative flex items-center mb-3 border shadow rounded-xl shadow-slate-200 border-slate-300 dark:border-slate-700 dark:shadow-slate-700">

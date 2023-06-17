@@ -6,7 +6,7 @@
     <span id="nama-pemilik" class="block w-full px-4 py-2 text-lg transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none text-slate-800 dark:text-slate-200">
     </span>
 
-    <span class="absolute px-1 text-sm text-blue-500 dark:text-blue-400 transition-all scale-90 -translate-x-2 -translate-y-[30px] left-4 top-1/2 bg-slate-100 dark:bg-slate-950">
+    <span class="absolute px-1 text-sm text-blue-500 dark:text-blue-400 transition-all scale-90 -translate-x-2 -translate-y-[30px] left-4 top-1/2 bg-slate-50 dark:bg-slate-900">
       Pemilik
     </span>
   </div>
@@ -21,7 +21,7 @@
       <span id="plat-motor" class="block w-full px-4 py-2 text-lg transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none text-slate-800 dark:text-slate-200">
       </span>
 
-      <span class="absolute px-1 text-sm text-blue-500 dark:text-blue-400 transition-all scale-90 -translate-x-2 -translate-y-[30px] left-4 top-1/2 bg-slate-100 dark:bg-slate-950">
+      <span class="absolute px-1 text-sm text-blue-500 dark:text-blue-400 transition-all scale-90 -translate-x-2 -translate-y-[30px] left-4 top-1/2 bg-slate-50 dark:bg-slate-900">
         Nomor Plat & Lokasi Parkir
       </span>
     </div>
@@ -38,7 +38,7 @@
     <span id="tanggal-masuk" class="block w-full px-4 py-2 text-lg transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none text-slate-800 dark:text-slate-200">
     </span>
 
-    <span class="absolute px-1 text-sm text-blue-500 dark:text-blue-400 transition-all scale-90 -translate-x-2 -translate-y-[30px] left-4 top-1/2 bg-slate-100 dark:bg-slate-950">
+    <span class="absolute px-1 text-sm text-blue-500 dark:text-blue-400 transition-all scale-90 -translate-x-2 -translate-y-[30px] left-4 top-1/2 bg-slate-50 dark:bg-slate-900">
       Tanggal Masuk
     </span>
   </div>

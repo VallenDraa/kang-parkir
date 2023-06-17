@@ -62,12 +62,12 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
 <body class="bg-slate-100 dark:bg-slate-950">
   <?php include "../components/admin/admin-sidebar.php"; ?>
 
-  <div id="content">
-    <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-lg shadow shadow-slate-300 dark:shadow-slate-800">
+  <div id="content" style="width: calc(100% - 20rem);" class="translate-x-80">
+    <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 dark:bg-slate-900/50 backdrop-blur-lg shadow shadow-slate-300 dark:shadow-slate-800 print:hidden">
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto lg:gap-0">
         <!-- hamburger menu -->
         <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300 dark:hover:bg-slate-700 dark:active:bg-slate-800">
-          <i class="text-slate-800 dark:text-slate-300 fa-solid fa-bars"></i>
+          <i class="text print:hidden-slate-800 dark:text-slate-300 fa-solid fa-bars"></i>
         </button>
 
         <button id="print-laporan-btn" type="button" class="px-5 py-1 text-white transition-opacity duration-200 rounded-md shadow w-fit bg-gradient-to-b disabled:opacity-50 from-blue-400 to-blue-500 shadow-blue-300 hover:opacity-70 active:opacity-95 active:shadow-none">
@@ -100,7 +100,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
               </span>
             </div>
 
-            <i class="absolute self-start -translate-y-1/2 text-8xl top-1/2 right-5 text-slate-200 dark:text-slate-800 fa-solid fa-motorcycle"></i>
+            <i class="absolute self-start -translate-y-1/2 print:hidden text-8xl top-1/2 right-5 text-slate-200 dark:text-slate-800 fa-solid fa-motorcycle"></i>
           </div>
 
           <!-- Motor terakhir masuk -->
@@ -109,7 +109,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
               <?= DataMotorEkstra($data_tambahan['terakhir_masuk'], 'Terbaru Masuk') ?>
             </div>
 
-            <i class="absolute -translate-y-1/2 text-8xl top-1/2 right-5 text-slate-200 dark:text-slate-800 fa-solid fa-arrow-right-to-bracket"></i>
+            <i class="absolute -translate-y-1/2 print:hidden text-8xl top-1/2 right-5 text-slate-200 dark:text-slate-800 fa-solid fa-arrow-right-to-bracket"></i>
           </div>
 
           <!-- Motor terakhir keluar  -->
@@ -118,7 +118,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
               <?= DataMotorEkstra($data_tambahan['terakhir_keluar'], 'Terbaru Keluar', false) ?>
             </div>
 
-            <i class="absolute -translate-y-1/2 text-8xl top-1/2 right-5 text-slate-200 dark:text-slate-800 fa-solid fa-arrow-right-from-bracket"></i>
+            <i class="absolute -translate-y-1/2 print:hidden text-8xl top-1/2 right-5 text-slate-200 dark:text-slate-800 fa-solid fa-arrow-right-from-bracket"></i>
           </div>
         </div>
 
@@ -137,9 +137,9 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
             <h3 class="text-2xl font-medium text-slate-800 dark:text-slate-200">Data Motor <?= $periode_data ?></h3>
 
             <select id="pilihan-periode-motor" class="bg-transparent outline-none disabled:cursor-not-allowed">
-              <option id="opsi-periode" <?= $periode_data === PERIODE_HARIAN ? "selected" : "" ?> value="<?= PERIODE_HARIAN ?>"><?= PERIODE_HARIAN ?></option>
-              <option id="opsi-periode" <?= $periode_data === PERIODE_BULANAN ? "selected" : "" ?> value="<?= PERIODE_BULANAN ?>"><?= PERIODE_BULANAN ?></option>
-              <option id="opsi-periode" <?= $periode_data === PERIODE_TAHUNAN ? "selected" : "" ?> value="<?= PERIODE_TAHUNAN ?>"><?= PERIODE_TAHUNAN ?></option>
+              <option id="opsi-periode" class="text-slate-800 dark:text-slate-200 dark:bg-slate-900" <?= $periode_data === PERIODE_HARIAN ? "selected" : "" ?> value="<?= PERIODE_HARIAN ?>"><?= PERIODE_HARIAN ?></option>
+              <option id="opsi-periode" class="text-slate-800 dark:text-slate-200 dark:bg-slate-900" <?= $periode_data === PERIODE_BULANAN ? "selected" : "" ?> value="<?= PERIODE_BULANAN ?>"><?= PERIODE_BULANAN ?></option>
+              <option id="opsi-periode" class="text-slate-800 dark:text-slate-200 dark:bg-slate-900" <?= $periode_data === PERIODE_TAHUNAN ? "selected" : "" ?> value="<?= PERIODE_TAHUNAN ?>"><?= PERIODE_TAHUNAN ?></option>
             </select>
           </div>
 
@@ -162,7 +162,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
           </label>
 
           <button class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg dark:text-blue-400 hover:bg-slate-200 active:bg-slate-300 dark:hover:bg-slate-600 dark:active:bg-slate-700">
-            <i class="fa-solid fa-search"></i>
+            <i class="fa-solid print:hidden fa-search"></i>
           </button>
         </form>
 
@@ -209,7 +209,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
             $link_hal_sebelum = $halaman_sebelumnya  !== null ? "?halaman=$halaman_sebelumnya" : "#";
             ?>
             <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 dark:text-blue-400 rounded-xl place-content-center disabled:text-slate-400 dark:disabled:text-slate-600 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-blue-200 active:bg-blue-300">
-              <i class="fa-solid fa-left-long"></i>
+              <i class="fa-solid print:hidden fa-left-long"></i>
             </a>
 
             <span id="indikator-halaman">
@@ -222,14 +222,14 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
             ?>
 
             <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 dark:text-blue-400 rounded-xl place-content-center disabled:text-slate-400 dark:disabled:text-slate-600 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-blue-200 active:bg-blue-300">
-              <i class="fa-solid fa-right-long"></i>
+              <i class="fa-solid print:hidden fa-right-long"></i>
             </a>
           </div>
         </div>
       </section>
 
       <!-- peta parkiran -->
-      <section class="py-6 print:hidden">
+      <section class="py-6">
         <?php include "../components/peta-parkiran.php" ?>
       </section>
     </main>
@@ -239,7 +239,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
     <div class="flex items-center justify-between">
       <span id="dialog-title" class="text-2xl font-medium dark:text-slate-100">Detail Motor Terparkir</span>
       <button id="close-dialog-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid print:hidden fa-xmark"></i>
       </button>
     </div>
 
