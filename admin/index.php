@@ -13,8 +13,6 @@ if (!aksesAdmin($conn)) {
   header("Location: ../login.php");
 }
 
-include "../components/button.php";
-
 include "../lib/user/tambah-user.php";
 include "../lib/parkiran/cari-parkiran.php";
 include "../lib/motor/cari-motor.php";
@@ -54,7 +52,10 @@ if ($tab_aktif === TAB_MOTOR) {
   $data_motor_milik_user = new stdClass();
 
   foreach ($user_arr as $user) {
-    $data_motor_milik_user->{$user["id"]} = cariMotorDariUserId($conn, $user["id"], "", 1, 1)["motor_arr"];
+    // angka data per halaman disetting besar agar seluruh 
+    // data terambil dengan sekali query
+    $data_motor_milik_user->{$user["id"]} =
+      cariMotorDariUserId($conn, $user["id"], "", 1, 999999)["motor_arr"];
   }
 }
 
@@ -85,19 +86,21 @@ if ($tab_aktif === TAB_MOTOR) {
         <!-- hamburger menu -->
         <div class="basis-1/3">
           <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
-            <i class="text-slate-400 fa-solid fa-bars"></i>
+            <i class="text-slate-800 fa-solid fa-bars"></i>
           </button>
         </div>
 
         <!-- tambah motor -->
         <div class="flex justify-end md:basis-1/3 basis-full [&>button]:w-full md:[&>button]:w-fit">
-          <?= Button("Tambah Motor", "blue", "primary", "button", "tambah-motor-btn")  ?>
+          <button id="tambah-motor-btn" type="button" class="px-5 py-1 text-white transition-opacity duration-200 rounded-md shadow w-fit bg-gradient-to-b disabled:opacity-50 from-blue-400 to-blue-500 shadow-blue-300 hover:opacity-70 active:opacity-95 active:shadow-none">
+            Tambah Motor
+          </button>
         </div>
       </div>
     </header>
 
     <main class="px-6 mx-auto mt-8">
-      <h1 class="mb-6 text-4xl font-bold capitalize">Tabel <?= $tab_aktif ?></h1>
+      <h1 class="mb-6 text-4xl font-medium capitalize">Tabel <?= $tab_aktif ?></h1>
 
       <!-- search bar -->
       <form method="GET" class="relative flex items-center mb-3 border shadow rounded-xl shadow-slate-200 border-slate-300">
@@ -110,7 +113,7 @@ if ($tab_aktif === TAB_MOTOR) {
           Cari <?= $tab_aktif ?>
         </label>
 
-        <button id="hamburger-menu-btn" class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-slate-200 active:bg-slate-300">
+        <button class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-slate-200 active:bg-slate-300">
           <i class="fa-solid fa-search"></i>
         </button>
       </form>

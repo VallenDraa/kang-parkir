@@ -57,14 +57,14 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
         <!-- hamburger menu -->
         <div class="basis-1/3">
           <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-lg hover:bg-slate-200 active:bg-slate-300">
-            <i class="text-slate-400 fa-solid fa-bars"></i>
+            <i class="text-slate-800 fa-solid fa-bars"></i>
           </button>
         </div>
       </div>
     </header>
 
     <main class="px-6 mt-8">
-      <h1 class="mb-6 text-4xl font-bold capitalize pt">Tabel Motor</h1>
+      <h1 class="mb-6 text-4xl font-medium capitalize">Tabel Motor</h1>
 
       <!-- table list motor -->
       <!-- search bar -->
@@ -77,7 +77,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
           Cari Motor
         </label>
 
-        <button id="hamburger-menu-btn" class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-slate-200 active:bg-slate-300">
+        <button class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-slate-200 active:bg-slate-300">
           <i class="fa-solid fa-search"></i>
         </button>
       </form>

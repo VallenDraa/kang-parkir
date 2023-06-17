@@ -12,10 +12,8 @@ if (!aksesUser($conn)) {
   header("Location: ./login.php");
 }
 
-
 include "config.php";
 include "lib/motor/cari-motor.php";
-include "components/button.php";
 
 $data_user = userDariId($conn, $_SESSION['id']);
 
@@ -40,14 +38,14 @@ $data_user = userDariId($conn, $_SESSION['id']);
         <!-- hamburger menu -->
         <div class="basis-1/3">
           <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-lg hover:bg-slate-200 active:bg-slate-300">
-            <i class="text-slate-400 fa-solid fa-bars"></i>
+            <i class="text-slate-800 fa-solid fa-bars"></i>
           </button>
         </div>
       </div>
     </header>
 
     <main class="flex flex-col items-center justify-center flex-grow h-full px-6 mt-8">
-      <h1 class="mb-6 text-4xl font-bold text-center capitalize">Edit data user</h1>
+      <h1 class="mb-6 text-4xl font-medium text-center capitalize">Edit data user</h1>
 
       <form action="lib/action/edit-user.action.php" method="post" class="relative z-10 p-10 mx-auto bg-transparent w-fit">
         <input type="hidden" name="id-user" value="<?= $_SESSION['id'] ?>">
@@ -86,9 +84,10 @@ $data_user = userDariId($conn, $_SESSION['id']);
             </label>
           </div>
 
-          <div class="[&>button]:w-full w-full">
-            <?= Button("Ganti Data", "blue", "primary", "submit") ?>
-          </div>
+
+          <button class="w-full px-5 py-1 text-white transition-opacity duration-200 rounded-md shadow bg-gradient-to-b disabled:opacity-50 from-blue-400 to-blue-500 shadow-blue-300 hover:opacity-70 active:opacity-95 active:shadow-none">
+            Ganti Data
+          </button>
         </div>
       </form>
     </main>

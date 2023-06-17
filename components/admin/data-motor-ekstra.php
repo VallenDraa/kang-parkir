@@ -4,11 +4,11 @@ function DataMotorEkstra(array | null $baris_histori_parkir, string $title, $mas
   if (!$baris_histori_parkir) {
     return "
       <div class='flex flex-col flex-1'>
-        <span class='text-slate-600 font-medium'>$title</span>
-        <span class='block text-3xl font-bold mb-2 text-blue-500'>
+        <span class='font-medium text-slate-600'>$title</span>
+        <span class='block mb-2 text-3xl font-bold text-blue-500'>
           Belum Ada
         </span>
-        <span class='text-slate-500 font-medium'>
+        <span class='font-medium text-slate-500'>
           Lokasi Parkir: -
         </span>
       </div>
@@ -20,14 +20,14 @@ function DataMotorEkstra(array | null $baris_histori_parkir, string $title, $mas
 
   return "
     <div class='flex flex-col flex-1'>
-      <span class='text-slate-600 font-medium'>$title</span>
-      <span class='block text-3xl font-bold mb-2 text-blue-500'>
+      <span class='font-medium text-slate-600'>$title</span>
+      <span class='block mb-2 text-3xl font-bold text-blue-500'>
          $baris_histori_parkir[plat_motor]
       </span>
-      <span class='text-slate-500 font-medium'>
+      <span class='font-medium text-slate-500'>
         Lokasi Parkir:  $baris_histori_parkir[lokasi_parkir]
       </span>
-      <span class='text-slate-500 font-medium'>
+      <span class='font-medium text-slate-500'>
         $title_masuk_atau_keluar:  $baris_histori_parkir[$key_masuk_atau_keluar]
       </span>
     </div>

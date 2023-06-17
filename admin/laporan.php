@@ -15,7 +15,6 @@ if (!aksesAdmin($conn)) {
 
 include "../config.php";
 
-include "../components/button.php";
 include "../components/admin/data-motor-ekstra.php";
 include "../lib/chart-data.php";
 
@@ -71,12 +70,14 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
           <i class="text-slate-400 fa-solid fa-bars"></i>
         </button>
 
-        <?= Button("PDF Laporan", "blue", "primary", "button", "print-laporan-btn")  ?>
+        <button id="print-laporan-btn" type="button" class="px-5 py-1 text-white transition-opacity duration-200 rounded-md shadow w-fit bg-gradient-to-b disabled:opacity-50 from-blue-400 to-blue-500 shadow-blue-300 hover:opacity-70 active:opacity-95 active:shadow-none">
+          PDF Laporan
+        </button>
       </div>
     </header>
 
     <main class="px-6 mx-auto mt-4 space-y-12">
-      <h1 class="mb-4 text-4xl font-bold text-center capitalize print:hidden">Data Terkini Dari Kang Parkir</h1>
+      <h1 class="mb-4 text-4xl font-medium text-center capitalize print:hidden">Data Terkini Dari Kang Parkir</h1>
 
       <!-- grafik dan laporan -->
       <section id="target-print" class="grid grid-cols-8 gap-4">
@@ -148,7 +149,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
 
       <!-- histori parkir -->
       <section class="print:hidden">
-        <h2 class="mb-4 text-4xl font-bold text-center capitalize">Histori Parkir</h2>
+        <h2 class="mb-4 text-4xl font-medium text-center capitalize">Histori Parkir</h2>
 
         <!-- search bar -->
         <form method="GET" class="relative flex items-center mb-3 border shadow rounded-xl shadow-slate-200 border-slate-300">
@@ -160,7 +161,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
             Cari Motor
           </label>
 
-          <button id="hamburger-menu-btn" class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-slate-200 active:bg-slate-300">
+          <button class="w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-r-lg hover:bg-slate-200 active:bg-slate-300">
             <i class="fa-solid fa-search"></i>
           </button>
         </form>

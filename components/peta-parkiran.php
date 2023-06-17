@@ -1,4 +1,4 @@
-<h2 class="mb-6 text-4xl font-bold text-center capitalize">Peta Parkiran</h2>
+<h2 class="mb-6 text-4xl font-medium text-center capitalize">Peta Parkiran</h2>
 
 <div id="peta-parkiran" class="flex flex-col items-center justify-center w-full overflow-x-auto shadow rounded-xl lg:flex-row shadow-slate-200 bg-slate-100">
 

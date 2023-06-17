@@ -28,17 +28,29 @@ export function editUserHandler() {
       // ambil data motor milik user
       const motorArr = window.dataMotorMilikUser[idUser];
 
-      // isi list motor di dalam dialog
       let htmlListMotor = "";
-      motorArr.forEach(m => {
-        htmlListMotor += `
-          <li class="flex gap-5">
-            <span>${m.plat}</span>
-            <span>${m.lokasi_parkir}</span>
-            <span>${new Date(m.tanggal_masuk).toLocaleString()}</span>
-          </li>
+
+      // isi list motor di dalam dialog
+      if (motorArr.length === 0) {
+        htmlListMotor = `
+          <tr>
+            <td colspan="10" class="p-2 font-medium text-center text-slate-400">
+              User Tidak Punya Motor
+            </td>
+          </tr>
+        `;
+      } else {
+        motorArr.forEach((m, i) => {
+          htmlListMotor += `
+            <tr class="[&>td]:p-2 text-center even:bg-slate-50">
+              <td>${i + 1}</td>
+              <td>${m.plat}</td>
+              <td>${m.lokasi_parkir}</td>
+              <td>${new Date(m.tanggal_masuk).toLocaleString()}</td>
+            </tr>
           `;
-      });
+        });
+      }
 
       // set isi list motor milik user
       qs("#list-motor-user").innerHTML = htmlListMotor;

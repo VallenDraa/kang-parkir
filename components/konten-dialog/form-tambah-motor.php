@@ -1,5 +1,4 @@
  <form action="../lib/action/tambah-motor.action.php" id="form-tambah-motor" method="POST" class="flex flex-col gap-3 mt-5">
-
    <!-- Plat motor dan lokasi parkir -->
    <div class="flex gap-2">
      <!-- Plat motor  -->
@@ -14,7 +13,7 @@
      </div>
 
      <!-- lokasi parkir -->
-     <select id="token-parkiran" name="token-parkiran" class="h-full px-2 py-3 text-lg bg-transparent border shadow rounded-xl text-slate-800 shadow-slate-200 border-slate-300">
+     <select id="token-parkiran" name="token-parkiran" class="h-full p-2 text-lg bg-transparent border shadow rounded-xl text-slate-800 shadow-slate-200 border-slate-300">
        <?php foreach ($parkiran_kosong as $token) : ?>
          <option value="<?= $token ?>"><?= $token ?></option>
        <?php endforeach ?>
@@ -48,5 +47,9 @@
      </label>
    </div>
 
-   <?= Button("Tambah", "blue", "primary", "submit", "submit-motor-btn") ?>
+   <div class="flex-grow">
+     <button id="submit-motor-btn" class="w-full px-5 py-1 text-white transition-opacity duration-200 rounded-md shadow bg-gradient-to-b disabled:opacity-50 from-blue-400 to-blue-500 shadow-blue-300 hover:opacity-70 active:opacity-95 active:shadow-none">
+       Tambah
+     </button>
+   </div>
  </form>
