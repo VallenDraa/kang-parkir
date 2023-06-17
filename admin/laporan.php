@@ -229,7 +229,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
       </section>
 
       <!-- peta parkiran -->
-      <section class="py-6">
+      <section class="py-6 print:hidden">
         <?php include "../components/peta-parkiran.php" ?>
       </section>
     </main>
