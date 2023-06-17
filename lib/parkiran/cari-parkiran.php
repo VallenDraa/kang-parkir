@@ -25,6 +25,8 @@ function cekParkiranTerisi(mysqli $conn, string $token_parkiran)
   mysqli_stmt_execute($stmt);
 
   mysqli_stmt_bind_result($stmt, $plat_motor);
+  mysqli_stmt_fetch($stmt);
+
   mysqli_stmt_close($stmt);
 
   $terisi = $plat_motor !== null;

@@ -7,7 +7,7 @@
 
        <input type="text" name="plat-motor" required id="plat-motor" placeholder="plat-motor" class="w-full px-4 py-2 text-lg transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none text-slate-800 dark:text-slate-200 placeholder:text-transparent peer disabled:cursor-not-allowed disabled:opacity-20">
 
-       <label class="absolute z-20 px-1 text-sm text-blue-500 transition-transform scale-90 -translate-x-8 -translate-y-8 rounded-full dark:text-blue-400 left-9 top-1/2 backdrop-blur-sm peer-focus:-translate-x-8 peer-focus:-translate-y-8 bg-slate-100 dark:bg-slate-900 peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-slate-500" for="plat-motor">
+       <label class="absolute z-20 px-1 text-sm text-blue-500 transition-transform scale-90 -translate-x-8 -translate-y-8 bg-white rounded-full dark:text-blue-400 left-9 top-1/2 backdrop-blur-sm peer-focus:-translate-x-8 peer-focus:-translate-y-8 dark:bg-slate-900 peer-focus:scale-90 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-slate-500" for="plat-motor">
          Nomor Plat & Lokasi Parkir
        </label>
      </div>

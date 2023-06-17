@@ -32,7 +32,7 @@ if (!isset($_POST['id-user'])) {
 // Jika lolos cek diatas maka user bisa dihapus beserta 
 // data-data milik dia yang lain
 $id_user = $_POST['id-user'];
-$motor_milik_user = cariMotorDariUserId($conn, $id_user, "", 1, 1);
+$motor_milik_user = cariMotorDariUserId($conn, $id_user, "", 1, 999999)['motor_arr'];
 
 $plat = array_map(fn ($m) => $m['plat'], $motor_milik_user);
 $token_parkir_arr = array_map(fn ($m) => $m['lokasi_parkir'], $motor_milik_user);

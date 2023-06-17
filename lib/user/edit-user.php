@@ -71,38 +71,43 @@ function editUserOlehAdmin(
 ) {
   $berhasil = false;
 
-  // untuk mengecek apakah data yang baru 
-  // dan yang lama sama
-  $stmt_cek_data = mysqli_prepare(
-    $conn,
-    "SELECT username, is_admin FROM user WHERE id = ?"
-  );
+  try {
+    // untuk mengecek apakah data yang baru 
+    // dan yang lama sama
+    $stmt_cek_data = mysqli_prepare(
+      $conn,
+      "SELECT username, is_admin FROM user WHERE id = ?"
+    );
 
-  mysqli_stmt_bind_param($stmt_cek_data, "s", $id);
-  mysqli_stmt_execute($stmt_cek_data);
-  mysqli_stmt_bind_result($stmt_cek_data,  $cek_username, $cek_is_admin);
-  mysqli_stmt_fetch($stmt_cek_data);
-  mysqli_stmt_close($stmt_cek_data);
+    mysqli_stmt_bind_param($stmt_cek_data, "s", $id);
+    mysqli_stmt_execute($stmt_cek_data);
+    mysqli_stmt_bind_result($stmt_cek_data,  $cek_username, $cek_is_admin);
+    mysqli_stmt_fetch($stmt_cek_data);
+    mysqli_stmt_close($stmt_cek_data);
 
-  $data_sama = $cek_username === $username && $cek_is_admin === $is_admin;
+    $data_sama = $cek_username === $username && $cek_is_admin === $is_admin;
 
-  if ($data_sama) {
-    $berhasil = true;
+    if ($data_sama) {
+      $berhasil = true;
+
+      return $berhasil;
+    }
+
+    $stmt = mysqli_prepare(
+      $conn,
+      "UPDATE user SET username = ?, is_admin = ? WHERE id = ?"
+    );
+
+    mysqli_stmt_bind_param($stmt, "sds", $username, $is_admin, $id);
+    mysqli_stmt_execute($stmt);
+
+    $berhasil = mysqli_stmt_affected_rows($stmt) > 0;
+
+    mysqli_stmt_close($stmt);
 
     return $berhasil;
+  } catch (\Throwable $th) {
+    $berhasil = false;
+    return $berhasil;
   }
-
-  $stmt = mysqli_prepare(
-    $conn,
-    "UPDATE user SET username = ?, is_admin = ? WHERE id = ?"
-  );
-
-  mysqli_stmt_bind_param($stmt, "sds", $username, $is_admin, $id);
-  mysqli_stmt_execute($stmt);
-
-  $berhasil = mysqli_stmt_affected_rows($stmt) > 0;
-
-  mysqli_stmt_close($stmt);
-
-  return $berhasil;
 }

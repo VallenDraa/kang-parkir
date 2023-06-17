@@ -9,6 +9,9 @@ include "../motor/tambah-motor.php";
 include "../parkiran/cari-parkiran.php";
 include "../parkiran/tambah-parkiran.php";
 include "../user/tambah-user.php";
+include "../user/hapus-user.php";
+include "../motor/hapus-motor.php";
+include "../parkiran/hapus-parkiran.php";
 include "../user/cari-user.php";
 include "../histori-parkiran/tambah-histori-parkiran.php";
 include "../hak-akses.php";
@@ -77,18 +80,8 @@ if (
     '../../admin/index.php'
   );
 } else {
-  // jika tidak berhasil menambah motor untuk user baru
-  // maka langsung hapus user baru, karena user baru
-  // dibuat sebelum plat baru itu sendiri dibuat.
-  hapusUser($conn, $id_target_user);
-  hapusMotor($conn, $plat_motor);
-  kosongkanParkiran($conn, $token_parkiran);
-
   echo infoJs(
     "Motor dengan plat $plat_motor gagal ditambahkan. Coba lagi nanti !",
     '../../admin/index.php'
   );
 }
-
-mysqli_stmt_close($stmt_tambah_motor);
-mysqli_close($conn);
