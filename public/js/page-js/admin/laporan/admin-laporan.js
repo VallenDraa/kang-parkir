@@ -22,6 +22,7 @@ export const sidebar = new Sidebar(
 export const petaParkiran = new PetaParkiran(
   "#slot-parkiran",
   dialogDetailMotorTerparkir,
+  "../api/cari-motor-dari-plat.php",
 );
 export const slotParkiran = qsa("#slot-parkiran");
 

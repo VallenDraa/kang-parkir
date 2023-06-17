@@ -12,11 +12,13 @@ if (!aksesUser($conn)) {
   header("Location: login.php");
 }
 
+include "lib/parkiran/cari-parkiran.php";
 include "lib/motor/cari-motor.php";
 include "config.php";
 
 $halaman_aktif = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
 $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
+$parkiran = ambilSemuaParkiran($conn);
 
 [
   'motor_arr' => $motor_arr,
@@ -51,7 +53,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
 <body class="bg-slate-100 dark:bg-slate-950">
   <?php include "components/user-sidebar.php"; ?>
 
-  <div id="content">
+  <div id="content" style="width: calc(100% - 20rem);" class="translate-x-80">
     <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 dark:bg-slate-950/50 backdrop-blur-lg shadow shadow-slate-300 dark:shadow-slate-800">
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto md:gap-0">
         <!-- hamburger menu -->
@@ -64,7 +66,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
     </header>
 
     <main class="px-6 mt-8">
-      <h1 class="mb-6 text-4xl font-medium capitalize dark:text-slate-100">Tabel Motor</h1>
+      <h1 class="mb-6 text-4xl font-medium text-center capitalize dark:text-slate-100">Tabel Motor</h1>
 
       <!-- table list motor -->
       <!-- search bar -->
@@ -141,8 +143,24 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
           </a>
         </div>
       </div>
+
+      <!-- peta parkiran -->
+      <section class="my-16">
+        <?php include "./components/peta-parkiran.php" ?>
+      </section>
     </main>
   </div>
+
+  <dialog id="dialog">
+    <div class="flex items-center justify-between">
+      <span id="dialog-title" class="text-2xl font-medium dark:text-slate-100">Detail Motor Terparkir</span>
+      <button id="close-dialog-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
+        <i class="fa-solid print:hidden fa-xmark"></i>
+      </button>
+    </div>
+
+    <?php include "./components/konten-dialog/detail-motor-terparkir.php" ?>
+  </dialog>
 </body>
 
 </html>
