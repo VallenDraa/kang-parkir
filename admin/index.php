@@ -196,7 +196,7 @@ if ($tab_aktif === TAB_MOTOR) {
                           <!-- tombol user -->
                           <div class="flex items-center justify-center gap-2">
                             <?php if ($user_arr[$i]['id'] !== $_SESSION['id']) : ?>
-                              <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
+                              <button id="edit-user-btn" type="button" data-id-user="<?= $user_arr[$i]['id']; ?>" class="w-10 h-10 text-2xl text-blue-500 transition-colors duration-200 rounded-xl hover:bg-blue-200 active:bg-blue-300">
                                 <i class="drop-shadow fa-regular fa-pen-to-square"></i>
                               </button>
 
@@ -228,7 +228,7 @@ if ($tab_aktif === TAB_MOTOR) {
           <?php
           $link_hal_sebelum = $halaman_sebelumnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_sebelumnya" : "#";
           ?>
-          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-xl place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
+          <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-xl place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-blue-200 active:bg-blue-300">
             <i class="fa-solid fa-left-long"></i>
           </a>
 
@@ -241,7 +241,7 @@ if ($tab_aktif === TAB_MOTOR) {
           $link_hal_berikut = $halaman_berikutnya  !== null ? "?tab=$tab_aktif&halaman=$halaman_berikutnya" : "#";
           ?>
 
-          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-xl place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
+          <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-xl place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-blue-200 active:bg-blue-300">
             <i class="fa-solid fa-right-long"></i>
           </a>
         </div>

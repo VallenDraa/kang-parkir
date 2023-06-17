@@ -64,7 +64,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
   <?php include "../components/admin/admin-sidebar.php"; ?>
 
   <div id="content">
-    <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 backdrop-blur-lg shadow shadow-slate-200">
+    <header class="sticky top-0 z-[10000] py-2 bg-slate-50/50 backdrop-blur-lg shadow shadow-slate-200 print:hidden">
       <div class="flex flex-wrap items-center justify-between gap-2 px-6 mx-auto lg:gap-0">
         <!-- hamburger menu -->
         <button id="hamburger-menu-btn" type="button" class="w-10 h-10 text-2xl transition-colors duration-200 rounded-xl hover:bg-slate-200 active:bg-slate-300">
@@ -76,10 +76,10 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
     </header>
 
     <main class="px-6 mx-auto mt-4 space-y-12">
-      <h1 class="mb-4 text-4xl font-bold text-center capitalize">Data Terkini Dari Kang Parkir</h1>
+      <h1 class="mb-4 text-4xl font-bold text-center capitalize print:hidden">Data Terkini Dari Kang Parkir</h1>
 
       <!-- grafik dan laporan -->
-      <section class="grid grid-cols-8 gap-4">
+      <section id="target-print" class="grid grid-cols-8 gap-4">
         <!-- data ekstra -->
         <div class="flex flex-col row-start-1 gap-4 lg:flex-row 2xl:flex-col col-span-full 2xl:col-span-2">
           <!-- Total motor yang pernah parkir  -->
@@ -147,7 +147,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
       </section>
 
       <!-- histori parkir -->
-      <section>
+      <section class="print:hidden">
         <h2 class="mb-4 text-4xl font-bold text-center capitalize">Histori Parkir</h2>
 
         <!-- search bar -->
@@ -205,10 +205,9 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
           <!-- kontrol dari tabel -->
           <div class="flex items-center justify-center w-full gap-2 px-4 py-0.5 bg-slate-200">
             <?php
-            $link_hal_sebelum = $halaman_sebelumnya  !== null ? "?&halaman=$halaman_sebelumnya" : "#";
+            $link_hal_sebelum = $halaman_sebelumnya  !== null ? "?halaman=$halaman_sebelumnya" : "#";
             ?>
-
-            <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-xl place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
+            <a href='<?= $link_hal_sebelum ?>' id="halaman-sebelumnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-xl place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-blue-200 active:bg-blue-300">
               <i class="fa-solid fa-left-long"></i>
             </a>
 
@@ -218,10 +217,10 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
             </span>
 
             <?php
-            $link_hal_berikut = $halaman_berikutnya  !== null ? "?&halaman=$halaman_berikutnya" : "#";
+            $link_hal_berikut = $halaman_berikutnya  !== null ? "?halaman=$halaman_berikutnya" : "#";
             ?>
 
-            <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-xl place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-slate-300 active:bg-slate-400">
+            <a href="<?= $link_hal_berikut ?>" id="halaman-berikutnya-btn" class="grid w-10 h-10 text-xl text-blue-500 transition-colors duration-200 rounded-xl place-content-center disabled:text-slate-400 disabled:hover:bg-transparent disabled:active:bg-transparent hover:bg-blue-200 active:bg-blue-300">
               <i class="fa-solid fa-right-long"></i>
             </a>
           </div>
@@ -229,7 +228,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
       </section>
 
       <!-- peta parkiran -->
-      <section class="py-6">
+      <section class="py-6 print:hidden">
         <?php include "../components/peta-parkiran.php" ?>
       </section>
     </main>

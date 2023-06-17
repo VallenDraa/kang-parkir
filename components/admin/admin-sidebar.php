@@ -13,7 +13,7 @@ function activeIcon(bool $kondisi)
 }
 ?>
 
-<aside id="sidebar" class="flex flex-col pb-2 shadow shadow-slate-200 w-full md:w-80 h-screen bg-slate-50 z-[15000] left-0">
+<aside id="sidebar" class="flex flex-col pb-2 shadow shadow-slate-200 w-full md:w-80 h-screen bg-slate-50 z-[15000] left-0 print:hidden">
   <!-- sidebar control -->
   <div class="flex items-center justify-between px-4 py-2 border-b border-slate-300">
     <span class="pl-3 font-medium uppercase">Kang Parkir</span>
@@ -26,7 +26,7 @@ function activeIcon(bool $kondisi)
         <!-- <i class="fa-regular fa-lightbulb"></i> -->
       </button>
 
-      <button id="close-sidebar-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
+      <button id="close-sidebar-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 md:hidden rounded-xl hover:bg-red-200 active:bg-red-300">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
@@ -52,7 +52,7 @@ function activeIcon(bool $kondisi)
         <span>Utama</span>
       </summary>
 
-      <div class="pl-4">
+      <div class="pl-1.5 ml-2.5 border-l border-slate-300">
         <a href="index.php?tab=<?= TAB_USER ?>" class="flex items-center gap-3 px-3 py-2 transition-colors duration-200 rounded-lg cursor-pointer hover:bg-slate-200 <?= activeMenu(isset($tab_aktif) && $tab_aktif === TAB_USER) ?>">
           <i class="<?= activeIcon(isset($tab_aktif) && $tab_aktif === TAB_USER) ?> w-4 fa-solid fa-user"></i>
           <span>User</span>

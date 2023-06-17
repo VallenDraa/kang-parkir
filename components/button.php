@@ -7,7 +7,7 @@ function Button(string $content, string $color, string $type, string $btnType = 
 {
   $id = $html_id ? "$html_id" : "";
 
-  $class = "px-5 py-1 rounded-md ";
+  $class = "px-5 py-1 transition-opacity duration-200 rounded-md disabled:opacity-50 ";
 
   switch (strtolower($type)) {
     case 'primary':
