@@ -165,7 +165,7 @@ if ($tab_aktif === TAB_MOTOR) {
                       <td>
                         <form action="../lib/action/hapus-motor.action.php" id="hapus-motor-form" method="POST">
                           <input type="hidden" name="plat-motor" value="<?= $motor_arr[$i]['plat']; ?>" />
-                          <input type="hidden" name="token-parkiran" value="<?= $motor_arr[$i]['lokasi_parkir']; ?>" />
+                          <input type="hidden" name="lokasi-parkir" value="<?= $motor_arr[$i]['lokasi_parkir']; ?>" />
 
                           <button id="hapus-motor-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
                             <i class="drop-shadow fa-regular fa-trash-can"></i>
@@ -250,10 +250,10 @@ if ($tab_aktif === TAB_MOTOR) {
   </div>
 
   <dialog id="action-dialog">
-    <div>
-      <span id="dialog-title">Tambah Motor</span>
-      <button id="close-action-dialog-btn">
-        <i class="drop-shadow fa fa-window-close" aria-hidden='true'></i>
+    <div class="flex items-center justify-between">
+      <span id="dialog-title" class="text-2xl font-medium">Tambah Motor</span>
+      <button id="close-action-dialog-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
+        <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
 
