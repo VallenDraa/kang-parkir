@@ -4,6 +4,7 @@ import { PetaParkiran } from "../../../components/peta-parkiran.js";
 import { Sidebar } from "../../../components/sidebar.js";
 import { qs, qsa } from "../../../utils/dom-selector.js";
 import { adminChart } from "./admin-chart.js";
+import { adminPdf } from "./admin-pdf.js";
 
 export const dialogDetailMotorTerparkir = new CustomDialog(
   "#dialog",
@@ -28,6 +29,7 @@ export const dataMotorPeriodikChart = qs("#data-motor-perhari");
 export const pilihanPeriodeMotor = qs("#pilihan-periode-motor");
 
 export const printLaporan = qs("#print-laporan-btn");
+export const targetPrint = qs("#target-print");
 
 new KontrolTabel("#input-halaman", halaman => {
   window.location.href = `?keyword=${window.keyword}&halaman=${halaman}`;
@@ -35,3 +37,4 @@ new KontrolTabel("#input-halaman", halaman => {
 
 // inisialisasi
 adminChart();
+adminPdf();
