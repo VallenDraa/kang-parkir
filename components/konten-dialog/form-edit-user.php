@@ -3,7 +3,7 @@
 
    <!-- username  -->
    <div class="flex gap-2">
-     <div class="relative flex items-center flex-grow pl-3 mb-2 border shadow rounded-xl shadow-slate-200 border-slate-300">
+     <div class="relative flex items-center flex-grow pl-3 mb-2 border rounded-lg shadow shadow-slate-200 border-slate-300">
        <i class="text-slate-400 fa-solid fa-motorcycle"></i>
 
        <input type="text" name="username" required id="username" placeholder="username" class="w-full px-4 py-2 text-lg transition-colors bg-transparent border-l-0 rounded-md rounded-l-none outline-none text-slate-800 placeholder:text-transparent peer disabled:cursor-not-allowed disabled:opacity-20">
@@ -15,21 +15,23 @@
    </div>
 
    <!-- tabel semi-responsive -->
-   <div class="w-full h-56 overflow-auto">
-     <table class="w-full table-auto overflow-clip">
-       <thead class="sticky top-0">
-         <tr class="[&>th]:p-2 bg-slate-200 text-slate-700">
-           <th>No</th>
-           <th>Plat</th>
-           <th>Lokasi Parkir</th>
-           <th>Tanggal Masuk</th>
-         </tr>
-       </thead>
+   <div class="rounded-lg shadow shadow-slate-200 overflow-clip">
+     <div class="w-full overflow-auto min-h-[150px] max-h-56">
+       <table class="w-full table-auto overflow-clip">
+         <thead class="sticky top-0">
+           <tr class="[&>th]:p-2 bg-slate-200 text-slate-700">
+             <th>No</th>
+             <th>Plat</th>
+             <th>Lokasi Parkir</th>
+             <th>Tanggal Masuk</th>
+           </tr>
+         </thead>
 
-       <tbody id="list-motor-user">
+         <tbody id="list-motor-user">
 
-       </tbody>
-     </table>
+         </tbody>
+       </table>
+     </div>
    </div>
 
 

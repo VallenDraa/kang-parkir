@@ -31,7 +31,7 @@ if (!$motor) {
   exit;
 }
 
-$pemilik = userDariUsername($conn, $motor['id_user_pemilik']);
+$pemilik = userDariId($conn, $motor['id_user_pemilik']);
 
 http_response_code(200);
 echo json_encode([

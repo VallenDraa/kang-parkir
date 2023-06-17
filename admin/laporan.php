@@ -237,7 +237,7 @@ $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : "";
 
   <dialog id="dialog">
     <div class="flex items-center justify-between">
-      <span id="dialog-title" class="text-2xl font-medium">Tambah Motor</span>
+      <span id="dialog-title" class="text-2xl font-medium">Detail Motor Terparkir</span>
       <button id="close-dialog-btn" class="w-10 h-10 text-2xl text-red-500 transition-colors duration-200 rounded-xl hover:bg-red-200 active:bg-red-300">
         <i class="fa-solid fa-xmark"></i>
       </button>
