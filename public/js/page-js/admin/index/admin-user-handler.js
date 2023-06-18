@@ -16,7 +16,6 @@ export function editUserHandler() {
 
       const idUser = parseInt(btn.getAttribute("data-id-user"));
 
-      // TODO: error handling ketika idUser tidak ada
       if (!idUser) {
         console.error("Id user tidak ada");
       }
