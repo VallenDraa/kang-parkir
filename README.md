@@ -2,6 +2,23 @@
 # kang-parkir
 Website ini dibuat Untuk Menamatkan Matkul Pemrograman Lanjut 
 
+## Fitur Website
+List fitur dari aplikasi ini adalah sebagai berikut: 
+1.  Tampilan aplikasi terkait dengan parkir motor.
+2.  Database MySQL untuk menyimpan dan mengelola data.
+3.  Terdapat halaman login dengan dua hak akses yaitu admin dan user.
+4.  Terdapat berbagai hak admin, yaitu:
+	-	Admin dapat mengelola hak akses admin dan user.
+	-	Admin dapat memasukkan nomor plat motor saat masuk parkir dan menentukan lokasi parkir.
+3.  Hak akses user terbuat secara otomatis saat nomor plat motor dimasukkan oleh admin.
+4.  Sistem menyediakan informasi lokasi parkir yang tersedia dan jumlah parkir yang tersedia.
+5.  Admin dapat melihat data grafik jumlah motor yang parkir secara periodik.
+5.  Fitur grafik (column chart) untuk visualisasi jumlah motor parkir.
+6.  User dapat melihat lokasi motornya dan mengubah username dan password.
+7.  Fitur pencarian untuk mencari informasi terkait nomor plat motor atau data lainnya.
+8.  Fitur laporan untuk menghasilkan laporan berdasarkan data parkir motor.
+9.  Fitur dark dan light mode.
+
 ## Struktur Folder
 **Kang-Parkir**
 -   **admin** (Tempat halaman utama admin dan laporan)
@@ -35,26 +52,7 @@ Jika sudah anda bisa pergi ke http://localhost/parkiran-dua dan pada halaman log
 
 > **![](https://lh4.googleusercontent.com/qm1EAnnp3ExNI_iRMT5qUDRvsb707TXKyp1pXWFFVONlnWGgOLIJmqmUR5WkDLc7O9KcsL2Gn3YbobjB6E_SfHC_bCumEWy4V_Y3dhAjDCAgXhBiBdwG9r3i3tHtDWGO0sSglUIN0Jy6YZ8d_qFVlpc)**
 > 
-> Username: admin
-> Password: admin
-
-
-## Fitur Website
-Setelah anda login, anda dapat mengeksplorasi aplikasi ini dan mencoba fitur-fiturnya. List fitur dari aplikasi ini adalah sebagai berikut: 
-1.  Tampilan aplikasi terkait dengan parkir motor.
-2.  Database MySQL untuk menyimpan dan mengelola data.
-3.  Terdapat halaman login dengan dua hak akses yaitu admin dan user.
-4.  Terdapat berbagai hak admin, yaitu:
-	-	Admin dapat mengelola hak akses admin dan user.
-	-	Admin dapat memasukkan nomor plat motor saat masuk parkir dan menentukan lokasi parkir.
-3.  Hak akses user terbuat secara otomatis saat nomor plat motor dimasukkan oleh admin.
-4.  Sistem menyediakan informasi lokasi parkir yang tersedia dan jumlah parkir yang tersedia.
-5.  Admin dapat melihat data grafik jumlah motor yang parkir secara periodik.
-5.  Fitur grafik (column chart) untuk visualisasi jumlah motor parkir.
-6.  User dapat melihat lokasi motornya dan mengubah username dan password.
-7.  Fitur pencarian untuk mencari informasi terkait nomor plat motor atau data lainnya.
-8.  Fitur laporan untuk menghasilkan laporan berdasarkan data parkir motor.
-9.  Fitur dark dan light mode.
+> Username: admin dan Password: admin
 
 ## Preview Halaman Pada Website
 
