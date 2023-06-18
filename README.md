@@ -1,4 +1,5 @@
 
+
 # kang-parkir
 Website ini dibuat Untuk Menamatkan Matkul Pemrograman Lanjut 
 
@@ -20,6 +21,7 @@ List fitur dari aplikasi ini adalah sebagai berikut:
 9.  Fitur dark dan light mode.
 
 ## Struktur Folder
+
 **Kang-Parkir**
 -   **admin** (Tempat halaman utama admin dan laporan)
 -   **api** (Tempat file yang menghandle logic AJAX)
@@ -58,13 +60,12 @@ Jika sudah anda bisa pergi ke http://localhost/parkiran-dua dan pada halaman log
 
 > **![](https://lh5.googleusercontent.com/ggoA9MMiNChNrL0rBHbs0V6ij-FbvDgnZpBrEHLwP_tnqbi5Io81veFjyvl0jrVET2N9xA64rD9kFe8mte_6EXPmfxoraC5df74nYRjsMRvyZjPLMjDxdHnwx0P3IC00n7bAIyiiFyMebm7p_bZ9K9g)**
 > Halaman Utama Admin
-> 
-> 
+
 > **![](https://lh4.googleusercontent.com/zo2YxQoR0XSCbRINBRsCSUzS2zrOjW2eOrHFIZGU1_q0GyX2jJUqj00jwItfcvgOBn_Qb3R-c7dxHeqtZutJIolWksOlrw7xWb--C_i_jTM_f7moRuahCy09JCF3T8UXxDZzT9djO4F78AG-2d7J56I)**
 > Halaman Laporan Admin
-> 
+
 > **![](https://lh3.googleusercontent.com/Tky99i4g_rwGrkqQDZee8scbsRx7o8xgsPeOUk_nMmoXkKaYKgM_Aa1vTBIggmngp-ZwgLWShus7Z0fi7gh7j_5VNISM4SfpKsFg93Ss5rVmYXggk8LW5wvamiFY2Ev46lZWs7bTH8iDOPjsCz0dlLM)**
 > Halaman Utama User
-> 
+
 > **![](https://lh5.googleusercontent.com/hf3k6rzl0880RIb4txtogWKGMFaEhYV1bHjzpYud_T8hU0fnltXS9bTPMJgpnxyp3WajEKG1JzpF-UITaRtf9nLuEmQQpJhiYv3jKTqRveaJZfTEYMKcZ8GgsFI6dfLw7P7tWdNyUSiWkhG88oYwLNo)**
 > Halaman Pengaturan User
