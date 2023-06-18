@@ -2,6 +2,24 @@
 # kang-parkir
 Website ini dibuat Untuk Menamatkan Matkul Pemrograman Lanjut 
 
+## Struktur Folder
+**Kang-Parkir**
+-   **admin** (Tempat halaman utama admin dan laporan)
+-   **api** (Tempat file yang menghandle logic AJAX)
+-   **components** (Tempat folder dan file komponen HTML yang digunakan pada project)
+	-   **admin**
+	-   **konten-dialog**
+-   **db** (Tempat file SQL dan koneksi database MySQL pada PHP)
+	-   **sql**
+-   **lib** (Tempat file yang menghandle form action dan query ke database)
+	-   **action**
+	-   **histori-parkiran**
+	-   **motor**
+	-   **parkiran**
+	-   **user**
+-   **public** (Tempat file yang bisa diakses publik seperti gambar dan file Javascript)
+	-   **img**
+	-   **js**
 
 ## Menjalankan Project Di Komputer Anda
 Untuk menjalankan secara lokal, anda membutuhkan:
@@ -37,25 +55,6 @@ Setelah anda login, anda dapat mengeksplorasi aplikasi ini dan mencoba fitur-fit
 7.  Fitur pencarian untuk mencari informasi terkait nomor plat motor atau data lainnya.
 8.  Fitur laporan untuk menghasilkan laporan berdasarkan data parkir motor.
 9.  Fitur dark dan light mode.
-
-## Struktur Folder
-**Kang-Parkir**
--   **admin** (Tempat halaman utama admin dan laporan)
--   **api** (Tempat file yang menghandle logic AJAX)
--   **components** (Tempat folder dan file komponen HTML yang digunakan pada project)
-	-   **admin**
-	-   **konten-dialog**
--   **db** (Tempat file SQL dan koneksi database MySQL pada PHP)
-	-   **sql**
--   **lib** (Tempat file yang menghandle form action dan query ke database)
-	-   **action**
-	-   **histori-parkiran**
-	-   **motor**
-	-   **parkiran**
-	-   **user**
--   **public** (Tempat file yang bisa diakses publik seperti gambar dan file Javascript)
-	-   **img**
-	-   **js**
 
 ## Preview Halaman Pada Website
 
