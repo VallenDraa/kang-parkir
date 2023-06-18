@@ -65,6 +65,7 @@ function motorDariPlat(mysqli $conn, string $plat_arg)
   mysqli_stmt_execute($stmt);
 
   mysqli_stmt_bind_result($stmt, $plat, $lokasi_parkir, $tanggal_masuk, $id_user_pemilik);
+  mysqli_stmt_fetch($stmt);
 
   mysqli_stmt_close($stmt);
 
@@ -116,15 +117,15 @@ function cariMotorDariUserId(
     "
   );
 
-  mysqli_stmt_bind_param($stmt, "issdd", $id_user_pemilik, $keyword_sql, $keyword_sql, $halaman_aktif_sql, $jml_per_halaman);
+  mysqli_stmt_bind_param($stmt, "dssdd", $id_user_pemilik, $keyword_sql, $keyword_sql, $halaman_aktif_sql, $jml_per_halaman);
   mysqli_stmt_execute($stmt);
 
   mysqli_stmt_bind_result(
     $stmt,
-    $plat,
-    $lokasi_parkir,
-    $tanggal_masuk,
-    $id_user_pemilik,
+    $db_plat,
+    $db_lokasi_parkir,
+    $db_tanggal_masuk,
+    $db_id_user_pemilik,
   );
 
   // Rangkai data
@@ -139,10 +140,10 @@ function cariMotorDariUserId(
 
   while (mysqli_stmt_fetch($stmt)) {
     $motor = [
-      'plat' => $plat,
-      'lokasi_parkir' => $lokasi_parkir,
-      'tanggal_masuk' => $tanggal_masuk,
-      'id_user_pemilik' => $id_user_pemilik,
+      'plat' => $db_plat,
+      'lokasi_parkir' => $db_lokasi_parkir,
+      'tanggal_masuk' => $db_tanggal_masuk,
+      'id_user_pemilik' => $db_id_user_pemilik,
     ];
 
     array_push($data['motor_arr'], $motor);

@@ -11,8 +11,9 @@ export class PetaParkiran {
   /**
    * @param {string} slotParkiran
    * @param {CustomDialog} dialogDetailMotor
+   * @param {string} endpoint
    */
-  constructor(slotParkiran, dialogDetailMotor) {
+  constructor(slotParkiran, dialogDetailMotor, endpoint) {
     this.#slotParkiran = qsa(slotParkiran);
     this.#dialogDetailMotor = dialogDetailMotor;
 
@@ -47,7 +48,7 @@ export class PetaParkiran {
 
         try {
           const { pemilik, plat, tanggal_masuk, lokasi_parkir } = await fetch(
-            `../api/cari-motor-dari-plat.php?plat=${motorYangParkir}`,
+            `${endpoint}?plat=${motorYangParkir}`,
           ).then(res => res.json());
 
           namaPemilikSpan.textContent = pemilik;

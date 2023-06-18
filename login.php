@@ -50,7 +50,7 @@ logout();
           </label>
         </div>
 
-        <button class="w-full py-1 text-blue-500 transition-colors duration-200 bg-white border rounded-md active:bg-slate-300 border-slate-200 drop-shadow-lg hover:bg-slate-200 hover:text-blue-700">Login</button>
+        <button class="w-full py-1 text-blue-500 transition-colors duration-200 bg-white border rounded-md dark:text-blue-400 active:bg-slate-300 border-slate-200 drop-shadow-lg hover:bg-slate-200 hover:text-blue-700">Login</button>
       </div>
     </form>
   </div>
